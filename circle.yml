@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: 7.2.1
+
+dependencies:
+  override:
+    - npm install --dev
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: snabb-api-mock
+
+
+
