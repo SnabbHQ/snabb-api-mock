@@ -1,0 +1,27 @@
+type: object
+properties:
+  delivery_id:
+    type: string
+    description: "Unique identifier representing a specific delivery."
+  created_at:
+    type: integer
+    format: int32
+    description: "Unix timestamp representing the moment the delivery was created."
+  last_update_at:
+    type: integer
+    format: int32
+    description: "Unix timestamp representing the last time when the delivery infromation was updated."
+  scheduled_delivery_time:
+    type: integer
+    format: int32
+    description: "Unix timestamp representing selected date an hour by the user to get delivered to."
+  pickup_contact:
+    type: object
+    description: "The pickup contact information."
+    allOf:
+      - $ref: '#/definitions/Contact'
+  dropoff_contact:
+    type: object
+    description: "The dropoff contact information."
+    allOf:
+      - $ref: '#/definitions/Contact'

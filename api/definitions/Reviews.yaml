@@ -1,0 +1,12 @@
+type: object
+properties:
+  average_score:
+    type: number
+    format: float
+    description: "The average score from all the reviews performed for a given delivery/courier."
+  reviews:
+    type: array
+    description: "Array containing all the reviews for a given courier/delivery."
+    items:
+      allOf:
+        - $ref: '#/definitions/Review'

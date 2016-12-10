@@ -1,12 +1,22 @@
+Activities:
+  $ref: ./Activities.yaml
+Activity:
+  $ref: ./Activity.yaml
+Contact:
+  $ref: ./Contact.yaml
+Courier:
+  $ref: ./Courier.yaml
+Delivery:
+  $ref: ./Delivery.yaml
 Product:
   $ref: ./Product.yaml
 PriceEstimate:
   $ref: ./PriceEstimate.yaml
 Profile:
   $ref: ./Profile.yaml
-Activity:
-  $ref: ./Activity.yaml
-Activities:
-  $ref: ./Activities.yaml
 Error:
   $ref: ./Error.yaml
+Review:
+  $ref: ./Review.yaml
+Reviews:
+  $ref: ./Reviews.yaml

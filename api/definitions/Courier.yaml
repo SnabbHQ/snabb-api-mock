@@ -1,0 +1,28 @@
+type: object
+properties:
+  driver_id:
+    type: string
+    description: "Unique identifier representing a driver."
+  created_at:
+    type: string
+    description: "Unix timestamp representing the moment in which the driver was created."
+  updated_at:
+    type: string
+    description: "Unix timestamp representing the last time when the driver information was updated."
+  email:
+    type: string
+    description: "The email address of the driver."
+  profile_picture_url:
+    type: string
+    description: "The url of the courier's profile picture."
+  phone:
+    type: string
+    description: "The phone number of the courier with country code included."
+  deliveries_count:
+    type: number
+    description: "Number of deliveries performed by the courier."
+  reviews:
+    type: object
+    description: "All the reviews associated with the courier."
+    allOf:
+      - $ref: '#/definitions/Reviews'

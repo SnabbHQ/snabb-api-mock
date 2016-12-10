@@ -1,0 +1,9 @@
+type: object
+properties:
+  score:
+    type: number
+    format: float
+    description: "The rating given by the users for a particular delivery/courier."
+  comment:
+    type: string
+    description: "Comment provided by the user to give further feedback."
