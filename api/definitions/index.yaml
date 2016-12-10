@@ -3,15 +3,15 @@ Activities:
 Activity:
   $ref: ./Activity.yaml
 Contact:
-  $ref: ./Contact.yaml
+  $ref: ./contact/Contact.yaml
+Phone:
+  $ref: ./contact/Phone.yaml
 Courier:
   $ref: ./Courier.yaml
 Delivery:
   $ref: ./Delivery.yaml
 Product:
   $ref: ./Product.yaml
-Phone:
-  $ref: ./Phone.yaml
 Place:
   $ref: ./Place.yaml
 PriceEstimate:
