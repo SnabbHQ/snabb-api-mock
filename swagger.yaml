@@ -3,6 +3,10 @@ info:
   description: Move your app forward with the Snabb API
   version: 1.0.0
   title: Snabb API
+  contact:
+    name: Snabb Dev Systems
+    url: developers.snabb.io
+    email: dev.systems@snabb.io
 host: snabb-api-mock.herokuapp.com
 basePath: /api/v1
 schemes:
