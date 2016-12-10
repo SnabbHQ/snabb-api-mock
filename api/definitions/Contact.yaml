@@ -10,5 +10,7 @@ properties:
     type: string
     description: "The email address of the contact."
   phone:
-    type: string
-    description: "The phone number of the contact with country code included."
+    type: object
+    description: "The phone number of the contact."
+    allOf:
+      - $ref: '#/definitions/Phone'

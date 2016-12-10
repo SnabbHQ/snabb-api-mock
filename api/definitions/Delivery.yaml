@@ -15,13 +15,13 @@ properties:
     type: integer
     format: int32
     description: "Unix timestamp representing selected date an hour by the user to get delivered to."
-  pickup_contact:
+  pickup_place:
     type: object
-    description: "The pickup contact information."
+    description: "The pickup place information."
     allOf:
-      - $ref: '#/definitions/Contact'
-  dropoff_contact:
+      - $ref: '#/definitions/Place'
+  dropoff_place:
     type: object
-    description: "The dropoff contact information."
+    description: "The dropoff place information."
     allOf:
-      - $ref: '#/definitions/Contact'
+      - $ref: '#/definitions/Place'

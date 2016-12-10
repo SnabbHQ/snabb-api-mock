@@ -10,6 +10,10 @@ Delivery:
   $ref: ./Delivery.yaml
 Product:
   $ref: ./Product.yaml
+Phone:
+  $ref: ./Phone.yaml
+Place:
+  $ref: ./Place.yaml
 PriceEstimate:
   $ref: ./PriceEstimate.yaml
 Profile:
