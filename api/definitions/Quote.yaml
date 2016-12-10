@@ -2,10 +2,9 @@ type: object
 properties:
   quote_id:
     type: string
-    description: "Unique identifier representing a specific quote."
-  display_name:
-    type: string
-    description: "Display name of product."
+    description: "Unique identifier representing a specific quote. Once created this id can be passed into the
+    delivery creation to make sure the delivery prices match the generated values by the quote (so we don't find any
+    surprises down the road!)."
   distance:
     type: number
     format: float
@@ -13,7 +12,7 @@ properties:
   duration:
     type: number
     format: int32
-    description: "Estimated duration in Minutes of the delivery."
+    description: "Estimated duration in <b>minutes</b> of the delivery."
   price:
     type: string
     description: "The calculated price for the delivery."
@@ -22,4 +21,26 @@ properties:
     description: "The currency used for the price calculation"
     allOf:
       - $ref: '#/definitions/Quote'
+  expires_at:
+    type: string
+    description: "Unix timestamp representing the time when the quote will expire."
+  pickup_place:
+    type: object
+    description: "The pick up place information."
+    allOf:
+      - $ref: '#/definitions/Place'
+  pickup_eta:
+    type: number
+    format: int32
+    description: "The estimated time in <b>minutes</b> for pick up for this quote."
+  dropoff_place:
+    type: object
+    description: "The drop off place information."
+    allOf:
+      - $ref: '#/definitions/Place'
+  dropoff_eta:
+    type: number
+    format: int32
+    description: "The estimated time in <b>minutes</b> for drop off for this quote."
+
 

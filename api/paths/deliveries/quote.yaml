@@ -1,13 +1,13 @@
 get:
   summary: Quote
-  description: "The Quote endpoint returns a price range
-    for each product offered at a given location. The price estimate is
-    provided as a formatted string with the full price range and the localized
-    currency symbol.<br><br>The response also includes low and high estimates,
-    and the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for
-    situations requiring currency conversion. When surge is active for a particular
-    product, its surge_multiplier will be greater than 1, but the price estimate
-    already factors in this multiplier."
+  description: "The Quote endpoint returns a price range for each product offered at a given location. The price
+  estimate is provided as a formatted string with the full price range and the localized currency symbol.<br><br>The
+  response also includes low and high estimates, and the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency
+  code for situations requiring currency conversion.\n
+  \n
+  <b>Warning:</b> Quotes have a valid limited duration of 10min. This is done to prevent un-expected costs if the time
+  between the quote and the actual delivery order are to far apart. After this period, the quote won't be able to be
+  used to create a new delivery."
   parameters:
     - name: start_latitude
       in: query
