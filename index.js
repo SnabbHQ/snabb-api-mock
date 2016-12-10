@@ -1,21 +1,3 @@
-// var resolve = require('json-refs').resolveRefs;
-// var YAML = require('yaml-js');
-// var fs = require('fs');
-//
-// var root = YAML.load(fs.readFileSync('swagger.yaml').toString());
-// var options = {
-//   filter        : ['relative', 'remote'],
-//   loaderOptions : {
-//     processContent : function (res, callback) {
-//       callback(null, YAML.load(res.text));
-//     }
-//   }
-// };
-// resolve(root, options).then(function (results) {
-//   console.log(JSON.stringify(results.resolved, null, 2));
-// });
-
-
 'use strict';
 
 var app = require('connect')();
@@ -26,6 +8,9 @@ var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var fs = require('fs');
 var serverPort = process.env.PORT || 3000;
+
+// Enable/disable to print logs in console or not
+const LOGGING_ENABLED = false;
 
 // swaggerRouter configuration
 var options = {
@@ -48,7 +33,10 @@ var jsonRefOptions = {
 
 resolve(root, jsonRefOptions)
   .then(function (results) {
-    console.log(JSON.stringify(results.resolved, null, 2));
+
+    if (LOGGING_ENABLED) {
+      console.log(JSON.stringify(results.resolved, null, 2));
+    }
 
     // Initialize the Swagger middleware
     swaggerTools.initializeMiddleware(results.resolved, function (middleware) {
