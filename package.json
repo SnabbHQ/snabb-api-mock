@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node_modules/.bin/nodemon index.js"
+    "start": "node_modules/.bin/nodemon -e js,yaml"
   },
   "keywords": [
     "swagger"
