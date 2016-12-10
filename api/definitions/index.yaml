@@ -1,0 +1,12 @@
+Product:
+  $ref: ./Product.yaml
+PriceEstimate:
+  $ref: ./PriceEstimate.yaml
+Profile:
+  $ref: ./Profile.yaml
+Activity:
+  $ref: ./Activity.yaml
+Activities:
+  $ref: ./Activities.yaml
+Error:
+  $ref: ./Error.yaml

@@ -1,0 +1,10 @@
+/estimates/price:
+  $ref: ./estimates/price.yaml
+/estimates/time:
+  $ref: ./estimates/time.yaml
+/history:
+  $ref: ./history.yaml
+/products:
+  $ref: ./products.yaml
+/me:
+  $ref: ./me.yaml

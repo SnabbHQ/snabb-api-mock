@@ -1,0 +1,18 @@
+type: object
+properties:
+  first_name:
+    type: string
+    description: "Unique identifier representing a specific product for a given latitude & longitude. For example,
+    uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+  last_name:
+    type: string
+    description: Last name of the user.
+  email:
+    type: string
+    description: Email address of the user
+  picture:
+    type: string
+    description: Image URL of the user
+  promo_code:
+    type: string
+    description: Promo code of the user

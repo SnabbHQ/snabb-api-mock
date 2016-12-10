@@ -1,0 +1,5 @@
+type: object
+properties:
+  uuid:
+    type: string
+    description: "Unique identifier for the activity"

@@ -1,0 +1,18 @@
+get:
+  tags:
+  - User
+  summary: User Profile
+  description: "The User Profile endpoint returns information about the Uber user that has authorized with the
+  application."
+  operationId: meGET
+  parameters: []
+  responses:
+    200:
+      description: "Profile information for a user"
+      schema:
+        $ref: '#/definitions/Profile'
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: User
