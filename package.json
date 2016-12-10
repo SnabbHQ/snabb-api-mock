@@ -4,9 +4,9 @@
   "description": "Move your app forward with the Snabb API",
   "main": "index.js",
   "scripts": {
-	"prestart": "npm install",
-	"start": "node index.js"
-  },  
+    "prestart": "npm install",
+    "start": "node_modules/.bin/nodemon index.js"
+  },
   "keywords": [
     "swagger"
   ],
@@ -17,5 +17,8 @@
     "js-yaml": "^3.3.0",
     "json-refs": "^2.1.6",
     "swagger-tools": "0.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
