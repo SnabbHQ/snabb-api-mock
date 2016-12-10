@@ -1,0 +1,8 @@
+type: object
+properties:
+  code:
+    type: string
+    description: "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code."
+  symbol:
+    type: string
+    description: "Symbol code for the given currency."

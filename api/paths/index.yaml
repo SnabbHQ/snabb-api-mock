@@ -1,7 +1,5 @@
-/estimates/price:
-  $ref: ./estimates/price.yaml
-/estimates/time:
-  $ref: ./estimates/time.yaml
+/delivery/quote:
+  $ref: ./deliveries/quote.yaml
 /history:
   $ref: ./history.yaml
 /products:

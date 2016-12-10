@@ -1,6 +1,6 @@
 get:
-  summary: Price Estimates
-  description: "The Price Estimates endpoint returns an estimated price range
+  summary: Quote
+  description: "The Quote endpoint returns a price range
     for each product offered at a given location. The price estimate is
     provided as a formatted string with the full price range and the localized
     currency symbol.<br><br>The response also includes low and high estimates,
@@ -41,7 +41,7 @@ get:
       schema:
         type: array
         items:
-          $ref: '#/definitions/PriceEstimate'
+          $ref: '#/definitions/Quote'
     default:
       description: Unexpected error
       schema:

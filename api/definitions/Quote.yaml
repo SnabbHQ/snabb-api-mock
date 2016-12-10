@@ -1,0 +1,25 @@
+type: object
+properties:
+  quote_id:
+    type: string
+    description: "Unique identifier representing a specific quote."
+  display_name:
+    type: string
+    description: "Display name of product."
+  distance:
+    type: number
+    format: float
+    description: "Estimated distance in Km of the total route."
+  duration:
+    type: number
+    format: int32
+    description: "Estimated duration in Minutes of the delivery."
+  price:
+    type: string
+    description: "The calculated price for the delivery."
+  currency:
+    type: object
+    description: "The currency used for the price calculation"
+    allOf:
+      - $ref: '#/definitions/Quote'
+

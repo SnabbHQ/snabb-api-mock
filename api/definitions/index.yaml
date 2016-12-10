@@ -14,12 +14,14 @@ Product:
   $ref: ./Product.yaml
 Place:
   $ref: ./Place.yaml
-PriceEstimate:
+Quote:
   $ref: ./PriceEstimate.yaml
 Profile:
   $ref: ./Profile.yaml
 Error:
   $ref: ./Error.yaml
+Quote:
+  $ref: ./Quote.yaml
 Review:
   $ref: ./Review.yaml
 Reviews:
