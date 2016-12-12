@@ -1,0 +1,24 @@
+type: object
+properties:
+  transport_id:
+    type: string
+    description: "Unique identifier for the transportation type."
+  type:
+    type: string
+    description: "Value representing the transportation type."
+    enum:
+      - Foot
+      - Bike
+      - CargoBike
+      - Motorcycle
+      - Car
+      - Truck
+  max_weight:
+    type: number
+    format: int32
+    description: "Value in <b>KG</b> of the maximum weight this transport type can hold."
+  max_dimensions:
+    type: object
+    description: "Maximum dimensions of the package this transport type can hold."
+    allOf:
+          - $ref: '#/definitions/Dimension'

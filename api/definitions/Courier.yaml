@@ -26,3 +26,8 @@ properties:
     description: "All the reviews associated with the courier."
     allOf:
       - $ref: '#/definitions/Reviews'
+  transport_type:
+    type: object
+    description: "The transportation type used by the courier to perform the deliveries"
+    allOf:
+      - $ref: '#/definitions/TransportType'
