@@ -1,0 +1,13 @@
+type: object
+properties:
+  city_id:
+    type: string
+    description: "Unique identifier for the city."
+  name:
+    type: string
+    description: "Plain text name of the city. e.g. Stockholm."
+  region:
+      type: object
+      description: "The region which the city belongs to."
+      allOf:
+        - $ref: '#/definitions/Region'

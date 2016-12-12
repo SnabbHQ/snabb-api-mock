@@ -24,20 +24,20 @@ properties:
   expires_at:
     type: string
     description: "Unix timestamp representing the time when the quote will expire."
-  pickup_place:
+  pickup_location:
     type: object
-    description: "The pick up place information."
+    description: "The pick up location information."
     allOf:
-      - $ref: '#/definitions/Place'
+      - $ref: '#/definitions/Location'
   pickup_eta:
     type: number
     format: int32
     description: "The estimated time in <b>minutes</b> for pick up for this quote."
-  dropoff_place:
+  dropoff_location:
     type: object
-    description: "The drop off place information."
+    description: "The drop off location information."
     allOf:
-      - $ref: '#/definitions/Place'
+      - $ref: '#/definitions/Location'
   dropoff_eta:
     type: number
     format: int32

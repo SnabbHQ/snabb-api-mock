@@ -1,0 +1,16 @@
+type: object
+properties:
+  address_id:
+    type: string
+    description: "Unique identifier for the address."
+  street:
+    type: string
+    description: "Plain text name of the city. e.g. Stockholm."
+  postcode:
+    type: string
+    description: "Postal code of the address. e.g. 11218"
+  region:
+      type: object
+      description: "The region which the city belongs to."
+      allOf:
+        - $ref: '#/definitions/Region'

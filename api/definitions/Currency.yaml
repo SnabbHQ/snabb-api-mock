@@ -1,6 +1,6 @@
 type: object
 properties:
-  code:
+  iso_code:
     type: string
     description: "[ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code."
   symbol:

@@ -1,0 +1,22 @@
+type: object
+properties:
+  location_id:
+    type: string
+    description: "Unique identifier representing a location."
+  created_at:
+      type: string
+      description: "Unix timestamp representing the moment in which the location was created."
+  updated_at:
+    type: string
+    description: "Unix timestamp representing the last time when the location information was updated."
+  contact:
+    type: object
+    description: "Main contact associated with the given location"
+    allOf:
+      - $ref: '#/definitions/Contact'
+  formatted_address:
+    type: string
+    description: "Pre-formatted address. eg. Gavlegatan 18B, 11330, Stockholm"
+  comment:
+      type: string
+      description: "Special comments or instructions associated with the given location."

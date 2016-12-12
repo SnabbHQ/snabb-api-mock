@@ -10,18 +10,14 @@ properties:
   last_update_at:
     type: integer
     format: int32
-    description: "Unix timestamp representing the last time when the delivery infromation was updated."
-  scheduled_delivery_time:
-    type: integer
-    format: int32
-    description: "Unix timestamp representing selected date an hour by the user to get delivered to."
-  pickup_place:
+    description: "Unix timestamp representing the last time when the delivery information was updated."
+  pickup_location:
     type: object
-    description: "The pickup place information."
+    description: "The pickup location information."
     allOf:
-      - $ref: '#/definitions/Place'
-  dropoff_place:
+      - $ref: '#/definitions/Location'
+  dropoff_location:
     type: object
-    description: "The dropoff place information."
+    description: "The dropoff location information."
     allOf:
-      - $ref: '#/definitions/Place'
+      - $ref: '#/definitions/Location'

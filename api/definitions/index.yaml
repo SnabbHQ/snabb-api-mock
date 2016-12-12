@@ -12,10 +12,8 @@ Delivery:
   $ref: ./Delivery.yaml
 Product:
   $ref: ./Product.yaml
-Place:
-  $ref: ./Place.yaml
-Quote:
-  $ref: ./PriceEstimate.yaml
+Location:
+  $ref: ./location/Location.yaml
 Profile:
   $ref: ./Profile.yaml
 Error:
