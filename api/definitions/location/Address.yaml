@@ -9,8 +9,8 @@ properties:
   postcode:
     type: string
     description: "Postal code of the address. e.g. 11218"
-  region:
+  city:
       type: object
-      description: "The region which the city belongs to."
+      description: "The city which this address belongs to."
       allOf:
-        - $ref: '#/definitions/Region'
+        - $ref: '#/definitions/City'
