@@ -8,8 +8,6 @@ Phone:
   $ref: ./contact/Phone.yaml
 Courier:
   $ref: ./Courier.yaml
-Delivery:
-  $ref: ./Delivery.yaml
 Product:
   $ref: ./Product.yaml
 Currency:
@@ -28,10 +26,12 @@ Profile:
   $ref: ./Profile.yaml
 Error:
   $ref: ./Error.yaml
+Delivery:
+  $ref: ./delivery/Delivery.yaml
 Quote:
-  $ref: ./quote/Quote.yaml
+  $ref: ./delivery/Quote.yaml
 NewQuote:
-  $ref: ./quote/NewQuote.yaml
+  $ref: ./delivery/NewQuote.yaml
 Review:
   $ref: ./Review.yaml
 Reviews:

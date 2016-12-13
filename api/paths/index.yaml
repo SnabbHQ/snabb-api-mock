@@ -1,8 +1,14 @@
-/delivery/quote:
+#/deliveries/:
+#  $ref: ./deliveries/quote.yaml
+/deliveries/quote:
+  $ref: ./deliveries/quote.yaml
+/deliveries/{delivery_id}:
+  $ref: ./deliveries/delivery.yaml
+/delivery/address/validate:
   $ref: ./deliveries/quote.yaml
 /history:
   $ref: ./history.yaml
 /products:
   $ref: ./products.yaml
-/me:
+/profile:
   $ref: ./me.yaml
