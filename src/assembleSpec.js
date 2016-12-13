@@ -3,7 +3,7 @@
 let jsonRefs = require('json-refs')
 let Yaml = require('yaml-js')
 let fs = require('fs')
-let Config = require('./Config')
+let Config = require('./Config').Config
 
 module.exports.assembleSpec = function() {
   return new Promise(function (resolve, reject) {
@@ -24,7 +24,13 @@ module.exports.assembleSpec = function() {
       .then(function (results) {
 
         if (Config.LOGGING_ENABLED) {
-          console.log(JSON.stringify(results.resolved, null, 2));
+          let jsonString = JSON.stringify(results.resolved, null, 2)
+          console.log(jsonString);
+          fs.writeFile('/spec/file.json', jsonString, function(error) {
+            if (error) {
+              return reject(error)
+            }
+          })
         }
 
         resolve(results.resolved);
