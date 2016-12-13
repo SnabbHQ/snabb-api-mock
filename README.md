@@ -13,6 +13,16 @@ Snabb API mock using a combination of the following tools:
  - **CircleCi**: CI tool in charge of the CD pipeline. Every time a push to master occurs, CircleCi will automatically push 
  the to Heroku.
 
+### Automatically generate code
+In order to automatically generate the server side mock code, you will need to install [swagger-codegen]
+(https://github.com/swagger-api/swagger-codegen). If you are in OSX simply do:
+
+```
+brew install swagger-codegen
+```
+
+
+
 ### Swagger File Structure
 In order to break down our API specification in smaller pieces so does not drive us crazy having our entire API spec in a single file, we are using [json-refs](https://github.com/whitlockjc/json-refs) to compose our broken down spec. 
 

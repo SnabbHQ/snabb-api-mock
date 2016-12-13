@@ -7,7 +7,7 @@
 /deliveries/{delivery_id}:
   $ref: ./deliveries/delivery.yaml
 /deliveries/address/validate:
-  $ref: ./deliveries/quote.yaml
+  $ref: ./deliveries/validate.yaml
 /history:
   $ref: ./user/history.yaml
 /current:
