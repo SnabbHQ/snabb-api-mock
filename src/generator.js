@@ -1,10 +1,13 @@
-var fs = require('fs');
-var CodeGen = require('swagger-js-codegen').CodeGen;
-var assemble = rquire
+import SwaggerCodeGen from 'swagger-js-codegen'
+import assembleSpec from './assembleSpec'
 
-var file = 'swagger/spec.json';
-
-var swagger = JSON.parse(fs.readFileSync(file, 'UTF-8'));
-var nodejsSourceCode = CodeGen.getNodeCode({ className: 'Test', swagger: swagger });
-
-console.log(nodejsSourceCode);
+export default function codeGen() {
+  assembleSpec
+    .then(function (specObject) {
+      const nodejsSourceCode = SwaggerCodeGen.CodeGen.getNodeCode({className: 'Test', swagger: specObject});
+      console.log(nodejsSourceCode)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}

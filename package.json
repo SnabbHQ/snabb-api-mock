@@ -2,10 +2,10 @@
   "name": "snabb-api",
   "version": "1.0.0",
   "description": "Move your app forward with the Snabb API",
-  "main": "index.js",
+  "main": "init.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node assemble.js",
+    "start": "node init.js",
     "serve": "node_modules/.bin/nodemon -e js,yaml",
     "debug": "node_modules/.bin/nodemon debug -e js,yaml"
   },
