@@ -1,0 +1,18 @@
+get:
+  tags:
+  - Auth
+  summary: Authentication endpoint
+#  TODO - Add more information about the access token
+  description: "OAuth 2.0 Authentication endpoint"
+  operationId: authPOST
+  parameters: []
+  responses:
+    200:
+      description: "Access token information"
+      schema:
+        $ref: '#/definitions/Profile'
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: User

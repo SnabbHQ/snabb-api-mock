@@ -10,9 +10,35 @@ info:
 host: snabb-api-mock.herokuapp.com
 basePath: /api/v1
 schemes:
-- https
+  - https
+consumes:
+  - application/json
 produces:
-- application/json
+  - application/json
+
+securityDefinitions:
+  OauthPasswordSecurity:
+    type: oauth2
+    flow: application
+    tokenUrl: 'https://oauth.simple.api/token'
+    scopes:
+      admin: Admin scope
+      user: User scope
+  OauthApplicationSecurity:
+    type: oauth2
+    flow: password
+    tokenUrl: 'https://oauth.simple.api/token'
+    scopes:
+      admin: Admin scope
+      user: User scope
+      api: API scope
+
+security:
+  - OauthApplicationSecurity:
+    - api
+  - OauthPasswordSecurity:
+    - user
+
 paths:
   $ref: ./api/paths/index.yaml
 definitions:

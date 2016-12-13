@@ -14,3 +14,4 @@
   $ref: ./products.yaml
 /profile:
   $ref: ./user/me.yaml
+
