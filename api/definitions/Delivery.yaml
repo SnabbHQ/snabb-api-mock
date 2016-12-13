@@ -21,3 +21,7 @@ properties:
     description: "The dropoff location information."
     allOf:
       - $ref: '#/definitions/Location'
+  tracking_url:
+    type: string
+    description: "Automatically generated tracking URL to be used in order to track and monitor in real time the
+    status of the current delivery."
