@@ -9,6 +9,14 @@ properties:
   updated_at:
     type: string
     description: "Unix timestamp representing the last time when the driver information was updated."
+  status:
+    type: string
+    description: "Unique status code for couriers current state."
+    enum:
+      - free
+      - busy
+      - picking
+      - on_route
   email:
     type: string
     description: "The email address of the driver."

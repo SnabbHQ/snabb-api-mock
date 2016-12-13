@@ -17,6 +17,23 @@ properties:
   formatted_address:
     type: string
     description: "Pre-formatted address. eg. Gavlegatan 18B, 11330, Stockholm"
+  address:
+    type: object
+    description: "Associated address with the location."
+    allOf:
+      - $ref: '#/definitions/Address'
+  latitude:
+    type: number
+    format: float
+    description: "The courier's latitude."
+  longitude:
+    type: number
+    format: float
+    description: "The courier's longitude."
+  bearing:
+    type: number
+    format: float
+    description: "The courier's bearing (degrees from 0 to 359)."
   comment:
       type: string
       description: "Special comments or instructions associated with the given location."
