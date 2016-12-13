@@ -9,7 +9,7 @@ We are using Heroku as platform where to host our mocked API:
 Snabb API mock using a combination of the following tools:
 
  - **Swagger**: Swagger is a powerful open source framework backed by a large ecosystem of tools that helps you design, build, document, and consume your RESTful APIs.
- - **Node.js**: We are using multiple tools from node in order to compose and run our Swagger API based specification. Check index.js for more info.
+ - **Node.js**: We are using multiple tools from node in order to compose and run our Swagger API based specification. Check assembleSpec.js for more info.
  - **CircleCi**: CI tool in charge of the CD pipeline. Every time a push to master occurs, CircleCi will automatically push 
  the to Heroku.
 

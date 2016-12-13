@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node index.js",
+    "start": "node assemble.js",
     "serve": "node_modules/.bin/nodemon -e js,yaml",
     "debug": "node_modules/.bin/nodemon debug -e js,yaml"
   },
@@ -16,12 +16,12 @@
   "private": true,
   "dependencies": {
     "connect": "^3.2.0",
-    "js-yaml": "^3.3.0",
     "yaml-js": "^0.1.3",
     "json-refs": "^2.1.6",
     "swagger-tools": "0.10.1"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "swagger-js-codegen": "^1.7.10"
   }
 }
