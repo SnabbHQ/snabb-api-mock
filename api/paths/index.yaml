@@ -4,11 +4,13 @@
   $ref: ./deliveries/quote.yaml
 /deliveries/{delivery_id}:
   $ref: ./deliveries/delivery.yaml
-/delivery/address/validate:
+/deliveries/address/validate:
   $ref: ./deliveries/quote.yaml
 /history:
-  $ref: ./history.yaml
+  $ref: ./user/history.yaml
+/current:
+  $ref: ./user/current.yaml
 /products:
   $ref: ./products.yaml
 /profile:
-  $ref: ./me.yaml
+  $ref: ./user/me.yaml
