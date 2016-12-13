@@ -1,38 +1,20 @@
-get:
+post:
   summary: Quote
-  description: "The Quote endpoint returns a price range for each product offered at a given location. The price
-  estimate is provided as a formatted string with the full price range and the localized currency symbol.<br><br>The
-  response also includes low and high estimates, and the [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency
-  code for situations requiring currency conversion.\n
-  \n
-  <b>Warning:</b> Quotes have a valid limited duration of 10min. This is done to prevent un-expected costs if the time
-  between the quote and the actual delivery order are to far apart. After this period, the quote won't be able to be
-  used to create a new delivery."
+  operationId: createQuote
+  description: "The Quote endpoint returns a price for each product offered at a given location. <br/>The
+  response includes [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations requiring currency
+   conversion.\n\n
+
+  <b>Warning:</b> Quotes have a valid limited duration of <b>10min</b>. This is done to prevent un-expected costs if
+  the time between the quote and the actual delivery order are to far apart. After this period, the quote won't be
+  able to be used to create a new delivery."
   parameters:
-    - name: start_latitude
-      in: query
-      description: "Latitude component of start location."
+    - name: quoteInfo
+      in: body
+      description: "Information required to generate a valid quote to be given to the user."
       required: true
-      type: number
-      format: double
-    - name: start_longitude
-      in: query
-      description: "Longitude component of start location."
-      required: true
-      type: number
-      format: double
-    - name: end_latitude
-      in: query
-      description: "Latitude component of end location."
-      required: true
-      type: number
-      format: double
-    - name: end_longitude
-      in: query
-      description: "Longitude component of end location."
-      required: true
-      type: number
-      format: double
+      schema:
+        $ref: '#/definitions/NewQuote'
   tags:
     - Estimates
   responses:

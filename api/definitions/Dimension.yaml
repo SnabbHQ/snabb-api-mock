@@ -1,14 +1,14 @@
 type: object
 properties:
   height:
-    type: num
+    type: number
     format: int32
     description: "Height in <b>cm</b>"
   width:
-      type: num
-      format: int32
-      description: "Width in <b>cm</b>"
-  deptch:
-      type: num
-      format: int32
-      description: "Depth in <b>cm</b>"
+    type: number
+    format: int32
+    description: "Width in <b>cm</b>"
+  depth:
+    type: number
+    format: int32
+    description: "Depth in <b>cm</b>"

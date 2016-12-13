@@ -12,6 +12,16 @@ Delivery:
   $ref: ./Delivery.yaml
 Product:
   $ref: ./Product.yaml
+Currency:
+  $ref: ./Currency.yaml
+Address:
+  $ref: ./location/Address.yaml
+City:
+  $ref: ./location/City.yaml
+Country:
+  $ref: ./location/Country.yaml
+Region:
+  $ref: ./location/Region.yaml
 Location:
   $ref: ./location/Location.yaml
 Profile:
@@ -19,7 +29,9 @@ Profile:
 Error:
   $ref: ./Error.yaml
 Quote:
-  $ref: ./Quote.yaml
+  $ref: ./quote/Quote.yaml
+NewQuote:
+  $ref: ./quote/NewQuote.yaml
 Review:
   $ref: ./Review.yaml
 Reviews:
