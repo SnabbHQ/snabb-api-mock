@@ -24,7 +24,7 @@ Review:
   $ref: ./Review.yaml
 Reviews:
   $ref: ./Reviews.yaml
-TransportType:
-  $ref: ./TransportType.yaml
+Transport:
+  $ref: ./Transport.yaml
 Dimension:
   $ref: ./Dimension.yaml
