@@ -1,5 +1,7 @@
 #/deliveries/:
 #  $ref: ./deliveries/quote.yaml
+/oauth/token:
+  $ref: ./auth/token.yaml
 /deliveries/quote:
   $ref: ./deliveries/quote.yaml
 /deliveries/{delivery_id}:

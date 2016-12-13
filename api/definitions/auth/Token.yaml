@@ -1,0 +1,16 @@
+type: object
+properties:
+  access_token:
+    type: string
+    description: "The access token issued by the authorization server."
+  token_type:
+    type: string
+    description: "The type of the token issued."
+  expires_in:
+    type: number
+    format: int32
+    description: "The lifetime in seconds of the access token. For example, the value \"3600\" denotes that the access
+     token will expire in one hour from the time the response was generated."
+  scope:
+    type: string
+    description: "Scope usage of the token."

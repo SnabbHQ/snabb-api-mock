@@ -1,3 +1,5 @@
+Token:
+  $ref: ./auth/Token.yaml
 Activities:
   $ref: ./Activities.yaml
 Activity:

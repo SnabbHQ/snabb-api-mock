@@ -1,16 +1,39 @@
-get:
+post:
   tags:
   - Auth
   summary: Authentication endpoint
 #  TODO - Add more information about the access token
-  description: "OAuth 2.0 Authentication endpoint"
+  description: "OAuth 2.0 Authentication endpoint. \n\n <b>Warning</b>: Only application/x-www-form-urlencoded or
+  multipart/form-data body encodings are supported."
+  consumes:
+    - application/x-www-form-urlencoded
   operationId: authPOST
-  parameters: []
+  parameters:
+    - name: client_id
+      in: formData
+      description: "The client id."
+      required: true
+      type: string
+    - name: client_secret
+      in: formData
+      description: "The client secret."
+      required: true
+      type: string
+    - name: scope
+      in: formData
+      description: "The scope."
+      required: true
+      type: string
+    - name: grant_type
+      in: formData
+      description: "The grant type."
+      required: true
+      type: string
   responses:
     200:
       description: "Access token information"
       schema:
-        $ref: '#/definitions/Profile'
+        $ref: '#/definitions/Token'
     default:
       description: Unexpected error
       schema:
