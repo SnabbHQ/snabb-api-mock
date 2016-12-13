@@ -20,7 +20,7 @@ properties:
     type: object
     description: "The currency used for the price calculation"
     allOf:
-      - $ref: '#/definitions/Quote'
+      - $ref: '#/definitions/Currency'
   expires_at:
     type: string
     description: "Unix timestamp representing the time when the quote will expire."
