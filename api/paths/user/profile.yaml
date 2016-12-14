@@ -4,7 +4,7 @@ get:
   summary: User Profile
   description: "The User Profile endpoint returns information about the Snabb user that has authorized with the
   application."
-  operationId: meGET
+  operationId: profileGET
   parameters: []
   responses:
     200:

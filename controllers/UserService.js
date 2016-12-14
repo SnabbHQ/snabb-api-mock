@@ -50,7 +50,7 @@ exports.historyGET = function(args, res, next) {
   
 }
 
-exports.meGET = function(args, res, next) {
+exports.profileGET = function(args, res, next) {
   /**
    * parameters expected in the args:
   **/

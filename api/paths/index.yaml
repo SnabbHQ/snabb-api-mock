@@ -12,8 +12,9 @@
   $ref: ./user/history.yaml
 /current:
   $ref: ./user/current.yaml
+/profile:
+  $ref: ./user/profile.yaml
 /products:
   $ref: ./products.yaml
-/profile:
-  $ref: ./user/me.yaml
+
 

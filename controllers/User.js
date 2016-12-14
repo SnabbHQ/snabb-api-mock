@@ -14,6 +14,6 @@ module.exports.historyGET = function historyGET (req, res, next) {
   User.historyGET(req.swagger.params, res, next);
 };
 
-module.exports.meGET = function meGET (req, res, next) {
-  User.meGET(req.swagger.params, res, next);
+module.exports.profileGET = function profileGET (req, res, next) {
+  User.profileGET(req.swagger.params, res, next);
 };
