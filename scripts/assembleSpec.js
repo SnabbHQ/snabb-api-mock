@@ -15,7 +15,7 @@ module.exports.assembleSpec = function() {
       filter: ['relative', 'remote'],
       loaderOptions: {
         processContent: function (res, callback) {
-          console.log(res.text)
+          //console.log(res.text)
           callback(null, Yaml.load(res.text));
         }
       }
@@ -24,14 +24,14 @@ module.exports.assembleSpec = function() {
     jsonRefs.resolveRefs(root, jsonRefOptions)
       .then(function (results) {
 
+        let yaml = Yaml.dump(results.resolved)
+        fs.writeFile('swagger.yaml', yaml, function (error) {
+          if (error)
+            return reject(error)
+        })
+
         if (Config.LOGGING_ENABLED) {
-          let jsonString = JSON.stringify(results.resolved, null, 2)
-          console.log(jsonString);
-          fs.writeFile('swagger.json', jsonString, function(error) {
-            if (error) {
-              return reject(error)
-            }
-          })
+          console.log(yaml);
         }
 
         resolve(results.resolved);

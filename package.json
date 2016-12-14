@@ -9,7 +9,7 @@
     "serve": "node_modules/.bin/nodemon -e js,yaml",
     "debug": "node_modules/.bin/nodemon debug -e js,yaml",
     "spec-gen": "node scripts/specGen.js",
-    "code-gen": "npm run spec-gen && swagger-codegen generate -i swagger.json -l nodejs-server -o ."
+    "code-gen": "npm run spec-gen && swagger-codegen generate -i swagger.yaml -l nodejs-server -o ."
   },
   "keywords": [
     "swagger"

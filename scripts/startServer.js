@@ -8,7 +8,7 @@ let assembleSpec = require('./assembleSpec').assembleSpec
 
 // swaggerRouter configuration
 let options = {
-  swaggerUi: '/swagger.json',
+  swaggerUi: '/swagger.yaml',
   controllers: './controllers',
   useStubs: process.env.NODE_ENV === 'development' ? true : false // Conditionally turn on stubs (mock mode)
 };
