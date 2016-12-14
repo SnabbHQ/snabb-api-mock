@@ -5,11 +5,5 @@
 # The patterns follow closely to .gitignore or .dockerignore.
 
 # Lets ignore everything except the controllers as everything else has been customized for our needs.
-#api/
-#index.js
-#package.json
-#README.md
-#.swagger-codegen-ignore
-#LICENSE
 **
-!controllers
+!controllers/**
