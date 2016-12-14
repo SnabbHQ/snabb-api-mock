@@ -26,7 +26,7 @@ module.exports.assembleSpec = function() {
         if (Config.LOGGING_ENABLED) {
           let jsonString = JSON.stringify(results.resolved, null, 2)
           console.log(jsonString);
-          fs.writeFile('./spec/swagger.json', jsonString, function(error) {
+          fs.writeFile('swagger.json', jsonString, function(error) {
             if (error) {
               return reject(error)
             }
