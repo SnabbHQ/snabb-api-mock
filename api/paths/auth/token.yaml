@@ -34,6 +34,12 @@ post:
       description: "Access token information"
       schema:
         $ref: '#/definitions/Token'
+      examples:
+        application/json:
+          - access_token: "J1qK1c18UUGJFAzz9xnH56584l4"
+            token_type: "bearer"
+            expires_in: 2592000
+            scope: "api"
     default:
       description: Unexpected error
       schema:
