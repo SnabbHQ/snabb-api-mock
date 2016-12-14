@@ -6,8 +6,8 @@
   "scripts": {
     "prestart": "npm install",
     "start": "node scripts/startServer.js",
-    "serve": "node_modules/.bin/nodemon -e js,yaml",
-    "debug": "node_modules/.bin/nodemon debug -e js,yaml",
+    "serve": "node_modules/.bin/nodemon --config nodemon.json",
+    "debug": "node_modules/.bin/nodemon debug --config nodemon.json",
     "spec-gen": "node scripts/specGen.js",
     "code-gen": "npm run spec-gen && swagger-codegen generate -i swagger.yaml -l nodejs-server -o ."
   },
