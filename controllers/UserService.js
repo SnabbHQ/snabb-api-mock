@@ -56,11 +56,11 @@ exports.meGET = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = {
+  "thumbnail" : "aeiou",
+  "phone" : "{}",
   "last_name" : "aeiou",
-  "promo_code" : "aeiou",
   "first_name" : "aeiou",
-  "email" : "aeiou",
-  "picture" : "aeiou"
+  "email" : "aeiou"
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
