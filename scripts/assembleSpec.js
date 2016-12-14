@@ -1,7 +1,7 @@
 'use strict'
 
 let jsonRefs = require('json-refs')
-let Yaml = require('yaml-js')
+let Yaml = require('js-yaml')
 let fs = require('fs')
 let Config = require('./Config').Config
 
@@ -15,6 +15,7 @@ module.exports.assembleSpec = function() {
       filter: ['relative', 'remote'],
       loaderOptions: {
         processContent: function (res, callback) {
+          console.log(res.text)
           callback(null, Yaml.load(res.text));
         }
       }
