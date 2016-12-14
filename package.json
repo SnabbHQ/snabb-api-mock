@@ -2,12 +2,14 @@
   "name": "snabb-api",
   "version": "1.0.0",
   "description": "Move your app forward with the Snabb API",
-  "main": "init.js",
+  "main": "scripts/startServer.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node init.js",
+    "start": "node scripts/startServer.js",
     "serve": "node_modules/.bin/nodemon -e js,yaml",
-    "debug": "node_modules/.bin/nodemon debug -e js,yaml"
+    "debug": "node_modules/.bin/nodemon debug -e js,yaml",
+    "spec-gen": "node scripts/specGen.js",
+    "code-gen": "swagger-codegen generate -i spec/swagger.json -l nodejs-server -o ."
   },
   "keywords": [
     "swagger"
