@@ -10,7 +10,6 @@ info:
 host: snabb-api-mock.herokuapp.com #localhost:3000
 basePath: /api/v1
 schemes:
-  - http
   - https
 consumes:
   - application/json
