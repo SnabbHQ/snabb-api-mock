@@ -9,7 +9,7 @@ module.exports.assembleSpec = function() {
   return new Promise(function (resolve, reject) {
 
     // The Swagger document (require it, build it programmatically, fetch it from a URL, ...)
-    let root = Yaml.load(fs.readFileSync('swagger.yaml').toString());
+    let root = Yaml.load(fs.readFileSync('./api/swagger.yaml').toString());
 
     let jsonRefOptions = {
       filter: ['relative', 'remote'],
