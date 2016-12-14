@@ -11,6 +11,14 @@ get:
       description: "Profile information for a user"
       schema:
         $ref: '#/definitions/Profile'
+      examples:
+        application/json:
+          - first_name: "Michael"
+            last_name: "Knight"
+            email: "michael.knight@snabb.io"
+            phone:
+              number: "+46712345678"
+            thumbnail: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw"
     default:
       description: Unexpected error
       schema:
