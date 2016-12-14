@@ -14,21 +14,25 @@ post:
       description: "The client id."
       required: true
       type: string
+      x-example: "jmTfWIiqat02420meIeF"
     - name: client_secret
       in: formData
       description: "The client secret."
       required: true
       type: string
+      x-example: "YuAt2IrI3oHxG8SFplny"
     - name: scope
       in: formData
       description: "The scope."
       required: true
       type: string
+      x-example: "api"
     - name: grant_type
       in: formData
       description: "The grant type."
       required: true
       type: string
+      x-example: "client_credentials"
   responses:
     200:
       description: "Access token information"
