@@ -18,19 +18,9 @@ assembleSpec()
 
     // Initialize the Swagger middleware
     swaggerTools.initializeMiddleware(specObject, function (middleware) {
-      // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
-      app.use(middleware.swaggerMetadata())
 
-      // Validate Swagger requests
-      app.use(middleware.swaggerValidator())
-
-      // Route validated requests to appropriate controller
-      app.use(middleware.swaggerRouter(options))
-
-      // Serve the Swagger documents and Swagger UI
-      app.use(middleware.swaggerUi())
-
-      // Enable CORS headers
+      // Enable CORS headers. Btw for some black magic reason, this does no work if we put it after the last
+      // middleware use function.
       app.use((req, res, next) => {
 
         // Set CORS headers
@@ -45,6 +35,18 @@ assembleSpec()
 
         next()
       })
+
+      // Interpret Swagger resources and attach metadata to request - must be first in swagger-tools middleware chain
+      app.use(middleware.swaggerMetadata())
+
+      // Validate Swagger requests
+      app.use(middleware.swaggerValidator())
+
+      // Route validated requests to appropriate controller
+      app.use(middleware.swaggerRouter(options))
+
+      // Serve the Swagger documents and Swagger UI
+      app.use(middleware.swaggerUi())
 
       // Start the server
       http.createServer(app).listen(serverPort, function () {
