@@ -30,6 +30,20 @@ assembleSpec()
       // Serve the Swagger documents and Swagger UI
       app.use(middleware.swaggerUi())
 
+      // Enable CORS headers
+      app.use((req, res, next) => {
+
+        // Set CORS headers
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Request-Method', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+        res.setHeader('Access-Control-Allow-Headers', '*');
+        if ( req.method === 'OPTIONS' ) {
+          res.writeHead(200);
+          res.end();
+        }
+      })
+
       // Start the server
       http.createServer(app).listen(serverPort, function () {
         console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
