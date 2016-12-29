@@ -42,6 +42,8 @@ assembleSpec()
           res.writeHead(200);
           res.end();
         }
+
+        next()
       })
 
       // Start the server
