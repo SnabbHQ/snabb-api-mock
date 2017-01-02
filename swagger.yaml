@@ -7,10 +7,10 @@ info:
     name: Snabb Dev Systems
     url: developers.snabb.io
     email: dev.systems@snabb.io
-host: 'localhost:3000'
+host: snabb-api-mock.herokuapp.com
 basePath: /api/v1
 schemes:
-  - http
+  - https
 consumes:
   - application/json
 produces:
@@ -81,10 +81,10 @@ paths:
             $ref: '#/definitions/Token'
           examples:
             application/json:
-              - access_token: J1qK1c18UUGJFAzz9xnH56584l4
-                token_type: bearer
-                expires_in: 2592000
-                scope: api
+              access_token: J1qK1c18UUGJFAzz9xnH56584l4
+              token_type: bearer
+              expires_in: 2592000
+              scope: api
         default:
           description: Unexpected error
           schema:
@@ -254,13 +254,14 @@ paths:
             $ref: '#/definitions/Profile'
           examples:
             application/json:
-              - first_name: Michael
-                last_name: Knight
-                email: michael.knight@snabb.io
-                phone:
-                  number: '+46712345678'
-                thumbnail: >-
-                  https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw
+              first_name: Michael
+              last_name: Knight
+              email: michael.knight@snabb.io
+              phone:
+                number: '+46712345678'
+              thumbnail: >-
+                https://encrypted-tbn1.gstatic
+                .com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw
         default:
           description: Unexpected error
           schema:

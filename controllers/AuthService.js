@@ -9,12 +9,12 @@ exports.authPOST = function(args, res, next) {
   * grant_type (String)
   **/
     var examples = {};
-  examples['application/json'] = [ {
+  examples['application/json'] = {
   "access_token" : "J1qK1c18UUGJFAzz9xnH56584l4",
   "token_type" : "bearer",
   "expires_in" : 2592000,
   "scope" : "api"
-} ];
+};
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
