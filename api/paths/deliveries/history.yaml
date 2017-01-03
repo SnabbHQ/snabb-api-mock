@@ -1,4 +1,6 @@
 get:
+  tags:
+    - Deliveries
   summary: User Activity
   description: "The User Activity endpoint returns data about a user's lifetime activity with Uber. The response will
    include pickup locations and times, dropoff locations and times, the distance of past requests, and information
@@ -15,8 +17,6 @@ get:
       type: integer
       format: int32
       description: "Number of items to retrieve. Default is 5, maximum is 100."
-  tags:
-    - User
   responses:
     200:
       description: "History information for the given user"
