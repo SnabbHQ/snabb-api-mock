@@ -1,0 +1,54 @@
+post:
+  tags:
+  - Auth
+  summary: Client applications account registration endpoint
+#  TODO - Add more information about the access token
+  description: "OAuth 2.0 account creation and authentication endpoint. \n\n <b>Warning</b>: Only
+  application/x-www-form-urlencoded or multipart/form-data body encodings are supported."
+  consumes:
+    - application/x-www-form-urlencoded
+  operationId: registerPOST
+  parameters:
+    - name: name
+      in: formData
+      description: "The name or company name."
+      required: true
+      type: string
+      x-example: "Stark Industries"
+    - name: email
+      in: formData
+      description: "The email address to be used."
+      required: true
+      type: string
+      x-example: "tony.stark@stark.com"
+    - name: password
+      in: formData
+      description: "The client's password."
+      required: true
+      type: string
+      x-example: "passw0rd!"
+    - name: phone
+      in: formData
+      description: "The phone number of the user."
+      required: true
+      type: string
+      x-example: "+46712345678"
+  responses:
+    200:
+      description: "Access token information"
+      schema:
+        $ref: '#/definitions/Token'
+      examples:
+        application/json:
+          {
+            "access_token": "J1qK1c18UUGJFAzz9xnH56584l4",
+            "token_type": "bearer",
+            "expires_in": 2592000,
+            "scope": "api"
+          }
+
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: Auth

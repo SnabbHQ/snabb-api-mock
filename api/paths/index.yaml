@@ -1,5 +1,7 @@
 #/deliveries/:
 #  $ref: ./deliveries/quote.yaml
+/auth/register:
+  $ref: ./auth/register.yaml
 /deliveries/address/validate:
   $ref: ./deliveries/validate.yaml
 /deliveries/current:
