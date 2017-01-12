@@ -5,6 +5,7 @@ let http = require('http')
 let swaggerTools = require('swagger-tools')
 let serverPort = process.env.PORT || 3000
 let assembleSpec = require('./assembleSpec').assembleSpec
+let basicAuth = require('basic-auth-connect');
 
 // swaggerRouter configuration
 let options = {
@@ -18,6 +19,9 @@ assembleSpec()
 
     // Initialize the Swagger middleware
     swaggerTools.initializeMiddleware(specObject, function (middleware) {
+
+      // TODO - Super shitty and really un-secure way of auth but will do for now!! NOOOOOOOOOOOOOOO
+      app.use(basicAuth('snabbdev', 'devtest'));
 
       // Enable CORS headers. Btw for some black magic reason, this does no work if we put it after the last
       // middleware use function.
