@@ -3,7 +3,7 @@
 let app = require('connect')()
 let http = require('http')
 let swaggerTools = require('swagger-tools')
-let serverPort = process.env.PORT || 3000
+let serverPort = process.env.PORT || 5000
 let assembleSpec = require('./assembleSpec').assembleSpec
 let basicAuth = require('basic-auth-connect');
 
