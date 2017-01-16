@@ -11,7 +11,7 @@ let basicAuth = require('basic-auth-connect');
 let options = {
   swaggerUi: '/swagger.yaml',
   controllers: './controllers',
-  useStubs: process.env.NODE_ENV === 'development' ? true : false // Conditionally turn on stubs (mock mode)
+  useStubs: process.env.NODE_ENV === 'development' // Conditionally turn on stubs (mock mode)
 };
 
 assembleSpec()
@@ -21,7 +21,8 @@ assembleSpec()
     swaggerTools.initializeMiddleware(specObject, function (middleware) {
 
       // TODO - Super shitty and really un-secure way of auth but will do for now!! NOOOOOOOOOOOOOOO
-      app.use(basicAuth('snabbdev', 'devtest'));
+      // Disabled for now due to issues with fetching from client apps and internals
+      //app.use(basicAuth('snabbdev', 'devtest'));
 
       // Enable CORS headers. Btw for some black magic reason, this does no work if we put it after the last
       // middleware use function.
