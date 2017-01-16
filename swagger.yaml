@@ -376,6 +376,7 @@ paths:
               thumbnail: >-
                 https://encrypted-tbn1.gstatic
                 .com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw
+              verified: false
         default:
           description: Unexpected error
           schema:
@@ -656,6 +657,12 @@ definitions:
       thumbnail:
         type: string
         description: Small profile image URL of the user
+      verified:
+        type: boolean
+        description: >-
+          Flag representing if the user has been verified or not. In case is not
+          verified, the user will have restricted access to the API and only
+          certain actions will be allowed.
   Error:
     type: object
     properties:

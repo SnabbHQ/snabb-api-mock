@@ -17,3 +17,7 @@ properties:
   thumbnail:
     type: string
     description: "Small profile image URL of the user"
+  verified:
+    type: boolean
+    description: "Flag representing if the user has been verified or not. In case is not verified, the user will have
+     restricted access to the API and only certain actions will be allowed."
