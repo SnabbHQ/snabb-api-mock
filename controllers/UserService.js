@@ -12,7 +12,8 @@ exports.profileGET = function(args, res, next) {
   "phone" : {
     "number" : "+46712345678"
   },
-  "thumbnail" : "https://encrypted-tbn1.gstatic .com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw"
+  "thumbnail" : "https://encrypted-tbn1.gstatic .com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw",
+  "verified" : false
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
