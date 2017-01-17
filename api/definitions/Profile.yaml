@@ -1,6 +1,6 @@
 type: object
 properties:
-  consumer_id:
+  profile_id:
     type: integer
     description: "Unique identifier representing a user."
   company_name:

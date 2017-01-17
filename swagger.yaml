@@ -368,7 +368,7 @@ paths:
             $ref: '#/definitions/Profile'
           examples:
             application/json:
-              consumer_id: 3254345
+              profile_id: 3254345
               company_name: Knight Industries Inc.
               first_name: Michael
               last_name: Knight
@@ -385,7 +385,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  '/user/profile/{consumer_id}/':
+  '/user/profile/{profile_id}/':
     put:
       tags:
         - User
@@ -395,7 +395,7 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       parameters:
-        - name: consumer_id
+        - name: profile_id
           in: path
           description: ID of the user to update
           required: true
@@ -455,7 +455,7 @@ paths:
             $ref: '#/definitions/Profile'
           examples:
             application/json:
-              consumer_id: 3254345
+              profile_id: 3254345
               company_name: Knight Industries Inc.
               first_name: Michael
               last_name: Knight
@@ -730,7 +730,7 @@ definitions:
   Profile:
     type: object
     properties:
-      consumer_id:
+      profile_id:
         type: integer
         description: Unique identifier representing a user.
       company_name:

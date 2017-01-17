@@ -6,7 +6,7 @@ exports.profileGET = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = {
-  "consumer_id" : 3254345,
+  "profile_id" : 3254345,
   "company_name" : "Knight Industries Inc.",
   "first_name" : "Michael",
   "last_name" : "Knight",
@@ -32,7 +32,7 @@ exports.profileGET = function(args, res, next) {
 exports.profilePUT = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * consumer_id (String)
+  * profile_id (String)
   * company_name (String)
   * first_name (String)
   * last_name (String)
@@ -44,7 +44,7 @@ exports.profilePUT = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = {
-  "consumer_id" : 3254345,
+  "profile_id" : 3254345,
   "company_name" : "Knight Industries Inc.",
   "first_name" : "Michael",
   "last_name" : "Knight",

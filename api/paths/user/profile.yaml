@@ -14,7 +14,7 @@ get:
       examples:
         application/json:
           {
-            "consumer_id": 3254345,
+            "profile_id": 3254345,
             "company_name": "Knight Industries Inc.",
             "first_name": "Michael",
             "last_name": "Knight",
