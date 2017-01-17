@@ -1,5 +1,11 @@
 type: object
 properties:
+  consumer_id:
+    type: integer
+    description: "Unique identifier representing a user."
+  company_name:
+    type: string
+    description: "Name of the company."
   first_name:
     type: string
     description: "First name of the user."
@@ -10,14 +16,24 @@ properties:
     type: string
     description: "Email address of the user"
   phone:
-    type: object
-    description: "The phone number of the user."
-    allOf:
-      - $ref: '#/definitions/Phone'
-  thumbnail:
     type: string
-    description: "Small profile image URL of the user"
+    description: "The phone number of the user."
   verified:
     type: boolean
     description: "Flag representing if the user has been verified or not. In case is not verified, the user will have
      restricted access to the API and only certain actions will be allowed."
+  send_email_notifications:
+    type: boolean
+    description: "Flag representing if the user want to receive email notifications."
+  send_sms_notifications:
+    type: boolean
+    description: "Flag representing if the user want to receive sms notifications."
+  user_lang:
+    type: string
+    description: "[ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) 2 character language code."
+  updated_at:
+    type: integer
+    description: "Unix timestamp representing the moment in which the user was updated."
+  created_at:
+    type: integer
+    description: "Unix timestamp representing the moment in which the user was created."

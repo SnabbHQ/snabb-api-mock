@@ -12,18 +12,18 @@ Snabb API mock using a combination of the following tools:
 
  - **Swagger**: Swagger is a powerful open source framework backed by a large ecosystem of tools that helps you design, build, document, and consume your RESTful APIs.
  - **Node.js**: We are using multiple tools from node in order to compose and run our Swagger API based specification. Check assembleSpec.js for more info.
- - **CircleCi**: CI tool in charge of the CD pipeline. Every time a push to master occurs, CircleCi will automatically push 
+ - **CircleCi**: CI tool in charge of the CD pipeline. Every time a push to master occurs, CircleCi will automatically push
  the to Heroku.
 
 ### Automatically generate spec
-As you can see in the package.json we have defined a script to automatically generate a single Swagger file spec. 
-Simply run: 
+As you can see in the package.json we have defined a script to automatically generate a single Swagger file spec.
+Simply run:
 
 ```
 npm run spec-gen
 ```
 
-You will find the outcome in the spec folder. 
+You will find the outcome in the spec folder.
 
 
 ### Automatically generate code
@@ -34,7 +34,7 @@ In order to automatically generate the server side mock code, you will need to i
 brew install swagger-codegen
 ```
 
-Once you have swagger-codegen-cli installed, you can simply run the following command to update the controllers for 
+Once you have swagger-codegen-cli installed, you can simply run the following command to update the controllers for
 the api stub:
 
 ```
@@ -42,7 +42,7 @@ npm run code-gen
 ```
 
 ### Swagger File Structure
-In order to break down our API specification in smaller pieces so does not drive us crazy having our entire API spec in a single file, we are using [json-refs](https://github.com/whitlockjc/json-refs) to compose our broken down spec. 
+In order to break down our API specification in smaller pieces so does not drive us crazy having our entire API spec in a single file, we are using [json-refs](https://github.com/whitlockjc/json-refs) to compose our broken down spec.
 
 
 ### Running the server locally
@@ -59,3 +59,6 @@ open http://localhost:3000/docs
 ```
 
 This project leverages the mega-awesome [swagger-tools](https://github.com/apigee-127/swagger-tools) middleware which does most all the work.
+
+### Specification examples
+https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v2.0/json

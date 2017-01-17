@@ -368,15 +368,105 @@ paths:
             $ref: '#/definitions/Profile'
           examples:
             application/json:
+              consumer_id: 3254345
+              company_name: Knight Industries Inc.
               first_name: Michael
               last_name: Knight
               email: michael.knight@snabb.io
-              phone:
-                number: '+46712345678'
-              thumbnail: >-
-                https://encrypted-tbn1.gstatic
-                .com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw
+              phone: '+46712345678'
               verified: false
+              send_email_notifications: false
+              send_sms_notifications: true
+              user_lang: en
+              updated_at: 1441146983
+              created_at: 1441146983
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  '/user/profile/{consumer_id}/':
+    put:
+      tags:
+        - User
+      summary: Update User
+      operationId: profilePUT
+      description: Update your profile info.
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: consumer_id
+          in: path
+          description: ID of the user to update
+          required: true
+          type: string
+        - name: company_name
+          description: New company name.
+          in: formData
+          required: false
+          type: string
+          x-example: Knight Industries Inc.
+        - name: first_name
+          description: New user first_name
+          in: formData
+          required: false
+          type: string
+          x-example: Michael
+        - name: last_name
+          description: New user last_name.
+          in: formData
+          required: false
+          type: string
+          x-example: Knight
+        - name: email
+          description: The user's email address to send the reset email to.
+          in: formData
+          required: false
+          type: string
+          x-example: michael.knight@snabb.io
+        - name: phone
+          description: New user phone
+          in: formData
+          required: false
+          type: string
+          x-example: +34 656565545
+        - name: user_lang
+          description: New user selected language
+          in: formData
+          required: false
+          type: string
+          x-example: en
+        - name: send_email_notifications
+          description: Manage email notifications status
+          in: formData
+          required: false
+          type: boolean
+          x-example: true
+        - name: send_sms_notifications
+          description: Manage sms notifications status
+          in: formData
+          required: false
+          type: boolean
+          x-example: true
+      responses:
+        '200':
+          description: Updated Profile.
+          schema:
+            $ref: '#/definitions/Profile'
+          examples:
+            application/json:
+              consumer_id: 3254345
+              company_name: Knight Industries Inc.
+              first_name: Michael
+              last_name: Knight
+              email: michael.knight@snabb.io
+              phone: '+46712345678'
+              verified: false
+              send_email_notifications: false
+              send_sms_notifications: true
+              user_lang: en
+              updated_at: 1441146983
+              created_at: 1441146983
         default:
           description: Unexpected error
           schema:
@@ -640,6 +730,12 @@ definitions:
   Profile:
     type: object
     properties:
+      consumer_id:
+        type: integer
+        description: Unique identifier representing a user.
+      company_name:
+        type: string
+        description: Name of the company.
       first_name:
         type: string
         description: First name of the user.
@@ -650,19 +746,31 @@ definitions:
         type: string
         description: Email address of the user
       phone:
-        type: object
-        description: The phone number of the user.
-        allOf:
-          - $ref: '#/definitions/Phone'
-      thumbnail:
         type: string
-        description: Small profile image URL of the user
+        description: The phone number of the user.
       verified:
         type: boolean
         description: >-
           Flag representing if the user has been verified or not. In case is not
           verified, the user will have restricted access to the API and only
           certain actions will be allowed.
+      send_email_notifications:
+        type: boolean
+        description: Flag representing if the user want to receive email notifications.
+      send_sms_notifications:
+        type: boolean
+        description: Flag representing if the user want to receive sms notifications.
+      user_lang:
+        type: string
+        description: >-
+          [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) 2 character
+          language code.
+      updated_at:
+        type: integer
+        description: Unix timestamp representing the moment in which the user was updated.
+      created_at:
+        type: integer
+        description: Unix timestamp representing the moment in which the user was created.
   Error:
     type: object
     properties:

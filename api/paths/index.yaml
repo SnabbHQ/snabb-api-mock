@@ -20,7 +20,5 @@
   $ref: ./user/resetPassword.yaml
 /user/profile:
   $ref: ./user/profile.yaml
-
-
-
-
+/user/profile/{consumer_id}/:
+  $ref: ./user/updateProfile.yaml
