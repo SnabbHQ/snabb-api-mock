@@ -1,6 +1,8 @@
 # Swagger based API mock for Snabb backend
 [![CircleCI](https://circleci.com/gh/SnabbHQ/snabb-api-mock.svg?style=shield&circle-token=1092d3fe71b80d8fce088cdadbd878de37ab8389)](https://circleci.com/gh/SnabbHQ/snabb-api-mock)
 
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/8fc0a33c7a90b116c22e)
+
 ## URL and API docs
 We are using Heroku as platform where to host our mocked API:
 * http://snabb-api-mock.herokuapp.com/docs
