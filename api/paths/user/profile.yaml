@@ -14,17 +14,19 @@ get:
       examples:
         application/json:
           {
+            "profile_id": 3254345,
+            "company_name": "Knight Industries Inc.",
             "first_name": "Michael",
             "last_name": "Knight",
             "email": "michael.knight@snabb.io",
-            "phone": {
-              "number": "+46712345678"
-            },
-            "thumbnail": "https://encrypted-tbn1.gstatic
-            .com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw",
-            "verified": false
+            "phone": "+46712345678",
+            "verified": false,
+            "send_email_notifications": false,
+            "send_sms_notifications": true,
+            "user_lang": "en",
+            "updated_at": 1441146983,
+            "created_at": 1441146983
           }
-
     default:
       description: Unexpected error
       schema:

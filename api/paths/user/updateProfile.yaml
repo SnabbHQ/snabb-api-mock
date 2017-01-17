@@ -1,0 +1,89 @@
+put:
+  tags:
+    - User
+  summary: Update User
+  operationId: profilePUT
+  description: "Update your profile info."
+  consumes:
+      # - application/json
+      - application/x-www-form-urlencoded
+  parameters:
+    - name: profile_id
+      in: path
+      description: "ID of the user to update"
+      required: true
+      type: string
+    - name: company_name
+      description: "New company name."
+      in: formData
+      required: false
+      type: string
+      x-example: "Knight Industries Inc."
+    - name: first_name
+      description: "New user first_name"
+      in: formData
+      required: false
+      type: string
+      x-example: "Michael"
+    - name: last_name
+      description: "New user last_name."
+      in: formData
+      required: false
+      type: string
+      x-example: "Knight"
+    - name: email
+      description: "The user's email address to send the reset email to."
+      in: formData
+      required: false
+      type: string
+      x-example: "michael.knight@snabb.io"
+    - name: phone
+      description: "New user phone"
+      in: formData
+      required: false
+      type: string
+      x-example: "+34 656565545"
+    - name: user_lang
+      description: "New user selected language"
+      in: formData
+      required: false
+      type: string
+      x-example: "en"
+    - name: send_email_notifications
+      description: "Manage email notifications status"
+      in: formData
+      required: false
+      type: boolean
+      x-example: true
+    - name: send_sms_notifications
+      description: "Manage sms notifications status"
+      in: formData
+      required: false
+      type: boolean
+      x-example: true
+  responses:
+    200:
+      description: "Updated Profile."
+      schema:
+        $ref: '#/definitions/Profile'
+      examples:
+        application/json:
+          {
+            "profile_id": 3254345,
+            "company_name": "Knight Industries Inc.",
+            "first_name": "Michael",
+            "last_name": "Knight",
+            "email": "michael.knight@snabb.io",
+            "phone": "+46712345678",
+            "verified": false,
+            "send_email_notifications": false,
+            "send_sms_notifications": true,
+            "user_lang": "en",
+            "updated_at": 1441146983,
+            "created_at": 1441146983
+          }
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: User
