@@ -1,0 +1,23 @@
+post:
+  tags:
+  - User
+  summary: Verify User
+  description: "Verify user email."
+  operationId: verifyUser
+  consumes:
+      - application/x-www-form-urlencoded
+  parameters:
+    - name: hash
+      description: "Unique hash of user"
+      in: formData
+      required: true
+      type: string
+      x-example: "r4w4fw45t542fd34234$"
+  responses:
+    200:
+      description: "Empty response when the given email address exists in our system."
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: User
