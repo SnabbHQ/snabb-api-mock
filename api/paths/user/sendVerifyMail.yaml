@@ -3,7 +3,7 @@ post:
   - User
   summary: Resend verify email
   description: "This endpoint allow to resend activation account email to a user. Regenerate the user hash and send it to the user email."
-  operationId: verifyUser
+  operationId: sendVerifyMail
   consumes:
       - application/x-www-form-urlencoded
   parameters:

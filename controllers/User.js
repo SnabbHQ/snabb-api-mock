@@ -18,14 +18,14 @@ module.exports.resetPOST = function resetPOST (req, res, next) {
   User.resetPOST(req.swagger.params, res, next);
 };
 
+module.exports.sendVerifyMail = function sendVerifyMail (req, res, next) {
+  User.sendVerifyMail(req.swagger.params, res, next);
+};
+
 module.exports.updatePassword = function updatePassword (req, res, next) {
   User.updatePassword(req.swagger.params, res, next);
 };
 
 module.exports.verifyUser = function verifyUser (req, res, next) {
   User.verifyUser(req.swagger.params, res, next);
-};
-
-module.exports.verifyUser_1 = function verifyUser_1 (req, res, next) {
-  User.verifyUser_1(req.swagger.params, res, next);
 };
