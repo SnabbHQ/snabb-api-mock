@@ -65,4 +65,4 @@ post:
       description: Unexpected error
       schema:
         $ref: '#/definitions/Error'
-  x-swagger-router-controller: Auth
+  x-swagger-router-controller: User

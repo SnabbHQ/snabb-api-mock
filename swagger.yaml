@@ -7,9 +7,10 @@ info:
     name: Snabb Dev Systems
     url: developers.snabb.io
     email: dev.systems@snabb.io
-host: snabb-api-mock.herokuapp.com
+host: 'localhost:5000'
 basePath: /api/v1
 schemes:
+  - http
   - https
 consumes:
   - application/json
@@ -340,7 +341,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-      x-swagger-router-controller: Auth
+      x-swagger-router-controller: User
   /user/verifyUser/:
     post:
       tags:

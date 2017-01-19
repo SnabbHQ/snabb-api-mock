@@ -38,8 +38,6 @@ assembleSpec()
         // to the API (e.g. in case you use sessions)
         res.setHeader('Access-Control-Allow-Credentials', true);
 
-        console.log(res.getHeader('Access-Control-Allow-Methods'));
-
         if ( req.method === 'OPTIONS' ) {
           res.writeHead(200);
           res.end();
