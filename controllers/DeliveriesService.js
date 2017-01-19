@@ -6,12 +6,12 @@ exports.addressGET = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = {
-  "delivery_id" : "aeiou",
-  "tracking_url" : "aeiou",
-  "dropoff_location" : "{}",
-  "created_at" : 123,
   "pickup_location" : "{}",
-  "last_update_at" : 123
+  "delivery_id" : "aeiou",
+  "last_update_at" : 123,
+  "created_at" : 123,
+  "tracking_url" : "aeiou",
+  "dropoff_location" : "{}"
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -31,12 +31,12 @@ exports.deliveriesCurrentGET = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = {
-  "history" : [ {
-    "uuid" : "aeiou"
-  } ],
+  "offset" : 123,
   "limit" : 123,
   "count" : 123,
-  "offset" : 123
+  "history" : [ {
+    "uuid" : "aeiou"
+  } ]
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -56,12 +56,12 @@ exports.deliveriesHistoryGET = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = {
-  "history" : [ {
-    "uuid" : "aeiou"
-  } ],
+  "offset" : 123,
   "limit" : 123,
   "count" : 123,
-  "offset" : 123
+  "history" : [ {
+    "uuid" : "aeiou"
+  } ]
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -80,12 +80,12 @@ exports.deliveryGET = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = {
-  "delivery_id" : "aeiou",
-  "tracking_url" : "aeiou",
-  "dropoff_location" : "{}",
-  "created_at" : 123,
   "pickup_location" : "{}",
-  "last_update_at" : 123
+  "delivery_id" : "aeiou",
+  "last_update_at" : 123,
+  "created_at" : 123,
+  "tracking_url" : "aeiou",
+  "dropoff_location" : "{}"
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -104,16 +104,16 @@ exports.quotePOST = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = [ {
-  "expires_at" : "aeiou",
   "duration" : 1.3579000000000001069366817318950779736042022705078125,
+  "expires_at" : "aeiou",
   "distance" : 1.3579000000000001069366817318950779736042022705078125,
-  "price" : "aeiou",
-  "pickup_eta" : 1.3579000000000001069366817318950779736042022705078125,
-  "dropoff_location" : "{}",
-  "dropoff_eta" : 1.3579000000000001069366817318950779736042022705078125,
-  "quote_id" : "aeiou",
   "pickup_location" : "{}",
-  "currency" : "{}"
+  "dropoff_eta" : 1.3579000000000001069366817318950779736042022705078125,
+  "price" : "aeiou",
+  "quote_id" : "aeiou",
+  "currency" : "{}",
+  "pickup_eta" : 1.3579000000000001069366817318950779736042022705078125,
+  "dropoff_location" : "{}"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');

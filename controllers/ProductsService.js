@@ -8,10 +8,10 @@ exports.productsGET = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = [ {
-  "display_name" : "aeiou",
+  "image" : "aeiou",
   "product_id" : "aeiou",
   "description" : "aeiou",
-  "image" : "aeiou",
+  "display_name" : "aeiou",
   "capacity" : "aeiou"
 } ];
   if(Object.keys(examples).length > 0) {
