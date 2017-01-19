@@ -1,7 +1,5 @@
 #/deliveries/:
 #  $ref: ./deliveries/quote.yaml
-/auth/register:
-  $ref: ./auth/register.yaml
 /deliveries/address/validate:
   $ref: ./deliveries/validate.yaml
 /deliveries/current:
@@ -16,6 +14,12 @@
   $ref: ./auth/token.yaml
 /products:
   $ref: ./products.yaml
+/user/register:
+  $ref: ./user/register.yaml
+/user/verifyUser/:
+  $ref: ./user/verifyUser.yaml
+/user/sendVerifyMail/:
+  $ref: ./user/sendVerifyMail.yaml
 /user/password/reset:
   $ref: ./user/resetPassword.yaml
 /user/profile:
@@ -24,7 +28,3 @@
   $ref: ./user/updateProfile.yaml
 /user/updatePassword/{profile_id}/:
   $ref: ./user/updatePassword.yaml
-/user/verifyUser/:
-  $ref: ./user/verifyUser.yaml
-/user/sendVerifyMail/:
-  $ref: ./user/sendVerifyMail.yaml

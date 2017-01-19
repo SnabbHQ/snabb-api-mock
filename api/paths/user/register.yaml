@@ -9,9 +9,9 @@ post:
     - application/x-www-form-urlencoded
   operationId: registerPOST
   parameters:
-    - name: name
+    - name: company_name
       in: formData
-      description: "The name or company name."
+      description: "The company name."
       required: true
       type: string
       x-example: "Knight Industries Inc."

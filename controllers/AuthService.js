@@ -28,7 +28,7 @@ exports.authPOST = function(args, res, next) {
 exports.registerPOST = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * name (String)
+  * company_name (String)
   * email (String)
   * password (String)
   * phone (String)
