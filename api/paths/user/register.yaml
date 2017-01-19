@@ -1,6 +1,6 @@
 post:
   tags:
-  - Auth
+  - User
   summary: Client applications account registration endpoint
 #  TODO - Add more information about the access token
   description: "OAuth 2.0 account creation and authentication endpoint. \n\n <b>Warning</b>: Only
