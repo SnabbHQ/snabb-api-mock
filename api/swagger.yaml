@@ -7,7 +7,7 @@ info:
     name: Snabb Dev Systems
     url: developers.snabb.io
     email: dev.systems@snabb.io
-host: localhost:5000 # snabb-api-mock.herokuapp.com #localhost:3000
+host: snabb-api-mock.herokuapp.com #localhost:5000
 basePath: /api/v1
 schemes:
   - http
