@@ -7,10 +7,10 @@ info:
     name: Snabb Dev Systems
     url: developers.snabb.io
     email: dev.systems@snabb.io
-host: 'localhost:5000'
+host: snabb-api-mock.herokuapp.com
 basePath: /api/v1
 schemes:
-  - http
+  - https
 consumes:
   - application/json
 produces:
@@ -488,7 +488,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  /user/sendVerifyMail:
+  /user/sendVerifyEmail:
     post:
       tags:
         - User
