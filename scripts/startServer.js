@@ -24,15 +24,22 @@ assembleSpec()
       // Disabled for now due to issues with fetching from client apps and internals
       //app.use(basicAuth('snabbdev', 'devtest'));
 
-      // Enable CORS headers. Btw for some black magic reason, this does no work if we put it after the last
-      // middleware use function.
+      // Enable CORS headers. Needs to be setup before any other middleware as the service will traverse through all
+      // the middlewares in order. We want to setup this before any call gets made.
       app.use((req, res, next) => {
 
         // Set CORS headers
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Request-Method', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET', 'POST', 'PUT', 'DELETE');
-        res.setHeader('Access-Control-Allow-Headers', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, DELETE');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
+
+        // Set to true if you need the website to include cookies in the requests sent
+        // to the API (e.g. in case you use sessions)
+        res.setHeader('Access-Control-Allow-Credentials', true);
+
+        console.log(res.getHeader('Access-Control-Allow-Methods'));
+
         if ( req.method === 'OPTIONS' ) {
           res.writeHead(200);
           res.end();
