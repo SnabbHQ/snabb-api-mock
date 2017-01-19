@@ -14,17 +14,17 @@
   $ref: ./auth/token.yaml
 /products:
   $ref: ./products.yaml
-/user/register:
-  $ref: ./user/register.yaml
-/user/verifyUser:
-  $ref: ./user/verifyUser.yaml
-/user/sendVerifyMail:
-  $ref: ./user/sendVerifyMail.yaml
-/user/password/reset:
-  $ref: ./user/resetPassword.yaml
+/user/forgotPassword:
+  $ref: ./user/forgotPassword.yaml
 /user/profile:
   $ref: ./user/profile.yaml
 /user/profile/{profile_id}:
   $ref: ./user/updateProfile.yaml
+/user/register:
+  $ref: ./user/register.yaml
+/user/sendVerifyMail:
+  $ref: ./user/sendVerifyMail.yaml
 /user/updatePassword/{profile_id}:
   $ref: ./user/updatePassword.yaml
+/user/verifyUser:
+  $ref: ./user/verifyUser.yaml

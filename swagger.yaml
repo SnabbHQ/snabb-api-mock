@@ -7,10 +7,10 @@ info:
     name: Snabb Dev Systems
     url: developers.snabb.io
     email: dev.systems@snabb.io
-host: snabb-api-mock.herokuapp.com
+host: 'localhost:5000'
 basePath: /api/v1
 schemes:
-  - https
+  - http
 consumes:
   - application/json
 produces:
@@ -274,135 +274,20 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Products
-  /user/register:
+  /user/forgotPassword:
     post:
       tags:
         - User
-      summary: Client applications account registration endpoint
-      description: |-
-        OAuth 2.0 account creation and authentication endpoint. 
-
-         <b>Warning</b>: Only application/x-www-form-urlencoded or multipart/form-data body encodings are supported.
-      consumes:
-        - application/x-www-form-urlencoded
-      operationId: registerPOST
-      parameters:
-        - name: company_name
-          in: formData
-          description: The company name.
-          required: true
-          type: string
-          x-example: Knight Industries Inc.
-        - name: email
-          in: formData
-          description: The email address to be used.
-          required: true
-          type: string
-          x-example: michael.knight@snabb.io
-        - name: password
-          in: formData
-          description: The client's password.
-          required: true
-          type: string
-          x-example: passw0rd!
-        - name: phone
-          in: formData
-          description: User phone.
-          required: true
-          type: string
-          x-example: '+46712345678'
-        - name: user_lang
-          in: formData
-          description: Default user lang (optional).
-          required: false
-          type: string
-          x-example: es
-      responses:
-        '200':
-          description: Profile information for a registered user
-          schema:
-            $ref: '#/definitions/Profile'
-          examples:
-            application/json:
-              profile_id: 3254345
-              company_name: Knight Industries Inc.
-              first_name: ''
-              last_name: ''
-              email: michael.knight@snabb.io
-              phone: '+46712345678'
-              verified: false
-              send_email_notifications: true
-              send_sms_notifications: true
-              user_lang: en
-              updated_at: 1441146983
-              created_at: 1441146983
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: User
-  /user/verifyUser:
-    post:
-      tags:
-        - User
-      summary: Verify User
-      description: Verify user email.
-      operationId: verifyUser
-      consumes:
-        - application/x-www-form-urlencoded
-      parameters:
-        - name: hash
-          description: Unique hash of user
-          in: formData
-          required: true
-          type: string
-          x-example: r4w4fw45t542fd34234$
-      responses:
-        '200':
-          description: Empty response when the given email address exists in our system.
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: User
-  /user/sendVerifyMail:
-    post:
-      tags:
-        - User
-      summary: Resend verify email
+      summary: Forgot Password
       description: >-
-        This endpoint allow to resend activation account email to a user.
-        Regenerate the user hash and send it to the user email.
-      operationId: sendVerifyMail
+        When a user does not remember their password, this endpoint will send an
+        email to the given user with instructions to reset their password.
+      operationId: forgotPasswordPOST
       consumes:
         - application/x-www-form-urlencoded
       parameters:
         - name: email
-          description: The user's email address to send the activation email to.
-          in: formData
-          required: true
-          type: string
-          x-example: darth.vader@snabb.io
-      responses:
-        '200':
-          description: Empty response when the given email address exists in our system.
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: User
-  /user/password/reset:
-    post:
-      tags:
-        - User
-      summary: Reset Password
-      description: Send an email to the given user in order to reset their password.
-      operationId: resetPOST
-      consumes:
-        - application/x-www-form-urlencoded
-      parameters:
-        - name: email
-          description: The user's email address to send the reset email to.
+          description: The user's email address to send the email to.
           in: formData
           required: true
           type: string
@@ -536,6 +421,99 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
+  /user/register:
+    post:
+      tags:
+        - User
+      summary: Client applications account registration endpoint
+      description: |-
+        OAuth 2.0 account creation and authentication endpoint. 
+
+         <b>Warning</b>: Only application/x-www-form-urlencoded or multipart/form-data body encodings are supported.
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: registerPOST
+      parameters:
+        - name: company_name
+          in: formData
+          description: The company name.
+          required: true
+          type: string
+          x-example: Knight Industries Inc.
+        - name: email
+          in: formData
+          description: The email address to be used.
+          required: true
+          type: string
+          x-example: michael.knight@snabb.io
+        - name: password
+          in: formData
+          description: The client's password.
+          required: true
+          type: string
+          x-example: passw0rd!
+        - name: phone
+          in: formData
+          description: User phone.
+          required: true
+          type: string
+          x-example: '+46712345678'
+        - name: user_lang
+          in: formData
+          description: Default user lang (optional).
+          required: false
+          type: string
+          x-example: es
+      responses:
+        '200':
+          description: Profile information for a registered user
+          schema:
+            $ref: '#/definitions/Profile'
+          examples:
+            application/json:
+              profile_id: 3254345
+              company_name: Knight Industries Inc.
+              first_name: ''
+              last_name: ''
+              email: michael.knight@snabb.io
+              phone: '+46712345678'
+              verified: false
+              send_email_notifications: true
+              send_sms_notifications: true
+              user_lang: en
+              updated_at: 1441146983
+              created_at: 1441146983
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/sendVerifyMail:
+    post:
+      tags:
+        - User
+      summary: Resend verify email
+      description: >-
+        This endpoint allow to resend activation account email to a user.
+        Regenerate the user hash and send it to the user email.
+      operationId: sendVerifyMail
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: email
+          description: The user's email address to send the activation email to.
+          in: formData
+          required: true
+          type: string
+          x-example: darth.vader@snabb.io
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
   '/user/updatePassword/{profile_id}':
     post:
       tags:
@@ -563,6 +541,30 @@ paths:
           required: true
           type: string
           x-example: N3w_4w3s0m3_p4sw0rd
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/verifyUser:
+    post:
+      tags:
+        - User
+      summary: Verify User
+      description: Verify user email.
+      operationId: verifyUser
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: hash
+          description: Unique hash of user
+          in: formData
+          required: true
+          type: string
+          x-example: r4w4fw45t542fd34234$
       responses:
         '200':
           description: Empty response when the given email address exists in our system.

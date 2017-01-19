@@ -1,5 +1,14 @@
 'use strict';
 
+exports.forgotPasswordPOST = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * email (String)
+  **/
+  // no response value expected for this operation
+  res.end();
+}
+
 exports.profileGET = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -99,15 +108,6 @@ exports.registerPOST = function(args, res, next) {
     res.end();
   }
   
-}
-
-exports.resetPOST = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * email (String)
-  **/
-  // no response value expected for this operation
-  res.end();
 }
 
 exports.sendVerifyMail = function(args, res, next) {
