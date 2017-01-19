@@ -341,7 +341,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  /user/verifyUser/:
+  /user/verifyUser:
     post:
       tags:
         - User
@@ -365,7 +365,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  /user/sendVerifyMail/:
+  /user/sendVerifyMail:
     post:
       tags:
         - User
@@ -449,7 +449,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  '/user/profile/{profile_id}/':
+  '/user/profile/{profile_id}':
     put:
       tags:
         - User
@@ -536,7 +536,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  '/user/updatePassword/{profile_id}/':
+  '/user/updatePassword/{profile_id}':
     post:
       tags:
         - User

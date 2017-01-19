@@ -16,15 +16,15 @@
   $ref: ./products.yaml
 /user/register:
   $ref: ./user/register.yaml
-/user/verifyUser/:
+/user/verifyUser:
   $ref: ./user/verifyUser.yaml
-/user/sendVerifyMail/:
+/user/sendVerifyMail:
   $ref: ./user/sendVerifyMail.yaml
 /user/password/reset:
   $ref: ./user/resetPassword.yaml
 /user/profile:
   $ref: ./user/profile.yaml
-/user/profile/{profile_id}/:
+/user/profile/{profile_id}:
   $ref: ./user/updateProfile.yaml
-/user/updatePassword/{profile_id}/:
+/user/updatePassword/{profile_id}:
   $ref: ./user/updatePassword.yaml
