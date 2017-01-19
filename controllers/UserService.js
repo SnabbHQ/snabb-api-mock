@@ -76,3 +76,32 @@ exports.resetPOST = function(args, res, next) {
   res.end();
 }
 
+exports.sendVerifyMail = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * email (String)
+  **/
+  // no response value expected for this operation
+  res.end();
+}
+
+exports.updatePassword = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * profile_id (String)
+  * current_password (String)
+  * new_password (String)
+  **/
+  // no response value expected for this operation
+  res.end();
+}
+
+exports.verifyUser = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * hash (String)
+  **/
+  // no response value expected for this operation
+  res.end();
+}
+

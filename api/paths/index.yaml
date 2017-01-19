@@ -22,3 +22,9 @@
   $ref: ./user/profile.yaml
 /user/profile/{profile_id}/:
   $ref: ./user/updateProfile.yaml
+/user/updatePassword/{profile_id}/:
+  $ref: ./user/updatePassword.yaml
+/user/verifyUser/:
+  $ref: ./user/verifyUser.yaml
+/user/sendVerifyMail/:
+  $ref: ./user/sendVerifyMail.yaml

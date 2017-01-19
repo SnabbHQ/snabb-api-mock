@@ -14,13 +14,13 @@ post:
       description: "The name or company name."
       required: true
       type: string
-      x-example: "Stark Industries"
+      x-example: "Knight Industries Inc."
     - name: email
       in: formData
       description: "The email address to be used."
       required: true
       type: string
-      x-example: "tony.stark@stark.com"
+      x-example: "michael.knight@snabb.io"
     - name: password
       in: formData
       description: "The client's password."
@@ -29,22 +29,36 @@ post:
       x-example: "passw0rd!"
     - name: phone
       in: formData
-      description: "The phone number of the user."
+      description: "User phone."
       required: true
       type: string
       x-example: "+46712345678"
+    - name: user_lang
+      in: formData
+      description: "Default user lang (optional)."
+      required: false
+      type: string
+      x-example: "es"
   responses:
     200:
-      description: "Access token information"
+      description: "Profile information for a registered user"
       schema:
-        $ref: '#/definitions/Token'
+        $ref: '#/definitions/Profile'
       examples:
         application/json:
           {
-            "access_token": "J1qK1c18UUGJFAzz9xnH56584l4",
-            "token_type": "bearer",
-            "expires_in": 2592000,
-            "scope": "api"
+            "profile_id": 3254345,
+            "company_name": "Knight Industries Inc.",
+            "first_name": "",
+            "last_name": "",
+            "email": "michael.knight@snabb.io",
+            "phone": "+46712345678",
+            "verified": false,
+            "send_email_notifications": true,
+            "send_sms_notifications": true,
+            "user_lang": "en",
+            "updated_at": 1441146983,
+            "created_at": 1441146983
           }
 
     default:

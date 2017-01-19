@@ -55,13 +55,13 @@ paths:
           description: The name or company name.
           required: true
           type: string
-          x-example: Stark Industries
+          x-example: Knight Industries Inc.
         - name: email
           in: formData
           description: The email address to be used.
           required: true
           type: string
-          x-example: tony.stark@stark.com
+          x-example: michael.knight@snabb.io
         - name: password
           in: formData
           description: The client's password.
@@ -70,21 +70,35 @@ paths:
           x-example: passw0rd!
         - name: phone
           in: formData
-          description: The phone number of the user.
+          description: User phone.
           required: true
           type: string
           x-example: '+46712345678'
+        - name: user_lang
+          in: formData
+          description: Default user lang (optional).
+          required: false
+          type: string
+          x-example: es
       responses:
         '200':
-          description: Access token information
+          description: Profile information for a registered user
           schema:
-            $ref: '#/definitions/Token'
+            $ref: '#/definitions/Profile'
           examples:
             application/json:
-              access_token: J1qK1c18UUGJFAzz9xnH56584l4
-              token_type: bearer
-              expires_in: 2592000
-              scope: api
+              profile_id: 3254345
+              company_name: Knight Industries Inc.
+              first_name: ''
+              last_name: ''
+              email: michael.knight@snabb.io
+              phone: '+46712345678'
+              verified: false
+              send_email_notifications: true
+              send_sms_notifications: true
+              user_lang: en
+              updated_at: 1441146983
+              created_at: 1441146983
         default:
           description: Unexpected error
           schema:
@@ -467,6 +481,91 @@ paths:
               user_lang: en
               updated_at: 1441146983
               created_at: 1441146983
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  '/user/updatePassword/{profile_id}/':
+    post:
+      tags:
+        - User
+      summary: Update Password
+      description: Update user password.
+      operationId: updatePassword
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: profile_id
+          in: path
+          description: ID of the user to update
+          required: true
+          type: string
+        - name: current_password
+          description: Current user password.
+          in: formData
+          required: true
+          type: string
+          x-example: p4sw0rd
+        - name: new_password
+          description: New user password.
+          in: formData
+          required: true
+          type: string
+          x-example: N3w_4w3s0m3_p4sw0rd
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/verifyUser/:
+    post:
+      tags:
+        - User
+      summary: Verify User
+      description: Verify user email.
+      operationId: verifyUser
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: hash
+          description: Unique hash of user
+          in: formData
+          required: true
+          type: string
+          x-example: r4w4fw45t542fd34234$
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/sendVerifyMail/:
+    post:
+      tags:
+        - User
+      summary: Resend verify email
+      description: >-
+        This endpoint allow to resend activation account email to a user.
+        Regenerate the user hash and send it to the user email.
+      operationId: sendVerifyMail
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: email
+          description: The user's email address to send the activation email to.
+          in: formData
+          required: true
+          type: string
+          x-example: darth.vader@snabb.io
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
           schema:
