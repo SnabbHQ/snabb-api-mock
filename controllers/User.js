@@ -14,6 +14,10 @@ module.exports.profilePUT = function profilePUT (req, res, next) {
   User.profilePUT(req.swagger.params, res, next);
 };
 
+module.exports.registerPOST = function registerPOST (req, res, next) {
+  User.registerPOST(req.swagger.params, res, next);
+};
+
 module.exports.resetPOST = function resetPOST (req, res, next) {
   User.resetPOST(req.swagger.params, res, next);
 };

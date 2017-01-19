@@ -277,7 +277,7 @@ paths:
   /user/register:
     post:
       tags:
-        - Auth
+        - User
       summary: Client applications account registration endpoint
       description: |-
         OAuth 2.0 account creation and authentication endpoint. 
