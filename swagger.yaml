@@ -424,7 +424,7 @@ paths:
         - User
       summary: Client applications account registration endpoint
       description: |-
-        OAuth 2.0 account creation and authentication endpoint. 
+        User registration endpoint. 
 
          <b>Warning</b>: Only application/x-www-form-urlencoded or multipart/form-data body encodings are supported.
       consumes:
@@ -480,6 +480,15 @@ paths:
               user_lang: en
               updated_at: 1441146983
               created_at: 1441146983
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: '400103'
+              key: email_already_exists
+              message: Email already exists
         default:
           description: Unexpected error
           schema:
@@ -875,10 +884,15 @@ definitions:
       code:
         type: integer
         format: int32
+        description: Unique identifier representing the error being returned to the user.
+      key:
+        type: string
+        description: Unique key code to identify the error.
       message:
         type: string
-      fields:
-        type: string
+        description: >-
+          A human readable error message (Note: Remember that this error is not
+          localized and will be returned only in english.
   Delivery:
     type: object
     properties:
