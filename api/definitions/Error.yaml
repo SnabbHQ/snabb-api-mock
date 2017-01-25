@@ -3,7 +3,11 @@ properties:
   code:
     type: integer
     format: int32
+    description: "Unique identifier representing the error being returned to the user."
+  key:
+    type: string
+    description: "Unique key code to identify the error."
   message:
     type: string
-  fields:
-    type: string
+    description: "A human readable error message (Note: Remember that this error is not localized and will be returned
+     only in english."

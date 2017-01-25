@@ -2,8 +2,7 @@ post:
   tags:
   - User
   summary: Client applications account registration endpoint
-#  TODO - Add more information about the access token
-  description: "OAuth 2.0 account creation and authentication endpoint. \n\n <b>Warning</b>: Only
+  description: "User registration endpoint. \n\n <b>Warning</b>: Only
   application/x-www-form-urlencoded or multipart/form-data body encodings are supported."
   consumes:
     - application/x-www-form-urlencoded
@@ -60,7 +59,17 @@ post:
             "updated_at": 1441146983,
             "created_at": 1441146983
           }
-
+    400:
+      description: "Bad request"
+      schema:
+        $ref: '#/definitions/Error'
+      examples:
+        application/json:
+          {
+            "code": "400103",
+            "key": "email_already_exists",
+            "message": "Email already exists",
+          }
     default:
       description: Unexpected error
       schema:
