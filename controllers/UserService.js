@@ -122,7 +122,6 @@ exports.sendVerifyMail = function(args, res, next) {
 exports.updatePassword = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * profile_id (String)
   * current_password (String)
   * new_password (String)
   **/
