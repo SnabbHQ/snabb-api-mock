@@ -24,7 +24,7 @@
   $ref: ./user/register.yaml
 /user/sendVerifyEmail:
   $ref: ./user/sendVerifyEmail.yaml
-/user/updatePassword/{profile_id}:
+/user/updatePassword:
   $ref: ./user/updatePassword.yaml
 /user/verifyUser:
   $ref: ./user/verifyUser.yaml

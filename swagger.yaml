@@ -520,7 +520,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  '/user/updatePassword/{profile_id}':
+  /user/updatePassword:
     post:
       tags:
         - User
@@ -530,11 +530,6 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       parameters:
-        - name: profile_id
-          in: path
-          description: ID of the user to update
-          required: true
-          type: string
         - name: current_password
           description: Current user password.
           in: formData
