@@ -10,7 +10,7 @@
   $ref: ./deliveries/quote.yaml
 /deliveries/{delivery_id}:
   $ref: ./deliveries/delivery.yaml
-/oauth/token:
+/o/token:
   $ref: ./auth/token.yaml
 /products:
   $ref: ./products.yaml
