@@ -13,6 +13,7 @@ put:
       description: "ID of the user to update"
       required: true
       type: string
+      x-example: "1234321"
     - name: company_name
       description: "New company name."
       in: formData

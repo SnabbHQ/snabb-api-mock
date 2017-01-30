@@ -60,5 +60,16 @@ open http://localhost:3000/docs
 
 This project leverages the mega-awesome [swagger-tools](https://github.com/apigee-127/swagger-tools) middleware which does most all the work.
 
+### API testing
+Developing the mock and the spec is great but this spec should match exactly the endpoints we are developing. In 
+order to do so we are using [Dredd](http://dredd.readthedocs.io/en/latest/). This library will compare the spec 
+provided with the api responses from a given endpoint. Check this example to run it against the Mock API endpoint. 
+ 
+
+```
+node_modules/.bin/dredd swagger.yaml https://snabb-api-mock.herokuapp.com
+```
+
+
 ### Specification examples
 https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v2.0/json

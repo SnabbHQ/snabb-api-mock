@@ -13,12 +13,14 @@ get:
     required: true
     type: number
     format: double
+    x-example: "12.2330"
   - name: longitude
     in: query
     description: "Longitude component of location."
     required: true
     type: number
     format: double
+    x-example: "0.2332"
   responses:
     200:
       description: "An array of products"

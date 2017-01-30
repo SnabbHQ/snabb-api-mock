@@ -19,6 +19,7 @@
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
     "connect": "^3.2.0",
+    "dredd": "^2.2.5",
     "js-yaml": "^3.7.0",
     "json-refs": "^2.1.6",
     "swagger-tools": "0.10.1"

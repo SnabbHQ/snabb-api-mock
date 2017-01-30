@@ -10,6 +10,7 @@ get:
       description: "ID of the delivery to fetch"
       required: true
       type: string
+      x-example: "1234321"
   responses:
     200:
       description: "A delivery response."
