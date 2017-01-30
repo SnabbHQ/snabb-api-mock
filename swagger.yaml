@@ -172,6 +172,7 @@ paths:
           description: ID of the delivery to fetch
           required: true
           type: string
+          x-example: '1234321'
       responses:
         '200':
           description: A delivery response.
@@ -253,12 +254,14 @@ paths:
           required: true
           type: number
           format: double
+          x-example: '12.2330'
         - name: longitude
           in: query
           description: Longitude component of location.
           required: true
           type: number
           format: double
+          x-example: '0.2332'
       responses:
         '200':
           description: An array of products
@@ -346,6 +349,7 @@ paths:
           description: ID of the user to update
           required: true
           type: string
+          x-example: '1234321'
         - name: company_name
           description: New company name.
           in: formData
