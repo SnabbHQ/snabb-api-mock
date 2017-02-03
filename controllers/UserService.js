@@ -110,6 +110,16 @@ exports.registerPOST = function(args, res, next) {
   
 }
 
+exports.resetPassword = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * hash (String)
+  * password (String)
+  **/
+  // no response value expected for this operation
+  res.end();
+}
+
 exports.sendVerifyMail = function(args, res, next) {
   /**
    * parameters expected in the args:
