@@ -34,155 +34,6 @@ security:
   - OauthPasswordSecurity:
       - user
 paths:
-  /deliveries/address/validate:
-    get:
-      tags:
-        - Deliveries
-      summary: Validate an Address
-      operationId: addressGET
-      description: >-
-        Simple helper endpoint to validate an address before creating a quote or
-        a delivery.
-      parameters: []
-      responses:
-        '200':
-          description: If is a valid address
-          schema:
-            $ref: '#/definitions/Delivery'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Delivery
-  /deliveries/current:
-    get:
-      tags:
-        - Deliveries
-      summary: User Current Activity
-      description: >-
-        The User Current Activity endpoint returns data about a ongoing user's
-        lifetime activity with Snabb. The response will include pickup locations
-        and times, dropoff locations and times, the distance of ongoing
-        requests, and information about which products were
-        requested.<br><br>The history array in the response will have a maximum
-        length based on the limit parameter. The response value count may exceed
-        limit, therefore subsequent API requests may be necessary.
-      parameters:
-        - name: offset
-          in: query
-          type: integer
-          format: int32
-          description: Offset the list of returned results by this amount. Default is zero.
-        - name: limit
-          in: query
-          type: integer
-          format: int32
-          description: 'Number of items to retrieve. Default is 5, maximum is 100.'
-      responses:
-        '200':
-          description: Ongoing deliveries information for the given user
-          schema:
-            $ref: '#/definitions/Activities'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /deliveries/history:
-    get:
-      tags:
-        - Deliveries
-      summary: User Activity
-      description: >-
-        The User Activity endpoint returns data about a user's lifetime activity
-        with Uber. The response will include pickup locations and times, dropoff
-        locations and times, the distance of past requests, and information
-        about which products were requested.<br><br>The history array in the
-        response will have a maximum length based on the limit parameter. The
-        response value count may exceed limit, therefore subsequent API requests
-        may be necessary.
-      parameters:
-        - name: offset
-          in: query
-          type: integer
-          format: int32
-          description: Offset the list of returned results by this amount. Default is zero.
-        - name: limit
-          in: query
-          type: integer
-          format: int32
-          description: 'Number of items to retrieve. Default is 5, maximum is 100.'
-      responses:
-        '200':
-          description: History information for the given user
-          schema:
-            $ref: '#/definitions/Activities'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-  /deliveries/quote:
-    post:
-      summary: Quote
-      operationId: quotePOST
-      description: >-
-        The Quote endpoint returns a price for each product offered at a given
-        location. <br/>The response includes [ISO
-        4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for
-        situations requiring currency conversion.
-
-
-
-        <b>Warning:</b> Quotes have a valid limited duration of <b>10min</b>.
-        This is done to prevent un-expected costs if the time between the quote
-        and the actual delivery order are to far apart. After this period, the
-        quote won't be able to be used to create a new delivery.
-      parameters:
-        - name: quoteInfo
-          in: body
-          description: >-
-            Information required to generate a valid quote to be given to the
-            user.
-          required: true
-          schema:
-            $ref: '#/definitions/NewQuote'
-      tags:
-        - Deliveries
-      responses:
-        '200':
-          description: An array of price estimates by product.
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Quote'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Delivery
-  '/deliveries/{delivery_id}':
-    get:
-      tags:
-        - Deliveries
-      summary: Delivery
-      operationId: deliveryGET
-      description: Get a particular delivery information.
-      parameters:
-        - name: delivery_id
-          in: path
-          description: ID of the delivery to fetch
-          required: true
-          type: string
-          x-example: '1234321'
-      responses:
-        '200':
-          description: A delivery response.
-          schema:
-            $ref: '#/definitions/Delivery'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Delivery
   /o/token:
     post:
       tags:
@@ -236,44 +87,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Auth
-  /products:
-    get:
-      tags:
-        - Products
-      summary: Product Types
-      description: >-
-        The Products endpoint returns information about the *Uber* products
-        offered at a given location. The response includes the display name and
-        other details about each product, and lists the products in the proper
-        display order.
-      operationId: productsGET
-      parameters:
-        - name: latitude
-          in: query
-          description: Latitude component of location.
-          required: true
-          type: number
-          format: double
-          x-example: '12.2330'
-        - name: longitude
-          in: query
-          description: Longitude component of location.
-          required: true
-          type: number
-          format: double
-          x-example: '0.2332'
-      responses:
-        '200':
-          description: An array of products
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Product'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Products
   /user/forgotPassword:
     post:
       tags:
@@ -294,6 +107,36 @@ paths:
           x-example: darth.vader@snabb.io
       responses:
         '204':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/resetPassword:
+    post:
+      tags:
+        - User
+      summary: Reset passwrod
+      description: Reset password for user.
+      operationId: resetPassword
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: hash
+          description: Unique hash of user
+          in: formData
+          required: true
+          type: string
+          x-example: r4w4fw45t542fd34234$
+        - name: password
+          description: New password for user
+          in: formData
+          required: true
+          type: string
+          x-example: p4sw0rd
+      responses:
+        '200':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error

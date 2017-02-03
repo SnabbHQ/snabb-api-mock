@@ -1,21 +1,23 @@
 #/deliveries/:
 #  $ref: ./deliveries/quote.yaml
-/deliveries/address/validate:
-  $ref: ./deliveries/validate.yaml
-/deliveries/current:
-  $ref: ./deliveries/current.yaml
-/deliveries/history:
-  $ref: ./deliveries/history.yaml
-/deliveries/quote:
-  $ref: ./deliveries/quote.yaml
-/deliveries/{delivery_id}:
-  $ref: ./deliveries/delivery.yaml
+#/deliveries/address/validate:
+#  $ref: ./deliveries/validate.yaml
+#/deliveries/current:
+#  $ref: ./deliveries/current.yaml
+#/deliveries/history:
+#  $ref: ./deliveries/history.yaml
+#/deliveries/quote:
+#  $ref: ./deliveries/quote.yaml
+#/deliveries/{delivery_id}:
+#  $ref: ./deliveries/delivery.yaml
+#/products:
+#  $ref: ./products.yaml
 /o/token:
   $ref: ./auth/token.yaml
-/products:
-  $ref: ./products.yaml
 /user/forgotPassword:
   $ref: ./user/forgotPassword.yaml
+/user/resetPassword:
+  $ref: ./user/resetPassword.yaml
 /user/profile:
   $ref: ./user/profile.yaml
 /user/profile/{profile_id}:

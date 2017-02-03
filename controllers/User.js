@@ -22,6 +22,10 @@ module.exports.registerPOST = function registerPOST (req, res, next) {
   User.registerPOST(req.swagger.params, res, next);
 };
 
+module.exports.resetPassword = function resetPassword (req, res, next) {
+  User.resetPassword(req.swagger.params, res, next);
+};
+
 module.exports.sendVerifyMail = function sendVerifyMail (req, res, next) {
   User.sendVerifyMail(req.swagger.params, res, next);
 };
