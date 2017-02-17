@@ -421,6 +421,37 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
+  /address/validateAddress:
+    post:
+      tags:
+        - Address
+      summary: Verify Address.
+      description: Verify if Snabb works in this address.
+      operationId: verifyAddress
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: address
+          description: Address formatted like gmaps.
+          in: formData
+          required: true
+          type: string
+          x-example: 'Passatge Dr. Serra, 46004, València, Spain'
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              key: ADDRESS_OK
+              code: 200206
+              message: Address valid
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Address
 definitions:
   Token:
     type: object

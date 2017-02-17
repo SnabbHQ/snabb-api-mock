@@ -30,3 +30,5 @@
   $ref: ./user/updatePassword.yaml
 /user/verifyUser:
   $ref: ./user/verifyUser.yaml
+/address/validateAddress:
+  $ref: ./address/validateAddress.yaml
