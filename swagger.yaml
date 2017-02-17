@@ -439,7 +439,9 @@ paths:
           x-example: 'Passatge Dr. Serra, 46004, València, Spain'
       responses:
         '200':
-          description: Empty response when the given email address exists in our system.
+          description: >-
+            Return ADDRESS_OK if Snabb works in this address. If not, you get an
+            error code.
           schema:
             $ref: '#/definitions/Error'
           examples:
