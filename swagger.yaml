@@ -456,6 +456,10 @@ paths:
               code: 400401
               message: Key address is required
               key: KEY_ADDRESS_REQUIRED
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
       x-swagger-router-controller: Address
 definitions:
   Token:
