@@ -25,9 +25,15 @@ post:
                 "code": 200206,
                 "message": "Address valid"
             }
-            
-    default:
-      description: Unexpected error
-      schema:
-        $ref: '#/definitions/Error'
+
+    "400":
+      description: Return KEY_ADDRESS_REQUIRED if you don't send "address" field.
+      examples:
+        application/json:
+            {
+                'code': 400401,
+                'message': 'Key address is required',
+                'key': 'KEY_ADDRESS_REQUIRED'
+            }
+
   x-swagger-router-controller: Address
