@@ -1,0 +1,42 @@
+post:
+  tags:
+  - Address
+  summary: Verify Address.
+  description: "Verify if Snabb works in this address."
+  operationId: verifyAddress
+  consumes:
+      - application/x-www-form-urlencoded
+  parameters:
+    - name: address
+      description: "Address formatted like gmaps."
+      in: formData
+      required: true
+      type: string
+      x-example: "Passatge Dr. Serra, 46004, València, Spain"
+  responses:
+    200:
+      description: "Return ADDRESS_OK if Snabb works in this address. If not, you get an error code."
+      schema:
+        $ref: '#/definitions/Error'
+      examples:
+        application/json:
+            {
+                "key": "ADDRESS_OK",
+                "code": 200206,
+                "message": "Address valid"
+            }
+
+    "400":
+      description: Return KEY_ADDRESS_REQUIRED if you don't send "address" field.
+      examples:
+        application/json:
+            {
+                'code': 400401,
+                'message': 'Key address is required',
+                'key': 'KEY_ADDRESS_REQUIRED'
+            }
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: Address
