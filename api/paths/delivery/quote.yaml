@@ -17,6 +17,33 @@ post:
       required: true
       schema:
         $ref: '#/definitions/PostQuote'
+      x-examples:
+        default: |
+          {
+            "tasks" : [
+              {
+                "type": "pickup",
+                "comments": "Fragile package.",
+                "place":{
+                  "description" : "Cactus Office",
+                  "address": "Pasaje Doctor Serra, 3, 46004, Valencia"
+                }
+              },
+              {
+                "type": "dropoff",
+                "comments": "",
+                "place":{
+                  "description" : "Snabb Master Head Quarters. Where all the fun takes place! :)",
+                  "address": "Calle San Vicente Martir, 91, 46007, Valencia"
+                },
+                "contact":{
+                  "company_name": "Martinez e hijos",
+                  "phone": "+34625188855",
+                  "email": "pp@pp.ppp"
+                }
+              }
+            ]
+          }
   responses:
     200:
       description: "An array of price estimates by product."
@@ -36,7 +63,7 @@ post:
                 "task_id": 1421,
                 "place": {
                   "place_id": 1421,
-                  "description": "Snabb Master Head Quorters. Wher all the fun takes place! :)",
+                  "description": "Snabb Master Head Quarters. Where all the fun takes place! :)",
                   "address": {
                     "address_id": 1421,
                     "address": "Calle San Vicente Martir, 91, 46007, Valencia",
