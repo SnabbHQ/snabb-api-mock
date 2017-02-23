@@ -1,44 +1,48 @@
-Token:
-  $ref: ./auth/Token.yaml
 Activities:
   $ref: ./Activities.yaml
 Activity:
   $ref: ./Activity.yaml
-Contact:
-  $ref: ./contact/Contact.yaml
-Phone:
-  $ref: ./contact/Phone.yaml
-Courier:
-  $ref: ./Courier.yaml
-Product:
-  $ref: ./Product.yaml
-Currency:
-  $ref: ./Currency.yaml
 Address:
   $ref: ./location/Address.yaml
 City:
   $ref: ./location/City.yaml
+Contact:
+  $ref: ./contact/Contact.yaml
 Country:
   $ref: ./location/Country.yaml
-Region:
-  $ref: ./location/Region.yaml
-Location:
-  $ref: ./location/Location.yaml
-Profile:
-  $ref: ./Profile.yaml
-Error:
-  $ref: ./Error.yaml
+Courier:
+  $ref: ./Courier.yaml
+Currency:
+  $ref: ./Currency.yaml
 Delivery:
   $ref: ./delivery/Delivery.yaml
-Quote:
-  $ref: ./delivery/Quote.yaml
+Dimension:
+  $ref: ./Dimension.yaml
+Error:
+  $ref: ./Error.yaml
+Location:
+  $ref: ./location/Location.yaml
 NewQuote:
   $ref: ./delivery/NewQuote.yaml
+Phone:
+  $ref: ./contact/Phone.yaml
+Price:
+  $ref: ./delivery/Price.yaml
+Prices:
+  $ref: ./delivery/Prices.yaml
+Product:
+  $ref: ./Product.yaml
+Profile:
+  $ref: ./Profile.yaml
+Quote:
+  $ref: ./delivery/Quote.yaml
+Region:
+  $ref: ./location/Region.yaml
 Review:
   $ref: ./Review.yaml
 Reviews:
   $ref: ./Reviews.yaml
+Token:
+  $ref: ./auth/Token.yaml
 Transport:
   $ref: ./Transport.yaml
-Dimension:
-  $ref: ./Dimension.yaml

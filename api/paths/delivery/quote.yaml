@@ -1,4 +1,6 @@
 post:
+  tags:
+    - Delivery
   summary: Quote
   operationId: quotePOST
   description: "The Quote endpoint returns a price for each product offered at a given location. <br/>The
@@ -15,8 +17,6 @@ post:
       required: true
       schema:
         $ref: '#/definitions/NewQuote'
-  tags:
-    - Deliveries
   responses:
     200:
       description: "An array of price estimates by product."

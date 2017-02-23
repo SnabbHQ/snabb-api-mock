@@ -6,12 +6,10 @@
 #  $ref: ./deliveries/current.yaml
 #/deliveries/history:
 #  $ref: ./deliveries/history.yaml
-#/deliveries/quote:
-#  $ref: ./deliveries/quote.yaml
 #/deliveries/{delivery_id}:
 #  $ref: ./deliveries/delivery.yaml
-#/products:
-#  $ref: ./products.yaml
+/delivery/quote:
+  $ref: ./delivery/quote.yaml
 /o/token:
   $ref: ./auth/token.yaml
 /user/forgotPassword:

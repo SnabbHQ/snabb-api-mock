@@ -34,6 +34,45 @@ security:
   - OauthPasswordSecurity:
       - user
 paths:
+  /delivery/quote:
+    post:
+      tags:
+        - Delivery
+      summary: Quote
+      operationId: quotePOST
+      description: >-
+        The Quote endpoint returns a price for each product offered at a given
+        location. <br/>The response includes [ISO
+        4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for
+        situations requiring currency conversion.
+
+
+
+        <b>Warning:</b> Quotes have a valid limited duration of <b>10min</b>.
+        This is done to prevent un-expected costs if the time between the quote
+        and the actual delivery order are to far apart. After this period, the
+        quote won't be able to be used to create a new delivery.
+      parameters:
+        - name: quoteInfo
+          in: body
+          description: >-
+            Information required to generate a valid quote to be given to the
+            user.
+          required: true
+          schema:
+            $ref: '#/definitions/NewQuote'
+      responses:
+        '200':
+          description: An array of price estimates by product.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Quote'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Delivery
   /o/token:
     post:
       tags:
@@ -462,25 +501,6 @@ paths:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Address
 definitions:
-  Token:
-    type: object
-    properties:
-      access_token:
-        type: string
-        description: The access token issued by the authorization server.
-      token_type:
-        type: string
-        description: The type of the token issued.
-      expires_in:
-        type: number
-        format: int32
-        description: >-
-          The lifetime in seconds of the access token. For example, the value
-          "3600" denotes that the access token will expire in one hour from the
-          time the response was generated.
-      scope:
-        type: string
-        description: Scope usage of the token.
   Activities:
     type: object
     properties:
@@ -506,6 +526,37 @@ definitions:
       uuid:
         type: string
         description: Unique identifier for the activity
+  Address:
+    type: object
+    properties:
+      address_id:
+        type: string
+        description: Unique identifier for the address.
+      street:
+        type: string
+        description: Plain text name of the city. e.g. Stockholm.
+      postcode:
+        type: string
+        description: Postal code of the address. e.g. 11218
+      city:
+        type: object
+        description: The city which this address belongs to.
+        allOf:
+          - $ref: '#/definitions/City'
+  City:
+    type: object
+    properties:
+      city_id:
+        type: string
+        description: Unique identifier for the city.
+      name:
+        type: string
+        description: Plain text name of the city. e.g. Stockholm.
+      region:
+        type: object
+        description: The region which the city belongs to.
+        allOf:
+          - $ref: '#/definitions/Region'
   Contact:
     type: object
     properties:
@@ -523,15 +574,25 @@ definitions:
         description: The phone number of the contact.
         allOf:
           - $ref: '#/definitions/Phone'
-  Phone:
+  Country:
     type: object
     properties:
-      number:
+      country_id:
+        type: string
+        description: Unique identifier for the country.
+      name:
+        type: string
+        description: Plain text name of the country. e.g. Sweden.
+      iso_code:
         type: string
         description: >-
-          Phone number. This could be either a local phone number in which the
-          associated country code will be automatically appended or an
-          international phone number with either the 00 or + included
+          [ISO 31661-1](https://en.wikipedia.org/wiki/ISO_3166-1) 2 character
+          country code.
+      default_currency:
+        type: string
+        description: The default currency to use in this country.
+        allOf:
+          - $ref: '#/definitions/Currency'
   Courier:
     type: object
     properties:
@@ -578,27 +639,6 @@ definitions:
         description: The transportation used by the courier to perform the deliveries.
         allOf:
           - $ref: '#/definitions/Transport'
-  Product:
-    type: object
-    properties:
-      product_id:
-        type: string
-        description: >-
-          Unique identifier representing a specific product for a given latitude
-          & longitude. For example, uberX in San Francisco will have a different
-          product_id than uberX in Los Angeles.
-      description:
-        type: string
-        description: Description of product.
-      display_name:
-        type: string
-        description: Display name of product.
-      capacity:
-        type: string
-        description: 'Capacity of product. For example, 4 people.'
-      image:
-        type: string
-        description: Image URL representing the product.
   Currency:
     type: object
     properties:
@@ -608,70 +648,67 @@ definitions:
       symbol:
         type: string
         description: Symbol code for the given currency.
-  Address:
+  Delivery:
     type: object
     properties:
-      address_id:
+      delivery_id:
         type: string
-        description: Unique identifier for the address.
-      street:
-        type: string
-        description: Plain text name of the city. e.g. Stockholm.
-      postcode:
-        type: string
-        description: Postal code of the address. e.g. 11218
-      city:
+        description: Unique identifier representing a specific delivery.
+      created_at:
+        type: integer
+        format: int32
+        description: Unix timestamp representing the moment the delivery was created.
+      last_update_at:
+        type: integer
+        format: int32
+        description: >-
+          Unix timestamp representing the last time when the delivery
+          information was updated.
+      pickup_location:
         type: object
-        description: The city which this address belongs to.
+        description: The pickup location information.
         allOf:
-          - $ref: '#/definitions/City'
-  City:
-    type: object
-    properties:
-      city_id:
-        type: string
-        description: Unique identifier for the city.
-      name:
-        type: string
-        description: Plain text name of the city. e.g. Stockholm.
-      region:
+          - $ref: '#/definitions/Location'
+      dropoff_location:
         type: object
-        description: The region which the city belongs to.
+        description: The dropoff location information.
         allOf:
-          - $ref: '#/definitions/Region'
-  Country:
-    type: object
-    properties:
-      country_id:
-        type: string
-        description: Unique identifier for the country.
-      name:
-        type: string
-        description: Plain text name of the country. e.g. Sweden.
-      iso_code:
+          - $ref: '#/definitions/Location'
+      tracking_url:
         type: string
         description: >-
-          [ISO 31661-1](https://en.wikipedia.org/wiki/ISO_3166-1) 2 character
-          country code.
-      default_currency:
-        type: string
-        description: The default currency to use in this country.
-        allOf:
-          - $ref: '#/definitions/Currency'
-  Region:
+          Automatically generated tracking URL to be used in order to track and
+          monitor in real time the status of the current delivery.
+  Dimension:
     type: object
     properties:
-      region_id:
+      height:
+        type: number
+        format: int32
+        description: Height in <b>cm</b>
+      width:
+        type: number
+        format: int32
+        description: Width in <b>cm</b>
+      depth:
+        type: number
+        format: int32
+        description: Depth in <b>cm</b>
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        description: Unique identifier representing the error being returned to the user.
+      key:
         type: string
-        description: Unique identifier for the region.
-      name:
+        description: Unique key code to identify the error.
+      message:
         type: string
-        description: Plain text name of the region. e.g. Uppland.
-      country:
-        type: object
-        description: The country which the region belongs to.
-        allOf:
-          - $ref: '#/definitions/Country'
+        description: >-
+          A human readable error message (Note: Remember that this error is not
+          localized and will be returned only in english.
   Location:
     type: object
     properties:
@@ -716,6 +753,76 @@ definitions:
       comment:
         type: string
         description: Special comments or instructions associated with the given location.
+  NewQuote:
+    type: object
+    properties:
+      pickup_location:
+        type: object
+        description: The pick up location information.
+        allOf:
+          - $ref: '#/definitions/Location'
+      dropoff_location:
+        type: object
+        description: The drop off location information.
+        allOf:
+          - $ref: '#/definitions/Location'
+  Phone:
+    type: object
+    properties:
+      number:
+        type: string
+        description: >-
+          Phone number. This could be either a local phone number in which the
+          associated country code will be automatically appended or an
+          international phone number with either the 00 or + included
+  Price:
+    type: object
+    properties:
+      price:
+        type: string
+        description: The final calculated price
+      eta:
+        type: number
+        description: Calculated ETA for the pickup of the item.
+  Prices:
+    type: object
+    properties:
+      small:
+        type: object
+        description: Small package size.
+        allOf:
+          - $ref: '#/definitions/Price'
+      medium:
+        type: object
+        description: Medium package size.
+        allOf:
+          - $ref: '#/definitions/Price'
+      big:
+        type: object
+        description: Big package size.
+        allOf:
+          - $ref: '#/definitions/Price'
+  Product:
+    type: object
+    properties:
+      product_id:
+        type: string
+        description: >-
+          Unique identifier representing a specific product for a given latitude
+          & longitude. For example, uberX in San Francisco will have a different
+          product_id than uberX in Los Angeles.
+      description:
+        type: string
+        description: Description of product.
+      display_name:
+        type: string
+        description: Display name of product.
+      capacity:
+        type: string
+        description: 'Capacity of product. For example, 4 people.'
+      image:
+        type: string
+        description: Image URL representing the product.
   Profile:
     type: object
     properties:
@@ -760,52 +867,6 @@ definitions:
       created_at:
         type: integer
         description: Unix timestamp representing the moment in which the user was created.
-  Error:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-        description: Unique identifier representing the error being returned to the user.
-      key:
-        type: string
-        description: Unique key code to identify the error.
-      message:
-        type: string
-        description: >-
-          A human readable error message (Note: Remember that this error is not
-          localized and will be returned only in english.
-  Delivery:
-    type: object
-    properties:
-      delivery_id:
-        type: string
-        description: Unique identifier representing a specific delivery.
-      created_at:
-        type: integer
-        format: int32
-        description: Unix timestamp representing the moment the delivery was created.
-      last_update_at:
-        type: integer
-        format: int32
-        description: >-
-          Unix timestamp representing the last time when the delivery
-          information was updated.
-      pickup_location:
-        type: object
-        description: The pickup location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      dropoff_location:
-        type: object
-        description: The dropoff location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      tracking_url:
-        type: string
-        description: >-
-          Automatically generated tracking URL to be used in order to track and
-          monitor in real time the status of the current delivery.
   Quote:
     type: object
     properties:
@@ -819,22 +880,29 @@ definitions:
       distance:
         type: number
         format: float
-        description: Estimated distance in Km of the total route.
+        description: Estimated distance in meters of the total route.
       duration:
         type: number
         format: int32
         description: Estimated duration in <b>minutes</b> of the delivery.
-      price:
+      expires_at:
         type: string
-        description: The calculated price for the delivery.
+        description: Unix timestamp representing the time when the quote will expire.
+      quote_user:
+        type: number
+        description: TODO
+      prices:
+        type: object
+        description: >-
+          An object containing all the prices and ETA for each of the packages
+          supported in the given location.
+        allOf:
+          - $ref: '#/definitions/Currency'
       currency:
         type: object
         description: The currency used for the price calculation
         allOf:
           - $ref: '#/definitions/Currency'
-      expires_at:
-        type: string
-        description: Unix timestamp representing the time when the quote will expire.
       pickup_location:
         type: object
         description: The pick up location information.
@@ -853,19 +921,20 @@ definitions:
         type: number
         format: int32
         description: The estimated time in <b>minutes</b> for drop off for this quote.
-  NewQuote:
+  Region:
     type: object
     properties:
-      pickup_location:
+      region_id:
+        type: string
+        description: Unique identifier for the region.
+      name:
+        type: string
+        description: Plain text name of the region. e.g. Uppland.
+      country:
         type: object
-        description: The pick up location information.
+        description: The country which the region belongs to.
         allOf:
-          - $ref: '#/definitions/Location'
-      dropoff_location:
-        type: object
-        description: The drop off location information.
-        allOf:
-          - $ref: '#/definitions/Location'
+          - $ref: '#/definitions/Country'
   Review:
     type: object
     properties:
@@ -891,6 +960,25 @@ definitions:
         items:
           allOf:
             - $ref: '#/definitions/Review'
+  Token:
+    type: object
+    properties:
+      access_token:
+        type: string
+        description: The access token issued by the authorization server.
+      token_type:
+        type: string
+        description: The type of the token issued.
+      expires_in:
+        type: number
+        format: int32
+        description: >-
+          The lifetime in seconds of the access token. For example, the value
+          "3600" denotes that the access token will expire in one hour from the
+          time the response was generated.
+      scope:
+        type: string
+        description: Scope usage of the token.
   Transport:
     type: object
     properties:
@@ -916,18 +1004,3 @@ definitions:
         description: Maximum dimensions of the package this transport type can hold.
         allOf:
           - $ref: '#/definitions/Dimension'
-  Dimension:
-    type: object
-    properties:
-      height:
-        type: number
-        format: int32
-        description: Height in <b>cm</b>
-      width:
-        type: number
-        format: int32
-        description: Width in <b>cm</b>
-      depth:
-        type: number
-        format: int32
-        description: Depth in <b>cm</b>
