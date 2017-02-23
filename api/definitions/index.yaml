@@ -22,10 +22,14 @@ Error:
   $ref: ./Error.yaml
 Location:
   $ref: ./location/Location.yaml
-NewQuote:
-  $ref: ./delivery/NewQuote.yaml
 Place:
   $ref: ./location/Place.yaml
+PostQuote:
+  $ref: ./delivery/PostQuote.yaml
+PostQuotePlace:
+  $ref: ./delivery/PostQuotePlace.yaml
+PostQuoteTask:
+  $ref: ./delivery/PostQuoteTask.yaml
 Price:
   $ref: ./delivery/Price.yaml
 Prices:

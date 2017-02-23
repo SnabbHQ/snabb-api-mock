@@ -3,7 +3,7 @@
 exports.quotePOST = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * quoteInfo (NewQuote)
+  * body (NewQuote)
   **/
     var examples = {};
   examples['application/json'] = {

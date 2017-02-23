@@ -23,8 +23,11 @@ properties:
   comments:
     type: string
     description: "Any additional comment to facilitate the completion of the task."
-  taskType:
-      type: string
-      description: "The type of task. This will be either pickup or dropoff"
+  task_type:
+    type: string
+    enum:
+      - pickup
+      - dropoff
+    description: "The type of task. This will be either pickup or dropoff"
 
 

@@ -53,14 +53,14 @@ paths:
         and the actual delivery order are to far apart. After this period, the
         quote won't be able to be used to create a new delivery.
       parameters:
-        - name: quoteInfo
+        - name: body
           in: body
           description: >-
             Information required to generate a valid quote to be given to the
             user.
           required: true
           schema:
-            $ref: '#/definitions/NewQuote'
+            $ref: '#/definitions/PostQuote'
       responses:
         '200':
           description: An array of price estimates by product.
@@ -151,6 +151,15 @@ paths:
                 iso_code: EUR
               created_at: 1487881467
               updated_at: 1487881468
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: '400405'
+              key: INVALID_ZIPCODE
+              message: Zipcode not valid
         default:
           description: Unexpected error
           schema:
@@ -849,19 +858,6 @@ definitions:
       comment:
         type: string
         description: Special comments or instructions associated with the given location.
-  NewQuote:
-    type: object
-    properties:
-      pickup_location:
-        type: object
-        description: The pick up location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      dropoff_location:
-        type: object
-        description: The drop off location information.
-        allOf:
-          - $ref: '#/definitions/Location'
   Place:
     type: object
     properties:
@@ -876,6 +872,57 @@ definitions:
         description: Physical representation of the place.
         allOf:
           - $ref: '#/definitions/Address'
+  PostQuote:
+    type: object
+    required:
+      - tasks
+    properties:
+      tasks:
+        type: array
+        description: >-
+          Array containing all the tasks associated with the current quote. This
+          tasks could be either be pickUp or dropOff type.
+        items:
+          allOf:
+            - $ref: '#/definitions/PostQuoteTask'
+  PostQuotePlace:
+    type: object
+    required:
+      - address
+    properties:
+      description:
+        type: string
+        description: Short text describing the place.
+      address:
+        type: string
+        description: >-
+          Plain text name of the address. e.g. Calle San Vicente Martir, 91,
+          46007, Valencia.
+  PostQuoteTask:
+    type: object
+    required:
+      - type
+      - place
+    properties:
+      type:
+        type: string
+        enum:
+          - pickup
+          - dropoff
+        description: The type of task. This will be either pickup or dropoff
+      comments:
+        type: string
+        description: Any additional comment to facilitate the completion of the task.
+      place:
+        type: object
+        description: The place associated with the given task.
+        allOf:
+          - $ref: '#/definitions/PostQuotePlace'
+      contact:
+        type: object
+        description: The contact associated with the given task.
+        allOf:
+          - $ref: '#/definitions/Contact'
   Price:
     type: object
     properties:
@@ -1082,8 +1129,11 @@ definitions:
       comments:
         type: string
         description: Any additional comment to facilitate the completion of the task.
-      taskType:
+      task_type:
         type: string
+        enum:
+          - pickup
+          - dropoff
         description: The type of task. This will be either pickup or dropoff
   Token:
     type: object
