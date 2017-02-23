@@ -3,7 +3,7 @@
 exports.quotePOST = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * body (NewQuote)
+  * body (PostQuote)
   **/
     var examples = {};
   examples['application/json'] = {
@@ -15,7 +15,7 @@ exports.quotePOST = function(args, res, next) {
     "task_id" : 1421,
     "place" : {
       "place_id" : 1421,
-      "description" : "Snabb Master Head Quorters. Wher all the fun takes place! :)",
+      "description" : "Snabb Master Head Quarters. Where all the fun takes place! :)",
       "address" : {
         "address_id" : 1421,
         "address" : "Calle San Vicente Martir, 91, 46007, Valencia",
