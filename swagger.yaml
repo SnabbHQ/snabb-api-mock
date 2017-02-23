@@ -532,23 +532,38 @@ definitions:
       address_id:
         type: string
         description: Unique identifier for the address.
-      street:
+      address:
         type: string
-        description: Plain text name of the city. e.g. Stockholm.
-      postcode:
+        description: >-
+          Plain text name of the address. e.g. Calle San Vicente Martir, 91,
+          46007, Valencia.
+      latitude:
+        type: number
+        format: float
+        description: Latitude of the address.
+      longitude:
+        type: number
+        format: float
+        description: Longitude of the address.
+      created_at:
         type: string
-        description: Postal code of the address. e.g. 11218
+        description: Unix timestamp representing the time when the address was created.
+      updated_at:
+        type: string
+        description: >-
+          Unix timestamp representing the time when the address was updated
+          last.
+      zipcode:
+        type: string
+        description: ZipCode (or PostalCode) of the address.
       city:
         type: object
-        description: The city which this address belongs to.
+        description: The city in which this address is located.
         allOf:
           - $ref: '#/definitions/City'
   City:
     type: object
     properties:
-      city_id:
-        type: string
-        description: Unique identifier for the city.
       name:
         type: string
         description: Plain text name of the city. e.g. Stockholm.
@@ -570,16 +585,14 @@ definitions:
         type: string
         description: The email address of the contact.
       phone:
-        type: object
-        description: The phone number of the contact.
-        allOf:
-          - $ref: '#/definitions/Phone'
+        type: string
+        description: >-
+          Phone number. This could be either a local phone number in which the
+          associated country code will be automatically appended or an
+          international phone number with either the 00 or + included
   Country:
     type: object
     properties:
-      country_id:
-        type: string
-        description: Unique identifier for the country.
       name:
         type: string
         description: Plain text name of the country. e.g. Sweden.
@@ -588,9 +601,9 @@ definitions:
         description: >-
           [ISO 31661-1](https://en.wikipedia.org/wiki/ISO_3166-1) 2 character
           country code.
-      default_currency:
-        type: string
-        description: The default currency to use in this country.
+      currency:
+        type: object
+        description: The currency to use in this country.
         allOf:
           - $ref: '#/definitions/Currency'
   Courier:
@@ -766,15 +779,20 @@ definitions:
         description: The drop off location information.
         allOf:
           - $ref: '#/definitions/Location'
-  Phone:
+  Place:
     type: object
     properties:
-      number:
+      place_id:
         type: string
-        description: >-
-          Phone number. This could be either a local phone number in which the
-          associated country code will be automatically appended or an
-          international phone number with either the 00 or + included
+        description: Unique identifier for the place.
+      description:
+        type: string
+        description: Short text describing the place.
+      address:
+        type: object
+        description: Physical representation of the place.
+        allOf:
+          - $ref: '#/definitions/Address'
   Price:
     type: object
     properties:
@@ -879,7 +897,7 @@ definitions:
           surprises down the road!).
       distance:
         type: number
-        format: float
+        format: int32
         description: Estimated distance in meters of the total route.
       duration:
         type: number
@@ -891,42 +909,35 @@ definitions:
       quote_user:
         type: number
         description: TODO
+      tasks:
+        type: array
+        description: >-
+          Array containing all the tasks associated with the current quote. This
+          tasks could be either be pickUp or dropOff type.
+        items:
+          allOf:
+            - $ref: '#/definitions/Task'
       prices:
         type: object
         description: >-
           An object containing all the prices and ETA for each of the packages
           supported in the given location.
         allOf:
-          - $ref: '#/definitions/Currency'
+          - $ref: '#/definitions/Prices'
       currency:
         type: object
         description: The currency used for the price calculation
         allOf:
           - $ref: '#/definitions/Currency'
-      pickup_location:
-        type: object
-        description: The pick up location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      pickup_eta:
-        type: number
-        format: int32
-        description: The estimated time in <b>minutes</b> for pick up for this quote.
-      dropoff_location:
-        type: object
-        description: The drop off location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      dropoff_eta:
-        type: number
-        format: int32
-        description: The estimated time in <b>minutes</b> for drop off for this quote.
+      created_at:
+        type: string
+        description: Unix timestamp representing the time when the quote was created.
+      updated_at:
+        type: string
+        description: Unix timestamp representing the time when the quote was updated last.
   Region:
     type: object
     properties:
-      region_id:
-        type: string
-        description: Unique identifier for the region.
       name:
         type: string
         description: Plain text name of the region. e.g. Uppland.
@@ -960,6 +971,37 @@ definitions:
         items:
           allOf:
             - $ref: '#/definitions/Review'
+  Task:
+    type: object
+    properties:
+      task_id:
+        type: string
+        description: Unique identifier representing a specific task.
+      description:
+        type: string
+        description: Description text for the created task.
+      place:
+        type: object
+        description: The place associated with the given task.
+        allOf:
+          - $ref: '#/definitions/Place'
+      contact:
+        type: object
+        description: The contact associated with the given task.
+        allOf:
+          - $ref: '#/definitions/Contact'
+      order:
+        type: number
+        format: int32
+        description: >-
+          Ordinal number which represent the order in which the task will be
+          executed by the couriers.
+      comments:
+        type: string
+        description: Any additional comment to facilitate the completion of the task.
+      taskType:
+        type: string
+        description: The type of task. This will be either pickup or dropoff
   Token:
     type: object
     properties:
