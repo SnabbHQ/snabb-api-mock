@@ -1,0 +1,25 @@
+type: object
+required: [
+  type,
+  place
+]
+properties:
+  type:
+    type: string
+    enum:
+      - pickup
+      - dropoff
+    description: "The type of task. This will be either pickup or dropoff"
+  comments:
+    type: string
+    description: "Any additional comment to facilitate the completion of the task."
+  place:
+    type: object
+    description: "The place associated with the given task."
+    allOf:
+      - $ref: '#/definitions/PostQuotePlace'
+  contact:
+    type: object
+    description: "The contact associated with the given task."
+    allOf:
+      - $ref: '#/definitions/Contact'

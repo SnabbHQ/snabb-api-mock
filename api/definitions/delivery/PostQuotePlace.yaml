@@ -1,0 +1,11 @@
+type: object
+required: [
+  address
+]
+properties:
+  description:
+    type: string
+    description: "Short text describing the place."
+  address:
+    type: string
+    description: "Plain text name of the address. e.g. Calle San Vicente Martir, 91, 46007, Valencia."

@@ -1,13 +1,10 @@
 type: object
 properties:
-  region_id:
-    type: string
-    description: "Unique identifier for the region."
   name:
     type: string
     description: "Plain text name of the region. e.g. Uppland."
   country:
-      type: object
-      description: "The country which the region belongs to."
-      allOf:
-        - $ref: '#/definitions/Country'
+    type: object
+    description: "The country which the region belongs to."
+    allOf:
+      - $ref: '#/definitions/Country'

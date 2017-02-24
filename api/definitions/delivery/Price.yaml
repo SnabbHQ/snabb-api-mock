@@ -1,0 +1,8 @@
+type: object
+properties:
+  price:
+    type: string
+    description: "The final calculated price"
+  eta:
+    type: number
+    description: "Calculated ETA for the pickup of the item."

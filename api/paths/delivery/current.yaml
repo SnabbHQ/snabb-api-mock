@@ -1,6 +1,6 @@
 get:
   tags:
-    - Deliveries
+    - Delivery
   summary: User Current Activity
   description: "The User Current Activity endpoint returns data about a ongoing user's lifetime activity with Snabb.
   The response will include pickup locations and times, dropoff locations and times, the distance of ongoing requests,

@@ -31,9 +31,9 @@ post:
       examples:
         application/json:
             {
-                'code': 400401,
-                'message': 'Key address is required',
-                'key': 'KEY_ADDRESS_REQUIRED'
+              'code': 400401,
+              'message': 'Key address is required',
+              'key': 'KEY_ADDRESS_REQUIRED'
             }
     default:
       description: Unexpected error

@@ -1,6 +1,0 @@
-type: object
-properties:
-  number:
-    type: string
-    description: "Phone number. This could be either a local phone number in which the associated country code will
-     be automatically appended or an international phone number with either the 00 or + included"

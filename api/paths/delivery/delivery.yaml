@@ -1,6 +1,6 @@
 get:
   tags:
-    - Deliveries
+    - Delivery
   summary: Delivery
   operationId: deliveryGET
   description: "Get a particular delivery information."

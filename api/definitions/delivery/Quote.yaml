@@ -7,40 +7,40 @@ properties:
     surprises down the road!)."
   distance:
     type: number
-    format: float
-    description: "Estimated distance in Km of the total route."
+    format: int32
+    description: "Estimated distance in meters of the total route."
   duration:
     type: number
     format: int32
     description: "Estimated duration in <b>minutes</b> of the delivery."
-  price:
+  expires_at:
     type: string
-    description: "The calculated price for the delivery."
+    description: "Unix timestamp representing the time when the quote will expire."
+  quote_user:
+    type: number
+    description: "TODO"
+  tasks:
+    type: array
+    description: "Array containing all the tasks associated with the current quote. This tasks could be either be
+    pickUp or dropOff type."
+    items:
+      allOf:
+        - $ref: '#/definitions/Task'
+  prices:
+    type: object
+    description: "An object containing all the prices and ETA for each of the packages supported in the given location."
+    allOf:
+      - $ref: '#/definitions/Prices'
   currency:
     type: object
     description: "The currency used for the price calculation"
     allOf:
       - $ref: '#/definitions/Currency'
-  expires_at:
+  created_at:
     type: string
-    description: "Unix timestamp representing the time when the quote will expire."
-  pickup_location:
-    type: object
-    description: "The pick up location information."
-    allOf:
-      - $ref: '#/definitions/Location'
-  pickup_eta:
-    type: number
-    format: int32
-    description: "The estimated time in <b>minutes</b> for pick up for this quote."
-  dropoff_location:
-    type: object
-    description: "The drop off location information."
-    allOf:
-      - $ref: '#/definitions/Location'
-  dropoff_eta:
-    type: number
-    format: int32
-    description: "The estimated time in <b>minutes</b> for drop off for this quote."
+    description: "Unix timestamp representing the time when the quote was created."
+  updated_at:
+    type: string
+    description: "Unix timestamp representing the time when the quote was updated last."
 
 

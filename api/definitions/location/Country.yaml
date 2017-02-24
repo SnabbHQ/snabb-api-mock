@@ -1,17 +1,14 @@
 type: object
 properties:
-  country_id:
-    type: string
-    description: "Unique identifier for the country."
   name:
     type: string
     description: "Plain text name of the country. e.g. Sweden."
   iso_code:
     type: string
     description: "[ISO 31661-1](https://en.wikipedia.org/wiki/ISO_3166-1) 2 character country code."
-  default_currency:
-    type: string
-    description: "The default currency to use in this country."
+  currency:
+    type: object
+    description: "The currency to use in this country."
     allOf:
       - $ref: '#/definitions/Currency'
 
