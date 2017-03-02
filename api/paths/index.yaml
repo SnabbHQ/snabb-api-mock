@@ -6,8 +6,12 @@
 #  $ref: ./deliveries/current.yaml
 #/deliveries/history:
 #  $ref: ./deliveries/history.yaml
-#/deliveries/{delivery_id}:
-#  $ref: ./deliveries/delivery.yaml
+/delivery:
+  $ref: ./delivery/newdelivery.yaml
+/delivery?page={page}:
+  $ref: ./delivery/deliveries.yaml
+/delivery/{delivery_id}:
+  $ref: ./delivery/delivery.yaml
 /delivery/quote:
   $ref: ./delivery/quote.yaml
 /o/token:

@@ -1,19 +1,32 @@
-get:
+post:
   tags:
     - Delivery
   summary: Delivery
-  operationId: deliveryGET
-  description: "Get a particular delivery information."
+  operationId: deliveryPOST
+  description: "The Delivery endpoint returns a new delivery object with their price <br/>The
+  response includes [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations requiring currency
+   conversion. Also, the response include the courier info and tasks details like tracking URL for each task\n\n
+
+  <b>Warning:</b> If you try to create a delivery of an expired Quote, the endpoint returns a bad request."
+  consumes:
+    - application/x-www-form-urlencoded
   parameters:
-    - name: delivery_id
-      in: path
-      description: "ID of the delivery to fetch"
+    - name: quote_id
+      in: formData
+      description: "Identifier of the quote."
+      required: true
+      type: number
+      format: int32
+      x-example: 895
+    - name: selected_price
+      in: formData
+      description: "The price option selected. (small|medium|big)."
       required: true
       type: string
-      x-example: "8b58bc58-7352-4278-b569-b5d24d8e3f76"
+      x-example: "medium"
   responses:
     200:
-      description: "Detail of a delivery."
+      description: "A delivery object."
       schema:
         type: array
         items:
@@ -138,6 +151,15 @@ get:
                ],
                "status": "en_route_to_pickup"
             }
+    '400':
+        description: Bad request
+        schema:
+          $ref: '#/definitions/Error'
+        examples:
+          application/json:
+            code: '400405'
+            key: QUOTE_EXPIRED
+            message: "Quote expired"
     default:
       description: Unexpected error
       schema:

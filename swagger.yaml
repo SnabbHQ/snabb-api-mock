@@ -34,6 +34,515 @@ security:
   - OauthPasswordSecurity:
       - user
 paths:
+  /delivery:
+    post:
+      tags:
+        - Delivery
+      summary: Delivery
+      operationId: deliveryPOST
+      description: >-
+        The Delivery endpoint returns a new delivery object with their price
+        <br/>The response includes [ISO
+        4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for
+        situations requiring currency conversion. Also, the response include the
+        courier info and tasks details like tracking URL for each task
+
+
+
+        <b>Warning:</b> If you try to create a delivery of an expired Quote, the
+        endpoint returns a bad request.
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: quote_id
+          in: formData
+          description: Identifier of the quote.
+          required: true
+          type: number
+          format: int32
+          x-example: 895
+        - name: selected_price
+          in: formData
+          description: The price option selected. (small|medium|big).
+          required: true
+          type: string
+          x-example: medium
+      responses:
+        '200':
+          description: A delivery object.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Delivery'
+          examples:
+            application/json:
+              delivery_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+              courier:
+                id: ZxK8Ygbpr1sfYgDaNURPjXKa
+                name: Michael Knight
+                phone: '+34661518132'
+                onDuty: false
+                timeLastSeen: 1486407209054
+                imageUrl: >-
+                  https://d15p8tr8p0vffz.cloudfront.net/090a12045fe17fafecda8497/294.png
+                location:
+                  - -0.3754607
+                  - 39.4667116
+                vehicle:
+                  id: h3OUAyCxLrUIdIOk8930sNMf
+                  type: BICYCLE
+                  description: null
+                  licensePlate: null
+                  color: null
+                  timeLastModified: 1482423618129
+              currency:
+                symbol: €
+                iso_code: EUR
+              price: 3.31
+              created_at: 1487881467
+              updated_at: 1487881468
+              order_reference_id: SNABB2017001
+              quote_id: 719
+              tasks:
+                - task_id: 1421
+                  place:
+                    place_id: 1421
+                    description: >-
+                      Snabb Master Head Quarters. Where all the fun takes place!
+                      :)
+                    address:
+                      address_id: 1421
+                      address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                      latitude: '39.46661480'
+                      longitude: '-0.38085870'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46007'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact:
+                    first_name: null
+                    last_name: null
+                    company_name: Martinez e hijos
+                    phone: '+34625188855'
+                    email: pp@pp.ppp
+                  order: 2
+                  comments: ''
+                  task_type: dropoff
+                  dispatching_meta:
+                    trackingURL: 'https://onf.lt/5f8b5c65f9'
+                    state: 1
+                    estimatedCompletionTime: 1488303586404
+                - task_id: 1420
+                  place:
+                    place_id: 1420
+                    description: Oficina Cactus
+                    address:
+                      address_id: 1420
+                      address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                      latitude: '39.46670680'
+                      longitude: '-0.37535140'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46004'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact: null
+                  order: 1
+                  comments: Fragile package.
+                  task_type: pickup
+                  dispatching_meta:
+                    trackingURL: 'https://onf.lt/5f8b5c65f9'
+                    state: 1
+                    estimatedCompletionTime: 1488303586404
+              status: en_route_to_pickup
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: '400405'
+              key: QUOTE_EXPIRED
+              message: Quote expired
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Delivery
+  '/delivery?page={page}':
+    get:
+      tags:
+        - Delivery
+      summary: Delivery
+      operationId: deliveryLIST
+      description: Get a list of deliveries for a user.
+      parameters:
+        - name: page
+          in: path
+          description: Numbre of page
+          required: true
+          type: number
+          format: int32
+          x-example: 1
+      responses:
+        '200':
+          description: A list of deliveries.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Delivery'
+          examples:
+            application/json:
+              count: 92
+              next: 'https://api_domain/api/v1/delivery/?page=2'
+              previous: null
+              results:
+                - delivery_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                  courier:
+                    id: ZxK8Ygbpr1sfYgDaNURPjXKa
+                    name: Michael Knight
+                    phone: '+34661518132'
+                    onDuty: false
+                    timeLastSeen: 1486407209054
+                    imageUrl: >-
+                      https://d15p8tr8p0vffz.cloudfront.net/090a12045fe17fafecda8497/294.png
+                    location:
+                      - -0.3754607
+                      - 39.4667116
+                    vehicle:
+                      id: h3OUAyCxLrUIdIOk8930sNMf
+                      type: BICYCLE
+                      description: null
+                      licensePlate: null
+                      color: null
+                      timeLastModified: 1482423618129
+                  currency:
+                    symbol: €
+                    iso_code: EUR
+                  price: 3.31
+                  created_at: 1487881467
+                  updated_at: 1487881468
+                  order_reference_id: SNABB2017001
+                  quote_id: 719
+                  tasks:
+                    - task_id: 1421
+                      place:
+                        place_id: 1421
+                        description: >-
+                          Snabb Master Head Quarters. Where all the fun takes
+                          place! :)
+                        address:
+                          address_id: 1421
+                          address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                          latitude: '39.46661480'
+                          longitude: '-0.38085870'
+                          active: true
+                          created_at: 1487881468
+                          updated_at: 1487881468
+                          zipcode: '46007'
+                          city:
+                            name: Valencia
+                            region:
+                              name: Valencia community
+                              country:
+                                name: Spain
+                                iso_code: ES
+                                currency:
+                                  symbol: €
+                                  iso_code: EUR
+                      contact:
+                        first_name: null
+                        last_name: null
+                        company_name: Martinez e hijos
+                        phone: '+34625188855'
+                        email: pp@pp.ppp
+                      order: 2
+                      comments: ''
+                      task_type: dropoff
+                      dispatching_meta:
+                        trackingURL: 'https://onf.lt/5f8b5c65f9'
+                        state: 1
+                        estimatedCompletionTime: 1488303586404
+                    - task_id: 1420
+                      place:
+                        place_id: 1420
+                        description: Oficina Cactus
+                        address:
+                          address_id: 1420
+                          address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                          latitude: '39.46670680'
+                          longitude: '-0.37535140'
+                          active: true
+                          created_at: 1487881468
+                          updated_at: 1487881468
+                          zipcode: '46004'
+                          city:
+                            name: Valencia
+                            region:
+                              name: Valencia community
+                              country:
+                                name: Spain
+                                iso_code: ES
+                                currency:
+                                  symbol: €
+                                  iso_code: EUR
+                      contact: null
+                      order: 1
+                      comments: Fragile package.
+                      task_type: pickup
+                      dispatching_meta:
+                        trackingURL: 'https://onf.lt/5f8b5c65f9'
+                        state: 1
+                        estimatedCompletionTime: 1488303586404
+                  status: en_route_to_pickup
+                - delivery_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                  courier:
+                    id: ZxK8Ygbpr1sfYgDaNURPjXKa
+                    name: Michael Knight
+                    phone: '+34661518132'
+                    onDuty: false
+                    timeLastSeen: 1486407209054
+                    imageUrl: >-
+                      https://d15p8tr8p0vffz.cloudfront.net/090a12045fe17fafecda8497/294.png
+                    location:
+                      - -0.3754607
+                      - 39.4667116
+                    vehicle:
+                      id: h3OUAyCxLrUIdIOk8930sNMf
+                      type: BICYCLE
+                      description: null
+                      licensePlate: null
+                      color: null
+                      timeLastModified: 1482423618129
+                  currency:
+                    symbol: €
+                    iso_code: EUR
+                  price: 3.31
+                  created_at: 1487881467
+                  updated_at: 1487881468
+                  order_reference_id: SNABB2017001
+                  quote_id: 719
+                  tasks:
+                    - task_id: 1421
+                      place:
+                        place_id: 1421
+                        description: >-
+                          Snabb Master Head Quarters. Where all the fun takes
+                          place! :)
+                        address:
+                          address_id: 1421
+                          address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                          latitude: '39.46661480'
+                          longitude: '-0.38085870'
+                          active: true
+                          created_at: 1487881468
+                          updated_at: 1487881468
+                          zipcode: '46007'
+                          city:
+                            name: Valencia
+                            region:
+                              name: Valencia community
+                              country:
+                                name: Spain
+                                iso_code: ES
+                                currency:
+                                  symbol: €
+                                  iso_code: EUR
+                      contact:
+                        first_name: null
+                        last_name: null
+                        company_name: Martinez e hijos
+                        phone: '+34625188855'
+                        email: pp@pp.ppp
+                      order: 2
+                      comments: ''
+                      task_type: dropoff
+                      dispatching_meta:
+                        trackingURL: 'https://onf.lt/5f8b5c65f9'
+                        state: 1
+                        estimatedCompletionTime: 1488303586404
+                    - task_id: 1420
+                      place:
+                        place_id: 1420
+                        description: Oficina Cactus
+                        address:
+                          address_id: 1420
+                          address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                          latitude: '39.46670680'
+                          longitude: '-0.37535140'
+                          active: true
+                          created_at: 1487881468
+                          updated_at: 1487881468
+                          zipcode: '46004'
+                          city:
+                            name: Valencia
+                            region:
+                              name: Valencia community
+                              country:
+                                name: Spain
+                                iso_code: ES
+                                currency:
+                                  symbol: €
+                                  iso_code: EUR
+                      contact: null
+                      order: 1
+                      comments: Fragile package.
+                      task_type: pickup
+                      dispatching_meta:
+                        trackingURL: 'https://onf.lt/5f8b5c65f9'
+                        state: 1
+                        estimatedCompletionTime: 1488303586404
+                  status: completed
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Delivery
+  '/delivery/{delivery_id}':
+    get:
+      tags:
+        - Delivery
+      summary: Delivery
+      operationId: deliveryGET
+      description: Get a particular delivery information.
+      parameters:
+        - name: delivery_id
+          in: path
+          description: ID of the delivery to fetch
+          required: true
+          type: string
+          x-example: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+      responses:
+        '200':
+          description: Detail of a delivery.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Delivery'
+          examples:
+            application/json:
+              delivery_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+              courier:
+                id: ZxK8Ygbpr1sfYgDaNURPjXKa
+                name: Michael Knight
+                phone: '+34661518132'
+                onDuty: false
+                timeLastSeen: 1486407209054
+                imageUrl: >-
+                  https://d15p8tr8p0vffz.cloudfront.net/090a12045fe17fafecda8497/294.png
+                location:
+                  - -0.3754607
+                  - 39.4667116
+                vehicle:
+                  id: h3OUAyCxLrUIdIOk8930sNMf
+                  type: BICYCLE
+                  description: null
+                  licensePlate: null
+                  color: null
+                  timeLastModified: 1482423618129
+              currency:
+                symbol: €
+                iso_code: EUR
+              price: 3.31
+              created_at: 1487881467
+              updated_at: 1487881468
+              order_reference_id: SNABB2017001
+              quote_id: 719
+              tasks:
+                - task_id: 1421
+                  place:
+                    place_id: 1421
+                    description: >-
+                      Snabb Master Head Quarters. Where all the fun takes place!
+                      :)
+                    address:
+                      address_id: 1421
+                      address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                      latitude: '39.46661480'
+                      longitude: '-0.38085870'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46007'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact:
+                    first_name: null
+                    last_name: null
+                    company_name: Martinez e hijos
+                    phone: '+34625188855'
+                    email: pp@pp.ppp
+                  order: 2
+                  comments: ''
+                  task_type: dropoff
+                  dispatching_meta:
+                    trackingURL: 'https://onf.lt/5f8b5c65f9'
+                    state: 1
+                    estimatedCompletionTime: 1488303586404
+                - task_id: 1420
+                  place:
+                    place_id: 1420
+                    description: Oficina Cactus
+                    address:
+                      address_id: 1420
+                      address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                      latitude: '39.46670680'
+                      longitude: '-0.37535140'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46004'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact: null
+                  order: 1
+                  comments: Fragile package.
+                  task_type: pickup
+                  dispatching_meta:
+                    trackingURL: 'https://onf.lt/5f8b5c65f9'
+                    state: 1
+                    estimatedCompletionTime: 1488303586404
+              status: en_route_to_pickup
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Delivery
   /delivery/quote:
     post:
       tags:
