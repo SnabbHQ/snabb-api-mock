@@ -290,9 +290,9 @@ post:
       type: number
       format: int32
       x-example: 895
-    - name: selected_price
+    - name: selected_package_size
       in: formData
-      description: "The price option selected. (small|medium|big)."
+      description: "The size price option selected. (small|medium|big)."
       required: true
       type: string
       x-example: "medium"
@@ -437,4 +437,3 @@ post:
       schema:
         $ref: '#/definitions/Error'
   x-swagger-router-controller: Delivery
-
