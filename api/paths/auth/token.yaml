@@ -1,6 +1,6 @@
 post:
   tags:
-  - Auth
+  - Authentication
   summary: POST /o/token
 #  TODO - Add more information about the access token
   description: "OAuth 2.0 Authentication endpoint. \n\n <b>Warning</b>: Only application/x-www-form-urlencoded or
