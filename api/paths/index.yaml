@@ -1,7 +1,3 @@
-#/deliveries/:
-#  $ref: ./deliveries/quote.yaml
-#/deliveries/address/validate:
-#  $ref: ./deliveries/validate.yaml
 #/deliveries/current:
 #  $ref: ./deliveries/current.yaml
 #/deliveries/history:

@@ -14,21 +14,21 @@ produces:
   - application/json
 
 securityDefinitions:
-  OauthPasswordSecurity:
-    type: oauth2
-    flow: application
-    tokenUrl: 'https://oauth.simple.api/token'
-    scopes:
-      admin: Admin scope
-      user: User scope
   OauthApplicationSecurity:
     type: oauth2
-    flow: password
-    tokenUrl: 'https://oauth.simple.api/token'
+    flow: application
+    tokenUrl: 'https://api.snabb.io/api/v1/o/token'
     scopes:
       admin: Admin scope
       user: User scope
       api: API scope
+  OauthPasswordSecurity:
+    type: oauth2
+    flow: password
+    tokenUrl: 'https://api.snabb.io/api/v1/o/token'
+    scopes:
+      admin: Admin scope
+      user: User scope
 
 security:
   - OauthApplicationSecurity:

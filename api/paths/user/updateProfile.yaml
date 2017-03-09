@@ -4,6 +4,9 @@ put:
   summary: Update User
   operationId: profilePUT
   description: "Update your profile info."
+  security:
+    - OauthPasswordSecurity:
+      - user
   consumes:
       # - application/json
       - application/x-www-form-urlencoded

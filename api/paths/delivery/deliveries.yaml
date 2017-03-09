@@ -4,6 +4,9 @@ get:
   summary: GET /deliveries
   operationId: deliveryLIST
   description: "Get a list of deliveries for a user."
+  security:
+    - OauthApplicationSecurity:
+      - api
   parameters:
     - name: page
       in: query
@@ -280,6 +283,9 @@ post:
    conversion. Also, the response include the courier info and tasks details like tracking URL for each task\n\n
 
   <b>Warning:</b> If you try to create a delivery of an expired Quote, the endpoint returns a bad request."
+  security:
+    - OauthApplicationSecurity:
+      - api
   consumes:
     - application/x-www-form-urlencoded
   parameters:

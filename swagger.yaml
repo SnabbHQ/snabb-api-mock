@@ -13,21 +13,21 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  OauthPasswordSecurity:
-    type: oauth2
-    flow: application
-    tokenUrl: 'https://oauth.simple.api/token'
-    scopes:
-      admin: Admin scope
-      user: User scope
   OauthApplicationSecurity:
     type: oauth2
-    flow: password
-    tokenUrl: 'https://oauth.simple.api/token'
+    flow: application
+    tokenUrl: 'https://api.snabb.io/api/v1/o/token'
     scopes:
       admin: Admin scope
       user: User scope
       api: API scope
+  OauthPasswordSecurity:
+    type: oauth2
+    flow: password
+    tokenUrl: 'https://api.snabb.io/api/v1/o/token'
+    scopes:
+      admin: Admin scope
+      user: User scope
 security:
   - OauthApplicationSecurity:
       - api
@@ -41,6 +41,9 @@ paths:
       summary: GET /deliveries
       operationId: deliveryLIST
       description: Get a list of deliveries for a user.
+      security:
+        - OauthApplicationSecurity:
+            - api
       parameters:
         - name: page
           in: query
@@ -278,6 +281,9 @@ paths:
 
         <b>Warning:</b> If you try to create a delivery of an expired Quote, the
         endpoint returns a bad request.
+      security:
+        - OauthApplicationSecurity:
+            - api
       consumes:
         - application/x-www-form-urlencoded
       parameters:
@@ -422,6 +428,9 @@ paths:
       summary: 'GET /deliveries/{delivery_id}'
       operationId: deliveryGET
       description: Get a particular delivery information.
+      security:
+        - OauthApplicationSecurity:
+            - api
       parameters:
         - name: delivery_id
           in: path
@@ -559,6 +568,9 @@ paths:
         This is done to prevent un-expected costs if the time between the quote
         and the actual delivery order are to far apart. After this period, the
         quote won't be able to be used to create a new delivery.
+      security:
+        - OauthApplicationSecurity:
+            - api
       parameters:
         - name: body
           in: body
@@ -760,6 +772,9 @@ paths:
       description: >-
         When a user does not remember their password, this endpoint will send an
         email to the given user with instructions to reset their password.
+      security:
+        - OauthPasswordSecurity:
+            - user
       operationId: forgotPasswordPOST
       consumes:
         - application/x-www-form-urlencoded
@@ -784,6 +799,9 @@ paths:
         - User
       summary: Reset passwrod
       description: Reset password for user.
+      security:
+        - OauthPasswordSecurity:
+            - user
       operationId: resetPassword
       consumes:
         - application/x-www-form-urlencoded
@@ -816,6 +834,9 @@ paths:
       description: >-
         The User Profile endpoint returns information about the Snabb user that
         has authorized with the application.
+      security:
+        - OauthPasswordSecurity:
+            - user
       operationId: profileGET
       parameters: []
       responses:
@@ -849,6 +870,9 @@ paths:
       summary: Update User
       operationId: profilePUT
       description: Update your profile info.
+      security:
+        - OauthPasswordSecurity:
+            - user
       consumes:
         - application/x-www-form-urlencoded
       parameters:
@@ -939,6 +963,9 @@ paths:
         User registration endpoint. 
 
          <b>Warning</b>: Only application/x-www-form-urlencoded or multipart/form-data body encodings are supported.
+      security:
+        - OauthPasswordSecurity:
+            - user
       consumes:
         - application/x-www-form-urlencoded
       operationId: registerPOST
@@ -1014,6 +1041,9 @@ paths:
       description: >-
         This endpoint allow to resend activation account email to a user.
         Regenerate the user hash and send it to the user email.
+      security:
+        - OauthPasswordSecurity:
+            - user
       operationId: sendVerifyMail
       consumes:
         - application/x-www-form-urlencoded
@@ -1038,6 +1068,9 @@ paths:
         - User
       summary: Update Password
       description: Update user password.
+      security:
+        - OauthPasswordSecurity:
+            - user
       operationId: updatePassword
       consumes:
         - application/x-www-form-urlencoded
@@ -1068,6 +1101,9 @@ paths:
         - User
       summary: Verify User
       description: Verify user email.
+      security:
+        - OauthPasswordSecurity:
+            - user
       operationId: verifyUser
       consumes:
         - application/x-www-form-urlencoded
@@ -1092,6 +1128,9 @@ paths:
         - Address
       summary: POST /validateAddress
       description: Validate if Snabb works in the address provided.
+      security:
+        - OauthApplicationSecurity:
+            - api
       operationId: validateAddress
       consumes:
         - application/x-www-form-urlencoded

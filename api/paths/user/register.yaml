@@ -4,6 +4,9 @@ post:
   summary: Client applications account registration endpoint
   description: "User registration endpoint. \n\n <b>Warning</b>: Only
   application/x-www-form-urlencoded or multipart/form-data body encodings are supported."
+  security:
+    - OauthPasswordSecurity:
+      - user
   consumes:
     - application/x-www-form-urlencoded
   operationId: registerPOST

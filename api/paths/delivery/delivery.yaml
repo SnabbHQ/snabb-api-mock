@@ -4,6 +4,9 @@ get:
   summary: GET /deliveries/{delivery_id}
   operationId: deliveryGET
   description: "Get a particular delivery information."
+  security:
+    - OauthApplicationSecurity:
+      - api
   parameters:
     - name: delivery_id
       in: path

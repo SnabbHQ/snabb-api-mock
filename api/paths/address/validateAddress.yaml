@@ -3,6 +3,9 @@ post:
   - Address
   summary: POST /validateAddress
   description: "Validate if Snabb works in the address provided."
+  security:
+    - OauthApplicationSecurity:
+      - api
   operationId: validateAddress
   consumes:
       - application/x-www-form-urlencoded
