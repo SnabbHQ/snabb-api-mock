@@ -1,7 +1,7 @@
 post:
   tags:
   - Auth
-  summary: Client applications authentication endpoint
+  summary: POST /o/token
 #  TODO - Add more information about the access token
   description: "OAuth 2.0 Authentication endpoint. \n\n <b>Warning</b>: Only application/x-www-form-urlencoded or
   multipart/form-data body encodings are supported."

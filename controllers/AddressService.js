@@ -1,6 +1,6 @@
 'use strict';
 
-exports.verifyAddress = function(args, res, next) {
+exports.validateAddress = function(args, res, next) {
   /**
    * parameters expected in the args:
   * address (String)

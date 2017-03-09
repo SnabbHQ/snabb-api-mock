@@ -1,7 +1,7 @@
 post:
   tags:
     - Delivery
-  summary: Quote
+  summary: POST /deliveries/quote
   operationId: quotePOST
   description: "The Quote endpoint returns a price for each product offered at a given location. <br/>The
   response includes [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations requiring currency

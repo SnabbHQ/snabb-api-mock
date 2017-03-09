@@ -1,9 +1,9 @@
 post:
   tags:
   - Address
-  summary: Verify Address.
-  description: "Verify if Snabb works in this address."
-  operationId: verifyAddress
+  summary: POST /validateAddress
+  description: "Validate if Snabb works in the address provided."
+  operationId: validateAddress
   consumes:
       - application/x-www-form-urlencoded
   parameters:

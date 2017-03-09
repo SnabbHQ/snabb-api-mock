@@ -1,7 +1,7 @@
 get:
   tags:
     - Delivery
-  summary: Delivery
+  summary: GET /deliveries
   operationId: deliveryLIST
   description: "Get a list of deliveries for a user."
   parameters:
@@ -273,7 +273,7 @@ get:
 post:
   tags:
     - Delivery
-  summary: Delivery
+  summary: POST /deliveries
   operationId: deliveryPOST
   description: "The Delivery endpoint returns a new delivery object with their price <br/>The
   response includes [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations requiring currency

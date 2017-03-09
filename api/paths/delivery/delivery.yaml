@@ -1,7 +1,7 @@
 get:
   tags:
     - Delivery
-  summary: Delivery
+  summary: GET /deliveries/{delivery_id}
   operationId: deliveryGET
   description: "Get a particular delivery information."
   parameters:

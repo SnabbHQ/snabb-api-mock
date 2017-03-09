@@ -38,7 +38,7 @@ paths:
     get:
       tags:
         - Delivery
-      summary: Delivery
+      summary: GET /deliveries
       operationId: deliveryLIST
       description: Get a list of deliveries for a user.
       parameters:
@@ -265,7 +265,7 @@ paths:
     post:
       tags:
         - Delivery
-      summary: Delivery
+      summary: POST /deliveries
       operationId: deliveryPOST
       description: >-
         The Delivery endpoint returns a new delivery object with their price
@@ -288,9 +288,9 @@ paths:
           type: number
           format: int32
           x-example: 895
-        - name: selected_price
+        - name: selected_package_size
           in: formData
-          description: The price option selected. (small|medium|big).
+          description: The size price option selected. (small|medium|big).
           required: true
           type: string
           x-example: medium
@@ -419,7 +419,7 @@ paths:
     get:
       tags:
         - Delivery
-      summary: Delivery
+      summary: 'GET /deliveries/{delivery_id}'
       operationId: deliveryGET
       description: Get a particular delivery information.
       parameters:
@@ -545,7 +545,7 @@ paths:
     post:
       tags:
         - Delivery
-      summary: Quote
+      summary: POST /deliveries/quote
       operationId: quotePOST
       description: >-
         The Quote endpoint returns a price for each product offered at a given
@@ -703,7 +703,7 @@ paths:
     post:
       tags:
         - Auth
-      summary: Client applications authentication endpoint
+      summary: POST /o/token
       description: |-
         OAuth 2.0 Authentication endpoint. 
 
@@ -1090,9 +1090,9 @@ paths:
     post:
       tags:
         - Address
-      summary: Verify Address.
-      description: Verify if Snabb works in this address.
-      operationId: verifyAddress
+      summary: POST /validateAddress
+      description: Validate if Snabb works in the address provided.
+      operationId: validateAddress
       consumes:
         - application/x-www-form-urlencoded
       parameters:

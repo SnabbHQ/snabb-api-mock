@@ -385,7 +385,7 @@ exports.deliveryPOST = function(args, res, next) {
   /**
    * parameters expected in the args:
   * quote_id (BigDecimal)
-  * selected_price (String)
+  * selected_package_size (String)
   **/
     var examples = {};
   examples['application/json'] = {
