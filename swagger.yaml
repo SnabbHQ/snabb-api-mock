@@ -51,6 +51,11 @@ paths:
           type: number
           format: int32
           x-example: 1
+        - name: status
+          in: query
+          description: Status of delivery
+          type: string
+          x-example: completed
       responses:
         '200':
           description: A list of deliveries.
