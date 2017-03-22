@@ -135,6 +135,7 @@ exports.deliveryLIST = function(args, res, next) {
   /**
    * parameters expected in the args:
   * page (BigDecimal)
+  * status (String)
   **/
     var examples = {};
   examples['application/json'] = {
