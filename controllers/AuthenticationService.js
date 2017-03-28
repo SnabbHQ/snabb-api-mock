@@ -4,8 +4,7 @@ exports.authPOST = function(args, res, next) {
   /**
    * parameters expected in the args:
   * client_id (String)
-  * username (String)
-  * password (String)
+  * client_secret (String)
   * grant_type (String)
   **/
     var examples = {};
