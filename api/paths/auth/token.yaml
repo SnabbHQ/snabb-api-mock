@@ -2,12 +2,12 @@ post:
   tags:
   - Authentication
   summary: POST /o/token
-#  TODO - Add more information about the access token
   description: "OAuth 2.0 Authentication endpoint. \n\n <b>Warning</b>: Only application/x-www-form-urlencoded or
   multipart/form-data body encodings are supported."
   consumes:
     - application/x-www-form-urlencoded
   operationId: authPOST
+  security: []
   parameters:
     - name: client_id
       in: formData
@@ -15,24 +15,18 @@ post:
       required: true
       type: string
       x-example: "jmTfWIiqat02420meIeF"
-    - name: username
+    - name: client_secret
       in: formData
-      description: "The client's username."
+      description: "The client's secret provided."
       required: true
       type: string
-      x-example: "user@snabb.io"
-    - name: password
-      in: formData
-      description: "The client's password."
-      required: true
-      type: string
-      x-example: "passw0rd!"
+      x-example: "yvYamIpyoeJhuwFnnkVD"
     - name: grant_type
       in: formData
       description: "The grant type."
       required: true
       type: string
-      x-example: "password"
+      x-example: "client_credentials"
   responses:
     200:
       description: "Access token information"
