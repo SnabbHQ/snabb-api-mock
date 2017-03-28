@@ -1,7 +1,3 @@
-#/deliveries/current:
-#  $ref: ./deliveries/current.yaml
-#/deliveries/history:
-#  $ref: ./deliveries/history.yaml
 /deliveries:
   $ref: ./delivery/deliveries.yaml
 /deliveries/{delivery_id}:
