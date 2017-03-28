@@ -9,6 +9,8 @@ info:
     email: dev.systems@snabb.io
 host: snabb-api-mock.herokuapp.com
 #host: localhost:5000
+schemes:
+  - http
 basePath: /api/v1
 consumes:
   - application/json

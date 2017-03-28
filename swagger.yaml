@@ -8,6 +8,8 @@ info:
     url: developers.snabb.io
     email: dev.systems@snabb.io
 host: snabb-api-mock.herokuapp.com
+schemes:
+  - http
 basePath: /api/v1
 consumes:
   - application/json
