@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: Move your app forward with the Snabb API
+  description: Move your app forward with the Snabb API.
   version: 1.0.0
   title: Snabb API
   contact:
