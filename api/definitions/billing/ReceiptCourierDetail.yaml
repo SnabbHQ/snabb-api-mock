@@ -1,0 +1,5 @@
+type: object
+properties:
+  receipt_id:
+    type: integer
+    description: "Unique identifier representing a specific receipt."

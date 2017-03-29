@@ -50,5 +50,11 @@ Token:
   $ref: ./auth/Token.yaml
 Transport:
   $ref: ./Transport.yaml
-UserReceipt:
-  $ref: ./billing/UserReceipt.yaml
+ReceiptCourier:
+  $ref: ./billing/ReceiptCourier.yaml
+ReceiptCourierDetail:
+  $ref: ./billing/ReceiptCourierDetail.yaml
+ReceiptUser:
+  $ref: ./billing/ReceiptUser.yaml
+ReceiptUserDetail:
+  $ref: ./billing/ReceiptUserDetail.yaml

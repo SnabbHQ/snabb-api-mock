@@ -7,9 +7,7 @@ info:
     name: Snabb Dev Systems
     url: developers.snabb.io
     email: dev.systems@snabb.io
-host: snabb-api-mock.herokuapp.com
-schemes:
-  - http
+host: 'localhost:5000'
 basePath: /api/v1
 consumes:
   - application/json
@@ -37,12 +35,12 @@ security:
   - OauthPasswordSecurity:
       - user
 paths:
-  /billing/receipts:
+  /billing/receiptUser:
     get:
       tags:
         - Billing
-      summary: GET /billing/receipts
-      operationId: receiptsLIST
+      summary: GET /billing/receiptUser
+      operationId: receiptUserLIST
       description: Get a list of receipts for a given delivery.
       security:
         - OauthApplicationSecurity:
@@ -56,24 +54,125 @@ paths:
           x-example: 1
       responses:
         '200':
-          description: A list of receipts.
+          description: A list of receipts of Users.
           schema:
             type: array
             items:
-              $ref: '#/definitions/UserReceipt'
+              $ref: '#/definitions/ReceiptUser'
           examples:
             application/json:
               count: 2
-              next: 'https://api_domain/api/v1/billing/receipts/?page=2'
+              next: 'https://api_domain/api/v1/billing/receiptUser/?page=2'
               previous: null
               results:
                 - receipt_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                  user: 2
+                  receipt_delivery: 2
+                  receipt_reference: SNABB-2017-U-1
                 - receipt_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                  user: 2
+                  receipt_delivery: 2
+                  receipt_reference: SNABB-2017-U-2
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Billing
+  '/billing/receiptUserDetail/{receipt_id}':
+    get:
+      tags:
+        - Billing
+      summary: 'GET /billing/receiptUser/{receipt_id}'
+      description: Get Html rendered with receipt of User
+      operationId: receiptUserDetailGET
+      security: []
+      parameters:
+        - name: receipt_id
+          in: path
+          description: Unique Id for receipt User
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Receipt User HTML rendered
+          schema:
+            $ref: '#/definitions/ReceiptUserDetail'
+          examples:
+            text/html: <html><body>Receipt User HTML </body></html>
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Auth
+  /billing/ReceiptCourier:
+    get:
+      tags:
+        - Billing
+      summary: GET /billing/receiptCourier
+      operationId: receiptCourierLIST
+      description: Get a list of receipts for a given delivery.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      parameters:
+        - name: page
+          in: query
+          description: Number of page
+          type: number
+          format: int32
+          x-example: 1
+      responses:
+        '200':
+          description: A list of receipts of Couriers.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReceiptCourier'
+          examples:
+            application/json:
+              count: 2
+              next: 'https://api_domain/api/v1/billing/receiptUser/?page=2'
+              previous: null
+              results:
+                - receipt_id: 1
+                  courier: 24
+                  receipt_delivery: 2
+                  receipt_reference: SNABB-2017-C-1
+                - receipt_id: 2
+                  courier: 25
+                  receipt_delivery: 4
+                  receipt_reference: SNABB-2017-C-2
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Billing
+  '/billing/receiptCourierDetail/{receipt_id}':
+    get:
+      tags:
+        - Billing
+      summary: 'GET /billing/receiptCourier/{receipt_id}'
+      description: Get Html rendered with receipt of Courier
+      operationId: receiptCourierDetailGET
+      security: []
+      parameters:
+        - name: receipt_id
+          in: path
+          description: Unique Id for receipt Courier
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Receipt Courier HTML rendered
+          schema:
+            $ref: '#/definitions/ReceiptCourierDetail'
+          examples:
+            text/html: <html><body>Receipt User HTML </body></html>
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Auth
   /deliveries:
     get:
       tags:
@@ -1771,9 +1870,45 @@ definitions:
         description: Maximum dimensions of the package this transport type can hold.
         allOf:
           - $ref: '#/definitions/Dimension'
-  UserReceipt:
+  ReceiptCourier:
     type: object
     properties:
       receipt_id:
+        type: integer
+        description: Unique identifier representing a specific receipt.
+      courier:
+        type: integer
+        description: Unique identifier representing a specific courier.
+      receipt_delivery:
+        type: integer
+        description: Unique identifier representing a specific delivery.
+      receipt_reference:
         type: string
+        description: Unique identifier representing a reference to receipt.
+  ReceiptCourierDetail:
+    type: object
+    properties:
+      receipt_id:
+        type: integer
+        description: Unique identifier representing a specific receipt.
+  ReceiptUser:
+    type: object
+    properties:
+      receipt_id:
+        type: integer
+        description: Unique identifier representing a specific receipt.
+      user:
+        type: integer
+        description: Unique identifier representing a specific user.
+      receipt_delivery:
+        type: integer
+        description: Unique identifier representing a specific delivery.
+      receipt_reference:
+        type: string
+        description: Unique identifier representing a reference to receipt.
+  ReceiptUserDetail:
+    type: object
+    properties:
+      receipt_id:
+        type: integer
         description: Unique identifier representing a specific receipt.
