@@ -34,8 +34,6 @@ Price:
   $ref: ./delivery/Price.yaml
 Prices:
   $ref: ./delivery/Prices.yaml
-Product:
-  $ref: ./Product.yaml
 Profile:
   $ref: ./Profile.yaml
 Quote:
@@ -52,3 +50,5 @@ Token:
   $ref: ./auth/Token.yaml
 Transport:
   $ref: ./Transport.yaml
+UserReceipt:
+  $ref: ./billing/UserReceipt.yaml

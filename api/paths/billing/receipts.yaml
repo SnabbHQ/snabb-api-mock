@@ -1,0 +1,44 @@
+get:
+  tags:
+    - Billing
+  summary: GET /billing/receipts
+  operationId: receiptsLIST
+  description: "Get a list of receipts for a given delivery."
+  security:
+    - OauthApplicationSecurity:
+      - api
+  parameters:
+    - name: page
+      in: query
+      description: "Number of page"
+      type: number
+      format: int32
+      x-example: 1
+  responses:
+    200:
+      description: "A list of receipts."
+      schema:
+        type: array
+        items:
+          $ref: '#/definitions/UserReceipt'
+      examples:
+        application/json:
+            {
+                "count": 2,
+                "next": "https://api_domain/api/v1/billing/receipts/?page=2",
+                "previous": null,
+                "results": [
+                    {
+                      "receipt_id": "8b58bc58-7352-4278-b569-b5d24d8e3f76",
+                    },
+                    {
+                      "receipt_id": "8b58bc58-7352-4278-b569-b5d24d8e3f76",
+                    },
+                ]
+            }
+
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: Billing

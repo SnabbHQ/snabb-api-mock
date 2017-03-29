@@ -37,6 +37,43 @@ security:
   - OauthPasswordSecurity:
       - user
 paths:
+  /billing/receipts:
+    get:
+      tags:
+        - Billing
+      summary: GET /billing/receipts
+      operationId: receiptsLIST
+      description: Get a list of receipts for a given delivery.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      parameters:
+        - name: page
+          in: query
+          description: Number of page
+          type: number
+          format: int32
+          x-example: 1
+      responses:
+        '200':
+          description: A list of receipts.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserReceipt'
+          examples:
+            application/json:
+              count: 2
+              next: 'https://api_domain/api/v1/billing/receipts/?page=2'
+              previous: null
+              results:
+                - receipt_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                - receipt_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Billing
   /deliveries:
     get:
       tags:
@@ -1526,27 +1563,6 @@ definitions:
         description: Big package size.
         allOf:
           - $ref: '#/definitions/Price'
-  Product:
-    type: object
-    properties:
-      product_id:
-        type: string
-        description: >-
-          Unique identifier representing a specific product for a given latitude
-          & longitude. For example, uberX in San Francisco will have a different
-          product_id than uberX in Los Angeles.
-      description:
-        type: string
-        description: Description of product.
-      display_name:
-        type: string
-        description: Display name of product.
-      capacity:
-        type: string
-        description: 'Capacity of product. For example, 4 people.'
-      image:
-        type: string
-        description: Image URL representing the product.
   Profile:
     type: object
     properties:
@@ -1755,3 +1771,9 @@ definitions:
         description: Maximum dimensions of the package this transport type can hold.
         allOf:
           - $ref: '#/definitions/Dimension'
+  UserReceipt:
+    type: object
+    properties:
+      receipt_id:
+        type: string
+        description: Unique identifier representing a specific receipt.

@@ -1,3 +1,7 @@
+/billing/receipts:
+  $ref: ./billing/receipts.yaml
+#/billing/receipts/{receipt_id}:
+#  $ref: ./billing/receipts.yaml
 /deliveries:
   $ref: ./delivery/deliveries.yaml
 /deliveries/{delivery_id}:
