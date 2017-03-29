@@ -9,7 +9,7 @@
     "serve": "node_modules/.bin/nodemon --config nodemon.json",
     "debug": "node_modules/.bin/nodemon debug --config nodemon.json",
     "spec-gen": "node scripts/specGen.js",
-    "code-gen": "npm run spec-gen && swagger-codegen generate -i swagger.yaml -l nodejs-server -o ."
+    "code-gen": "npm run spec-gen && java -jar swagger-codegen-cli.jar generate -i swagger.yaml -l nodejs-server -o ."
   },
   "keywords": [
     "swagger"
@@ -19,6 +19,7 @@
   "dependencies": {
     "basic-auth-connect": "^1.0.0",
     "connect": "^3.2.0",
+    "dredd": "^2.2.5",
     "js-yaml": "^3.7.0",
     "json-refs": "^2.1.6",
     "swagger-tools": "0.10.1"

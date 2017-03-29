@@ -1,0 +1,13 @@
+type: object
+properties:
+  place_id:
+    type: string
+    description: "Unique identifier for the place."
+  description:
+    type: string
+    description: "Short text describing the place."
+  address:
+    type: object
+    description: "Physical representation of the place."
+    allOf:
+      - $ref: '#/definitions/Address'

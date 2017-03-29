@@ -9,7 +9,11 @@ test:
   override:
     - echo "Tests disabled"
 deployment:
-  staging:
+  develop:
+    branch: develop
+    heroku:
+      appname: snabb-api-mock
+  production:
     branch: master
     heroku:
       appname: snabb-api-mock

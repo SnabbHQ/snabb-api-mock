@@ -3,14 +3,28 @@ properties:
   address_id:
     type: string
     description: "Unique identifier for the address."
-  street:
+  address:
     type: string
-    description: "Plain text name of the city. e.g. Stockholm."
-  postcode:
+    description: "Plain text name of the address. e.g. Calle San Vicente Martir, 91, 46007, Valencia."
+  latitude:
+    type: number
+    format: float
+    description: "Latitude of the address."
+  longitude:
+    type: number
+    format: float
+    description: "Longitude of the address."
+  created_at:
     type: string
-    description: "Postal code of the address. e.g. 11218"
+    description: "Unix timestamp representing the time when the address was created."
+  updated_at:
+    type: string
+    description: "Unix timestamp representing the time when the address was updated last."
+  zipcode:
+    type: string
+    description: "ZipCode (or PostalCode) of the address."
   city:
-      type: object
-      description: "The city which this address belongs to."
-      allOf:
-        - $ref: '#/definitions/City'
+    type: object
+    description: "The city in which this address is located."
+    allOf:
+      - $ref: '#/definitions/City'

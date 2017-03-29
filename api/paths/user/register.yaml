@@ -1,0 +1,80 @@
+post:
+  tags:
+  - User
+  summary: Client applications account registration endpoint
+  description: "User registration endpoint. \n\n <b>Warning</b>: Only
+  application/x-www-form-urlencoded or multipart/form-data body encodings are supported."
+  security:
+    - OauthPasswordSecurity:
+      - user
+  consumes:
+    - application/x-www-form-urlencoded
+  operationId: registerPOST
+  parameters:
+    - name: company_name
+      in: formData
+      description: "The company name."
+      required: true
+      type: string
+      x-example: "Knight Industries Inc."
+    - name: email
+      in: formData
+      description: "The email address to be used."
+      required: true
+      type: string
+      x-example: "michael.knight@snabb.io"
+    - name: password
+      in: formData
+      description: "The client's password."
+      required: true
+      type: string
+      x-example: "passw0rd!"
+    - name: phone
+      in: formData
+      description: "User phone."
+      required: true
+      type: string
+      x-example: "+46712345678"
+    - name: user_lang
+      in: formData
+      description: "Default user lang (optional)."
+      required: false
+      type: string
+      x-example: "es"
+  responses:
+    200:
+      description: "Profile information for a registered user"
+      schema:
+        $ref: '#/definitions/Profile'
+      examples:
+        application/json:
+          {
+            "profile_id": 3254345,
+            "company_name": "Knight Industries Inc.",
+            "first_name": "",
+            "last_name": "",
+            "email": "michael.knight@snabb.io",
+            "phone": "+46712345678",
+            "verified": false,
+            "send_email_notifications": true,
+            "send_sms_notifications": true,
+            "user_lang": "en",
+            "updated_at": 1441146983,
+            "created_at": 1441146983
+          }
+    400:
+      description: "Bad request"
+      schema:
+        $ref: '#/definitions/Error'
+      examples:
+        application/json:
+          {
+            "code": "400103",
+            "key": "email_already_exists",
+            "message": "Email already exists",
+          }
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: User

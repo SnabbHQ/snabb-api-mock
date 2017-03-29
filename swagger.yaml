@@ -8,177 +8,561 @@ info:
     url: developers.snabb.io
     email: dev.systems@snabb.io
 host: snabb-api-mock.herokuapp.com
-basePath: /api/v1
 schemes:
-  - https
+  - http
+basePath: /api/v1
 consumes:
   - application/json
 produces:
   - application/json
 securityDefinitions:
-  OauthPasswordSecurity:
-    type: oauth2
-    flow: application
-    tokenUrl: 'https://oauth.simple.api/token'
-    scopes:
-      admin: Admin scope
-      user: User scope
   OauthApplicationSecurity:
     type: oauth2
-    flow: password
-    tokenUrl: 'https://oauth.simple.api/token'
+    flow: application
+    tokenUrl: 'https://api.snabb.io/api/v1/o/token'
     scopes:
       admin: Admin scope
       user: User scope
       api: API scope
+  OauthPasswordSecurity:
+    type: oauth2
+    flow: password
+    tokenUrl: 'https://api.snabb.io/api/v1/o/token'
+    scopes:
+      admin: Admin scope
+      user: User scope
 security:
   - OauthApplicationSecurity:
       - api
   - OauthPasswordSecurity:
       - user
 paths:
-  /auth/register:
-    post:
-      tags:
-        - Auth
-      summary: Client applications account registration endpoint
-      description: |-
-        OAuth 2.0 account creation and authentication endpoint. 
-
-         <b>Warning</b>: Only application/x-www-form-urlencoded or multipart/form-data body encodings are supported.
-      consumes:
-        - application/x-www-form-urlencoded
-      operationId: registerPOST
-      parameters:
-        - name: name
-          in: formData
-          description: The name or company name.
-          required: true
-          type: string
-          x-example: Stark Industries
-        - name: email
-          in: formData
-          description: The email address to be used.
-          required: true
-          type: string
-          x-example: tony.stark@stark.com
-        - name: password
-          in: formData
-          description: The client's password.
-          required: true
-          type: string
-          x-example: passw0rd!
-        - name: phone
-          in: formData
-          description: The phone number of the user.
-          required: true
-          type: string
-          x-example: '+46712345678'
-      responses:
-        '200':
-          description: Access token information
-          schema:
-            $ref: '#/definitions/Token'
-          examples:
-            application/json:
-              access_token: J1qK1c18UUGJFAzz9xnH56584l4
-              token_type: bearer
-              expires_in: 2592000
-              scope: api
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Auth
-  /deliveries/address/validate:
+  /deliveries:
     get:
       tags:
-        - Deliveries
-      summary: Validate an Address
-      operationId: addressGET
-      description: >-
-        Simple helper endpoint to validate an address before creating a quote or
-        a delivery.
-      parameters: []
+        - Delivery
+      summary: GET /deliveries
+      operationId: deliveryLIST
+      description: Get a list of deliveries for a user.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      parameters:
+        - name: page
+          in: query
+          description: Number of page
+          type: number
+          format: int32
+          x-example: 1
+        - name: status
+          in: query
+          description: Status of delivery
+          type: string
+          x-example: completed
       responses:
         '200':
-          description: If is a valid address
+          description: A list of deliveries.
           schema:
-            $ref: '#/definitions/Delivery'
+            type: array
+            items:
+              $ref: '#/definitions/Delivery'
+          examples:
+            application/json:
+              count: 92
+              next: 'https://api_domain/api/v1/delivery/?page=2'
+              previous: null
+              results:
+                - delivery_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                  courier:
+                    id: ZxK8Ygbpr1sfYgDaNURPjXKa
+                    name: Michael Knight
+                    phone: '+34661518132'
+                    onDuty: false
+                    timeLastSeen: 1486407209054
+                    imageUrl: >-
+                      https://d15p8tr8p0vffz.cloudfront.net/090a12045fe17fafecda8497/294.png
+                    location:
+                      - -0.3754607
+                      - 39.4667116
+                    vehicle:
+                      id: h3OUAyCxLrUIdIOk8930sNMf
+                      type: BICYCLE
+                      description: null
+                      licensePlate: null
+                      color: null
+                      timeLastModified: 1482423618129
+                  currency:
+                    symbol: €
+                    iso_code: EUR
+                  price: 3.31
+                  created_at: 1487881467
+                  updated_at: 1487881468
+                  order_reference_id: SNABB2017001
+                  quote_id: 719
+                  tasks:
+                    - task_id: 1421
+                      place:
+                        place_id: 1421
+                        description: >-
+                          Snabb Master Head Quarters. Where all the fun takes
+                          place! :)
+                        address:
+                          address_id: 1421
+                          address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                          latitude: '39.46661480'
+                          longitude: '-0.38085870'
+                          active: true
+                          created_at: 1487881468
+                          updated_at: 1487881468
+                          zipcode: '46007'
+                          city:
+                            name: Valencia
+                            region:
+                              name: Valencia community
+                              country:
+                                name: Spain
+                                iso_code: ES
+                                currency:
+                                  symbol: €
+                                  iso_code: EUR
+                      contact:
+                        first_name: null
+                        last_name: null
+                        company_name: Martinez e hijos
+                        phone: '+34625188855'
+                        email: pp@pp.ppp
+                      order: 2
+                      comments: ''
+                      task_type: dropoff
+                      dispatching_meta:
+                        trackingURL: 'https://onf.lt/5f8b5c65f9'
+                        state: 1
+                        estimatedCompletionTime: 1488303586404
+                    - task_id: 1420
+                      place:
+                        place_id: 1420
+                        description: Oficina Cactus
+                        address:
+                          address_id: 1420
+                          address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                          latitude: '39.46670680'
+                          longitude: '-0.37535140'
+                          active: true
+                          created_at: 1487881468
+                          updated_at: 1487881468
+                          zipcode: '46004'
+                          city:
+                            name: Valencia
+                            region:
+                              name: Valencia community
+                              country:
+                                name: Spain
+                                iso_code: ES
+                                currency:
+                                  symbol: €
+                                  iso_code: EUR
+                      contact: null
+                      order: 1
+                      comments: Fragile package.
+                      task_type: pickup
+                      dispatching_meta:
+                        trackingURL: 'https://onf.lt/5f8b5c65f9'
+                        state: 1
+                        estimatedCompletionTime: 1488303586404
+                  status: en_route_to_pickup
+                - delivery_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                  courier:
+                    id: ZxK8Ygbpr1sfYgDaNURPjXKa
+                    name: Michael Knight
+                    phone: '+34661518132'
+                    onDuty: false
+                    timeLastSeen: 1486407209054
+                    imageUrl: >-
+                      https://d15p8tr8p0vffz.cloudfront.net/090a12045fe17fafecda8497/294.png
+                    location:
+                      - -0.3754607
+                      - 39.4667116
+                    vehicle:
+                      id: h3OUAyCxLrUIdIOk8930sNMf
+                      type: BICYCLE
+                      description: null
+                      licensePlate: null
+                      color: null
+                      timeLastModified: 1482423618129
+                  currency:
+                    symbol: €
+                    iso_code: EUR
+                  price: 3.31
+                  created_at: 1487881467
+                  updated_at: 1487881468
+                  order_reference_id: SNABB2017001
+                  quote_id: 719
+                  tasks:
+                    - task_id: 1421
+                      place:
+                        place_id: 1421
+                        description: >-
+                          Snabb Master Head Quarters. Where all the fun takes
+                          place! :)
+                        address:
+                          address_id: 1421
+                          address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                          latitude: '39.46661480'
+                          longitude: '-0.38085870'
+                          active: true
+                          created_at: 1487881468
+                          updated_at: 1487881468
+                          zipcode: '46007'
+                          city:
+                            name: Valencia
+                            region:
+                              name: Valencia community
+                              country:
+                                name: Spain
+                                iso_code: ES
+                                currency:
+                                  symbol: €
+                                  iso_code: EUR
+                      contact:
+                        first_name: null
+                        last_name: null
+                        company_name: Martinez e hijos
+                        phone: '+34625188855'
+                        email: pp@pp.ppp
+                      order: 2
+                      comments: ''
+                      task_type: dropoff
+                      dispatching_meta:
+                        trackingURL: 'https://onf.lt/5f8b5c65f9'
+                        state: 1
+                        estimatedCompletionTime: 1488303586404
+                    - task_id: 1420
+                      place:
+                        place_id: 1420
+                        description: Oficina Cactus
+                        address:
+                          address_id: 1420
+                          address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                          latitude: '39.46670680'
+                          longitude: '-0.37535140'
+                          active: true
+                          created_at: 1487881468
+                          updated_at: 1487881468
+                          zipcode: '46004'
+                          city:
+                            name: Valencia
+                            region:
+                              name: Valencia community
+                              country:
+                                name: Spain
+                                iso_code: ES
+                                currency:
+                                  symbol: €
+                                  iso_code: EUR
+                      contact: null
+                      order: 1
+                      comments: Fragile package.
+                      task_type: pickup
+                      dispatching_meta:
+                        trackingURL: 'https://onf.lt/5f8b5c65f9'
+                        state: 1
+                        estimatedCompletionTime: 1488303586404
+                  status: completed
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Delivery
-  /deliveries/current:
-    get:
+    post:
       tags:
-        - Deliveries
-      summary: User Current Activity
+        - Delivery
+      summary: POST /deliveries
+      operationId: deliveryPOST
       description: >-
-        The User Current Activity endpoint returns data about a ongoing user's
-        lifetime activity with Snabb. The response will include pickup locations
-        and times, dropoff locations and times, the distance of ongoing
-        requests, and information about which products were
-        requested.<br><br>The history array in the response will have a maximum
-        length based on the limit parameter. The response value count may exceed
-        limit, therefore subsequent API requests may be necessary.
+        The Delivery endpoint returns a new delivery object with their price
+        <br/>The response includes [ISO
+        4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for
+        situations requiring currency conversion. Also, the response include the
+        courier info and tasks details like tracking URL for each task
+
+
+
+        <b>Warning:</b> If you try to create a delivery of an expired Quote, the
+        endpoint returns a bad request.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      consumes:
+        - application/x-www-form-urlencoded
       parameters:
-        - name: offset
-          in: query
-          type: integer
+        - name: quote_id
+          in: formData
+          description: Identifier of the quote.
+          required: true
+          type: number
           format: int32
-          description: Offset the list of returned results by this amount. Default is zero.
-        - name: limit
-          in: query
-          type: integer
-          format: int32
-          description: 'Number of items to retrieve. Default is 5, maximum is 100.'
+          x-example: 895
+        - name: selected_package_size
+          in: formData
+          description: The size price option selected. (small|medium|big).
+          required: true
+          type: string
+          x-example: medium
       responses:
         '200':
-          description: Ongoing deliveries information for the given user
+          description: A delivery object.
           schema:
-            $ref: '#/definitions/Activities'
+            type: array
+            items:
+              $ref: '#/definitions/Delivery'
+          examples:
+            application/json:
+              delivery_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+              courier:
+                id: ZxK8Ygbpr1sfYgDaNURPjXKa
+                name: Michael Knight
+                phone: '+34661518132'
+                onDuty: false
+                timeLastSeen: 1486407209054
+                imageUrl: >-
+                  https://d15p8tr8p0vffz.cloudfront.net/090a12045fe17fafecda8497/294.png
+                location:
+                  - -0.3754607
+                  - 39.4667116
+                vehicle:
+                  id: h3OUAyCxLrUIdIOk8930sNMf
+                  type: BICYCLE
+                  description: null
+                  licensePlate: null
+                  color: null
+                  timeLastModified: 1482423618129
+              currency:
+                symbol: €
+                iso_code: EUR
+              price: 3.31
+              created_at: 1487881467
+              updated_at: 1487881468
+              order_reference_id: SNABB2017001
+              quote_id: 719
+              tasks:
+                - task_id: 1421
+                  place:
+                    place_id: 1421
+                    description: >-
+                      Snabb Master Head Quarters. Where all the fun takes place!
+                      :)
+                    address:
+                      address_id: 1421
+                      address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                      latitude: '39.46661480'
+                      longitude: '-0.38085870'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46007'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact:
+                    first_name: null
+                    last_name: null
+                    company_name: Martinez e hijos
+                    phone: '+34625188855'
+                    email: pp@pp.ppp
+                  order: 2
+                  comments: ''
+                  task_type: dropoff
+                  dispatching_meta:
+                    trackingURL: 'https://onf.lt/5f8b5c65f9'
+                    state: 1
+                    estimatedCompletionTime: 1488303586404
+                - task_id: 1420
+                  place:
+                    place_id: 1420
+                    description: Oficina Cactus
+                    address:
+                      address_id: 1420
+                      address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                      latitude: '39.46670680'
+                      longitude: '-0.37535140'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46004'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact: null
+                  order: 1
+                  comments: Fragile package.
+                  task_type: pickup
+                  dispatching_meta:
+                    trackingURL: 'https://onf.lt/5f8b5c65f9'
+                    state: 1
+                    estimatedCompletionTime: 1488303586404
+              status: en_route_to_pickup
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: '400405'
+              key: QUOTE_EXPIRED
+              message: Quote expired
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /deliveries/history:
+      x-swagger-router-controller: Delivery
+  '/deliveries/{delivery_id}':
     get:
       tags:
-        - Deliveries
-      summary: User Activity
-      description: >-
-        The User Activity endpoint returns data about a user's lifetime activity
-        with Uber. The response will include pickup locations and times, dropoff
-        locations and times, the distance of past requests, and information
-        about which products were requested.<br><br>The history array in the
-        response will have a maximum length based on the limit parameter. The
-        response value count may exceed limit, therefore subsequent API requests
-        may be necessary.
+        - Delivery
+      summary: 'GET /deliveries/{delivery_id}'
+      operationId: deliveryGET
+      description: Get a particular delivery information.
+      security:
+        - OauthApplicationSecurity:
+            - api
       parameters:
-        - name: offset
-          in: query
-          type: integer
-          format: int32
-          description: Offset the list of returned results by this amount. Default is zero.
-        - name: limit
-          in: query
-          type: integer
-          format: int32
-          description: 'Number of items to retrieve. Default is 5, maximum is 100.'
+        - name: delivery_id
+          in: path
+          description: ID of the delivery to fetch
+          required: true
+          type: string
+          x-example: 8b58bc58-7352-4278-b569-b5d24d8e3f76
       responses:
         '200':
-          description: History information for the given user
+          description: Detail of a delivery.
           schema:
-            $ref: '#/definitions/Activities'
+            type: array
+            items:
+              $ref: '#/definitions/Delivery'
+          examples:
+            application/json:
+              delivery_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+              courier:
+                id: ZxK8Ygbpr1sfYgDaNURPjXKa
+                name: Michael Knight
+                phone: '+34661518132'
+                onDuty: false
+                timeLastSeen: 1486407209054
+                imageUrl: >-
+                  https://d15p8tr8p0vffz.cloudfront.net/090a12045fe17fafecda8497/294.png
+                location:
+                  - -0.3754607
+                  - 39.4667116
+                vehicle:
+                  id: h3OUAyCxLrUIdIOk8930sNMf
+                  type: BICYCLE
+                  description: null
+                  licensePlate: null
+                  color: null
+                  timeLastModified: 1482423618129
+              currency:
+                symbol: €
+                iso_code: EUR
+              price: 3.31
+              created_at: 1487881467
+              updated_at: 1487881468
+              order_reference_id: SNABB2017001
+              quote_id: 719
+              tasks:
+                - task_id: 1421
+                  place:
+                    place_id: 1421
+                    description: >-
+                      Snabb Master Head Quarters. Where all the fun takes place!
+                      :)
+                    address:
+                      address_id: 1421
+                      address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                      latitude: '39.46661480'
+                      longitude: '-0.38085870'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46007'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact:
+                    first_name: null
+                    last_name: null
+                    company_name: Martinez e hijos
+                    phone: '+34625188855'
+                    email: pp@pp.ppp
+                  order: 2
+                  comments: ''
+                  task_type: dropoff
+                  dispatching_meta:
+                    trackingURL: 'https://onf.lt/5f8b5c65f9'
+                    state: 1
+                    estimatedCompletionTime: 1488303586404
+                - task_id: 1420
+                  place:
+                    place_id: 1420
+                    description: Oficina Cactus
+                    address:
+                      address_id: 1420
+                      address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                      latitude: '39.46670680'
+                      longitude: '-0.37535140'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46004'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact: null
+                  order: 1
+                  comments: Fragile package.
+                  task_type: pickup
+                  dispatching_meta:
+                    trackingURL: 'https://onf.lt/5f8b5c65f9'
+                    state: 1
+                    estimatedCompletionTime: 1488303586404
+              status: en_route_to_pickup
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+      x-swagger-router-controller: Delivery
   /deliveries/quote:
     post:
-      summary: Quote
+      tags:
+        - Delivery
+      summary: POST /deliveries/quote
       operationId: quotePOST
       description: >-
         The Quote endpoint returns a price for each product offered at a given
@@ -192,17 +576,45 @@ paths:
         This is done to prevent un-expected costs if the time between the quote
         and the actual delivery order are to far apart. After this period, the
         quote won't be able to be used to create a new delivery.
+      security:
+        - OauthApplicationSecurity:
+            - api
       parameters:
-        - name: quoteInfo
+        - name: body
           in: body
           description: >-
             Information required to generate a valid quote to be given to the
             user.
           required: true
           schema:
-            $ref: '#/definitions/NewQuote'
-      tags:
-        - Deliveries
+            $ref: '#/definitions/PostQuote'
+          x-examples:
+            default: |
+              {
+                "tasks" : [
+                  {
+                    "type": "pickup",
+                    "comments": "Fragile package.",
+                    "place":{
+                      "description" : "Cactus Office",
+                      "address": "Pasaje Doctor Serra, 3, 46004, Valencia"
+                    }
+                  },
+                  {
+                    "type": "dropoff",
+                    "comments": "",
+                    "place":{
+                      "description" : "Snabb Master Head Quarters. Where all the fun takes place! :)",
+                      "address": "Calle San Vicente Martir, 91, 46007, Valencia"
+                    },
+                    "contact":{
+                      "company_name": "Martinez e hijos",
+                      "phone": "+34625188855",
+                      "email": "pp@pp.ppp"
+                    }
+                  }
+                ]
+              }
       responses:
         '200':
           description: An array of price estimates by product.
@@ -210,39 +622,108 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Quote'
+          examples:
+            application/json:
+              quote_id: 719
+              distance: 473
+              expire_at: 1487882067
+              quote_user: 18
+              tasks:
+                - task_id: 1421
+                  place:
+                    place_id: 1421
+                    description: >-
+                      Snabb Master Head Quarters. Where all the fun takes place!
+                      :)
+                    address:
+                      address_id: 1421
+                      address: 'Calle San Vicente Martir, 91, 46007, Valencia'
+                      latitude: '39.46661480'
+                      longitude: '-0.38085870'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46007'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact:
+                    first_name: null
+                    last_name: null
+                    company_name: Martinez e hijos
+                    phone: '+34625188855'
+                    email: pp@pp.ppp
+                  order: 2
+                  comments: ''
+                  task_type: dropoff
+                - task_id: 1420
+                  place:
+                    place_id: 1420
+                    description: Oficina Cactus
+                    address:
+                      address_id: 1420
+                      address: 'Pasaje Doctor Serra, 3, 46004, Valencia'
+                      latitude: '39.46670680'
+                      longitude: '-0.37535140'
+                      active: true
+                      created_at: 1487881468
+                      updated_at: 1487881468
+                      zipcode: '46004'
+                      city:
+                        name: Valencia
+                        region:
+                          name: Valencia community
+                          country:
+                            name: Spain
+                            iso_code: ES
+                            currency:
+                              symbol: €
+                              iso_code: EUR
+                  contact: null
+                  order: 1
+                  comments: Fragile package.
+                  task_type: pickup
+              prices:
+                medium:
+                  price: 3.311
+                  eta: 20
+                big:
+                  price: 5.76
+                  eta: 30
+                small:
+                  price: 2.838
+                  eta: 20
+              currency:
+                symbol: €
+                iso_code: EUR
+              created_at: 1487881467
+              updated_at: 1487881468
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: '400405'
+              key: INVALID_ZIPCODE
+              message: Zipcode not valid
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Delivery
-  '/deliveries/{delivery_id}':
-    get:
-      tags:
-        - Deliveries
-      summary: Delivery
-      operationId: deliveryGET
-      description: Get a particular delivery information.
-      parameters:
-        - name: delivery_id
-          in: path
-          description: ID of the delivery to fetch
-          required: true
-          type: string
-      responses:
-        '200':
-          description: A delivery response.
-          schema:
-            $ref: '#/definitions/Delivery'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Delivery
-  /oauth/token:
+  /o/token:
     post:
       tags:
-        - Auth
-      summary: Client applications authentication endpoint
+        - Authentication
+      summary: POST /o/token
       description: |-
         OAuth 2.0 Authentication endpoint. 
 
@@ -250,6 +731,7 @@ paths:
       consumes:
         - application/x-www-form-urlencoded
       operationId: authPOST
+      security: []
       parameters:
         - name: client_id
           in: formData
@@ -257,24 +739,18 @@ paths:
           required: true
           type: string
           x-example: jmTfWIiqat02420meIeF
-        - name: username
+        - name: client_secret
           in: formData
-          description: The client's username.
+          description: The client's secret provided.
           required: true
           type: string
-          x-example: user@snabb.io
-        - name: password
-          in: formData
-          description: The client's password.
-          required: true
-          type: string
-          x-example: passw0rd!
+          x-example: yvYamIpyoeJhuwFnnkVD
         - name: grant_type
           in: formData
           description: The grant type.
           required: true
           type: string
-          x-example: password
+          x-example: client_credentials
       responses:
         '200':
           description: Access token information
@@ -291,60 +767,62 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Auth
-  /products:
-    get:
-      tags:
-        - Products
-      summary: Product Types
-      description: >-
-        The Products endpoint returns information about the *Uber* products
-        offered at a given location. The response includes the display name and
-        other details about each product, and lists the products in the proper
-        display order.
-      operationId: productsGET
-      parameters:
-        - name: latitude
-          in: query
-          description: Latitude component of location.
-          required: true
-          type: number
-          format: double
-        - name: longitude
-          in: query
-          description: Longitude component of location.
-          required: true
-          type: number
-          format: double
-      responses:
-        '200':
-          description: An array of products
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Product'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Products
-  /user/password/reset:
+  /user/forgotPassword:
     post:
       tags:
         - User
-      summary: Reset Password
-      description: Send an email to the given user in order to reset their password.
-      operationId: resetPOST
+      summary: Forgot Password
+      description: >-
+        When a user does not remember their password, this endpoint will send an
+        email to the given user with instructions to reset their password.
+      security:
+        - OauthPasswordSecurity:
+            - user
+      operationId: forgotPasswordPOST
       consumes:
         - application/x-www-form-urlencoded
       parameters:
         - name: email
-          description: The user's email address to send the reset email to.
+          description: The user's email address to send the email to.
           in: formData
           required: true
           type: string
           x-example: darth.vader@snabb.io
       responses:
         '204':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/resetPassword:
+    post:
+      tags:
+        - User
+      summary: Reset passwrod
+      description: Reset password for user.
+      security:
+        - OauthPasswordSecurity:
+            - user
+      operationId: resetPassword
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: hash
+          description: Unique hash of user
+          in: formData
+          required: true
+          type: string
+          x-example: r4w4fw45t542fd34234$
+        - name: password
+          description: New password for user
+          in: formData
+          required: true
+          type: string
+          x-example: p4sw0rd
+      responses:
+        '200':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
@@ -359,6 +837,9 @@ paths:
       description: >-
         The User Profile endpoint returns information about the Snabb user that
         has authorized with the application.
+      security:
+        - OauthPasswordSecurity:
+            - user
       operationId: profileGET
       parameters: []
       responses:
@@ -368,40 +849,326 @@ paths:
             $ref: '#/definitions/Profile'
           examples:
             application/json:
+              profile_id: 3254345
+              company_name: Knight Industries Inc.
               first_name: Michael
               last_name: Knight
               email: michael.knight@snabb.io
-              phone:
-                number: '+46712345678'
-              thumbnail: >-
-                https://encrypted-tbn1.gstatic
-                .com/images?q=tbn:ANd9GcTlovN715rKGVOscWvovnblMwpvwMlknTosSXthVP9xLlW7KCfw
+              phone: '+46712345678'
               verified: false
+              send_email_notifications: false
+              send_sms_notifications: true
+              user_lang: en
+              updated_at: 1441146983
+              created_at: 1441146983
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
+  '/user/profile/{profile_id}':
+    put:
+      tags:
+        - User
+      summary: Update User
+      operationId: profilePUT
+      description: Update your profile info.
+      security:
+        - OauthPasswordSecurity:
+            - user
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: profile_id
+          in: path
+          description: ID of the user to update
+          required: true
+          type: string
+          x-example: '1234321'
+        - name: company_name
+          description: New company name.
+          in: formData
+          required: false
+          type: string
+          x-example: Knight Industries Inc.
+        - name: first_name
+          description: New user first_name
+          in: formData
+          required: false
+          type: string
+          x-example: Michael
+        - name: last_name
+          description: New user last_name.
+          in: formData
+          required: false
+          type: string
+          x-example: Knight
+        - name: email
+          description: The user's email address to send the reset email to.
+          in: formData
+          required: false
+          type: string
+          x-example: michael.knight@snabb.io
+        - name: phone
+          description: New user phone
+          in: formData
+          required: false
+          type: string
+          x-example: +34 656565545
+        - name: user_lang
+          description: New user selected language
+          in: formData
+          required: false
+          type: string
+          x-example: en
+        - name: send_email_notifications
+          description: Manage email notifications status
+          in: formData
+          required: false
+          type: boolean
+          x-example: true
+        - name: send_sms_notifications
+          description: Manage sms notifications status
+          in: formData
+          required: false
+          type: boolean
+          x-example: true
+      responses:
+        '200':
+          description: Updated Profile.
+          schema:
+            $ref: '#/definitions/Profile'
+          examples:
+            application/json:
+              profile_id: 3254345
+              company_name: Knight Industries Inc.
+              first_name: Michael
+              last_name: Knight
+              email: michael.knight@snabb.io
+              phone: '+46712345678'
+              verified: false
+              send_email_notifications: false
+              send_sms_notifications: true
+              user_lang: en
+              updated_at: 1441146983
+              created_at: 1441146983
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/register:
+    post:
+      tags:
+        - User
+      summary: Client applications account registration endpoint
+      description: |-
+        User registration endpoint. 
+
+         <b>Warning</b>: Only application/x-www-form-urlencoded or multipart/form-data body encodings are supported.
+      security:
+        - OauthPasswordSecurity:
+            - user
+      consumes:
+        - application/x-www-form-urlencoded
+      operationId: registerPOST
+      parameters:
+        - name: company_name
+          in: formData
+          description: The company name.
+          required: true
+          type: string
+          x-example: Knight Industries Inc.
+        - name: email
+          in: formData
+          description: The email address to be used.
+          required: true
+          type: string
+          x-example: michael.knight@snabb.io
+        - name: password
+          in: formData
+          description: The client's password.
+          required: true
+          type: string
+          x-example: passw0rd!
+        - name: phone
+          in: formData
+          description: User phone.
+          required: true
+          type: string
+          x-example: '+46712345678'
+        - name: user_lang
+          in: formData
+          description: Default user lang (optional).
+          required: false
+          type: string
+          x-example: es
+      responses:
+        '200':
+          description: Profile information for a registered user
+          schema:
+            $ref: '#/definitions/Profile'
+          examples:
+            application/json:
+              profile_id: 3254345
+              company_name: Knight Industries Inc.
+              first_name: ''
+              last_name: ''
+              email: michael.knight@snabb.io
+              phone: '+46712345678'
+              verified: false
+              send_email_notifications: true
+              send_sms_notifications: true
+              user_lang: en
+              updated_at: 1441146983
+              created_at: 1441146983
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: '400103'
+              key: email_already_exists
+              message: Email already exists
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/sendVerifyEmail:
+    post:
+      tags:
+        - User
+      summary: Resend verify email
+      description: >-
+        This endpoint allow to resend activation account email to a user.
+        Regenerate the user hash and send it to the user email.
+      security:
+        - OauthPasswordSecurity:
+            - user
+      operationId: sendVerifyMail
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: email
+          description: The user's email address to send the activation email to.
+          in: formData
+          required: true
+          type: string
+          x-example: darth.vader@snabb.io
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/updatePassword:
+    post:
+      tags:
+        - User
+      summary: Update Password
+      description: Update user password.
+      security:
+        - OauthPasswordSecurity:
+            - user
+      operationId: updatePassword
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: current_password
+          description: Current user password.
+          in: formData
+          required: true
+          type: string
+          x-example: p4sw0rd
+        - name: new_password
+          description: New user password.
+          in: formData
+          required: true
+          type: string
+          x-example: N3w_4w3s0m3_p4sw0rd
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /user/verifyUser:
+    post:
+      tags:
+        - User
+      summary: Verify User
+      description: Verify user email.
+      security:
+        - OauthPasswordSecurity:
+            - user
+      operationId: verifyUser
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: hash
+          description: Unique hash of user
+          in: formData
+          required: true
+          type: string
+          x-example: r4w4fw45t542fd34234$
+      responses:
+        '200':
+          description: Empty response when the given email address exists in our system.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: User
+  /address/validateAddress:
+    post:
+      tags:
+        - Address
+      summary: POST /validateAddress
+      description: Validate if Snabb works in the address provided.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      operationId: validateAddress
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: address
+          description: Address formatted like gmaps.
+          in: formData
+          required: true
+          type: string
+          x-example: 'Passatge Dr. Serra, 46004, València, Spain'
+      responses:
+        '200':
+          description: >-
+            Return ADDRESS_OK if Snabb works in this address. If not, you get an
+            error code.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              key: ADDRESS_OK
+              code: 200206
+              message: Address valid
+        '400':
+          description: Return KEY_ADDRESS_REQUIRED if you don't send "address" field.
+          examples:
+            application/json:
+              code: 400401
+              message: Key address is required
+              key: KEY_ADDRESS_REQUIRED
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Address
 definitions:
-  Token:
-    type: object
-    properties:
-      access_token:
-        type: string
-        description: The access token issued by the authorization server.
-      token_type:
-        type: string
-        description: The type of the token issued.
-      expires_in:
-        type: number
-        format: int32
-        description: >-
-          The lifetime in seconds of the access token. For example, the value
-          "3600" denotes that the access token will expire in one hour from the
-          time the response was generated.
-      scope:
-        type: string
-        description: Scope usage of the token.
   Activities:
     type: object
     properties:
@@ -427,6 +1194,52 @@ definitions:
       uuid:
         type: string
         description: Unique identifier for the activity
+  Address:
+    type: object
+    properties:
+      address_id:
+        type: string
+        description: Unique identifier for the address.
+      address:
+        type: string
+        description: >-
+          Plain text name of the address. e.g. Calle San Vicente Martir, 91,
+          46007, Valencia.
+      latitude:
+        type: number
+        format: float
+        description: Latitude of the address.
+      longitude:
+        type: number
+        format: float
+        description: Longitude of the address.
+      created_at:
+        type: string
+        description: Unix timestamp representing the time when the address was created.
+      updated_at:
+        type: string
+        description: >-
+          Unix timestamp representing the time when the address was updated
+          last.
+      zipcode:
+        type: string
+        description: ZipCode (or PostalCode) of the address.
+      city:
+        type: object
+        description: The city in which this address is located.
+        allOf:
+          - $ref: '#/definitions/City'
+  City:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Plain text name of the city. e.g. Stockholm.
+      region:
+        type: object
+        description: The region which the city belongs to.
+        allOf:
+          - $ref: '#/definitions/Region'
   Contact:
     type: object
     properties:
@@ -440,19 +1253,27 @@ definitions:
         type: string
         description: The email address of the contact.
       phone:
-        type: object
-        description: The phone number of the contact.
-        allOf:
-          - $ref: '#/definitions/Phone'
-  Phone:
-    type: object
-    properties:
-      number:
         type: string
         description: >-
           Phone number. This could be either a local phone number in which the
           associated country code will be automatically appended or an
           international phone number with either the 00 or + included
+  Country:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Plain text name of the country. e.g. Sweden.
+      iso_code:
+        type: string
+        description: >-
+          [ISO 31661-1](https://en.wikipedia.org/wiki/ISO_3166-1) 2 character
+          country code.
+      currency:
+        type: object
+        description: The currency to use in this country.
+        allOf:
+          - $ref: '#/definitions/Currency'
   Courier:
     type: object
     properties:
@@ -499,27 +1320,6 @@ definitions:
         description: The transportation used by the courier to perform the deliveries.
         allOf:
           - $ref: '#/definitions/Transport'
-  Product:
-    type: object
-    properties:
-      product_id:
-        type: string
-        description: >-
-          Unique identifier representing a specific product for a given latitude
-          & longitude. For example, uberX in San Francisco will have a different
-          product_id than uberX in Los Angeles.
-      description:
-        type: string
-        description: Description of product.
-      display_name:
-        type: string
-        description: Display name of product.
-      capacity:
-        type: string
-        description: 'Capacity of product. For example, 4 people.'
-      image:
-        type: string
-        description: Image URL representing the product.
   Currency:
     type: object
     properties:
@@ -529,70 +1329,67 @@ definitions:
       symbol:
         type: string
         description: Symbol code for the given currency.
-  Address:
+  Delivery:
     type: object
     properties:
-      address_id:
+      delivery_id:
         type: string
-        description: Unique identifier for the address.
-      street:
-        type: string
-        description: Plain text name of the city. e.g. Stockholm.
-      postcode:
-        type: string
-        description: Postal code of the address. e.g. 11218
-      city:
+        description: Unique identifier representing a specific delivery.
+      created_at:
+        type: integer
+        format: int32
+        description: Unix timestamp representing the moment the delivery was created.
+      last_update_at:
+        type: integer
+        format: int32
+        description: >-
+          Unix timestamp representing the last time when the delivery
+          information was updated.
+      pickup_location:
         type: object
-        description: The city which this address belongs to.
+        description: The pickup location information.
         allOf:
-          - $ref: '#/definitions/City'
-  City:
-    type: object
-    properties:
-      city_id:
-        type: string
-        description: Unique identifier for the city.
-      name:
-        type: string
-        description: Plain text name of the city. e.g. Stockholm.
-      region:
+          - $ref: '#/definitions/Location'
+      dropoff_location:
         type: object
-        description: The region which the city belongs to.
+        description: The dropoff location information.
         allOf:
-          - $ref: '#/definitions/Region'
-  Country:
-    type: object
-    properties:
-      country_id:
-        type: string
-        description: Unique identifier for the country.
-      name:
-        type: string
-        description: Plain text name of the country. e.g. Sweden.
-      iso_code:
+          - $ref: '#/definitions/Location'
+      tracking_url:
         type: string
         description: >-
-          [ISO 31661-1](https://en.wikipedia.org/wiki/ISO_3166-1) 2 character
-          country code.
-      default_currency:
-        type: string
-        description: The default currency to use in this country.
-        allOf:
-          - $ref: '#/definitions/Currency'
-  Region:
+          Automatically generated tracking URL to be used in order to track and
+          monitor in real time the status of the current delivery.
+  Dimension:
     type: object
     properties:
-      region_id:
+      height:
+        type: number
+        format: int32
+        description: Height in <b>cm</b>
+      width:
+        type: number
+        format: int32
+        description: Width in <b>cm</b>
+      depth:
+        type: number
+        format: int32
+        description: Depth in <b>cm</b>
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        description: Unique identifier representing the error being returned to the user.
+      key:
         type: string
-        description: Unique identifier for the region.
-      name:
+        description: Unique key code to identify the error.
+      message:
         type: string
-        description: Plain text name of the region. e.g. Uppland.
-      country:
-        type: object
-        description: The country which the region belongs to.
-        allOf:
-          - $ref: '#/definitions/Country'
+        description: >-
+          A human readable error message (Note: Remember that this error is not
+          localized and will be returned only in english.
   Location:
     type: object
     properties:
@@ -637,9 +1434,128 @@ definitions:
       comment:
         type: string
         description: Special comments or instructions associated with the given location.
+  Place:
+    type: object
+    properties:
+      place_id:
+        type: string
+        description: Unique identifier for the place.
+      description:
+        type: string
+        description: Short text describing the place.
+      address:
+        type: object
+        description: Physical representation of the place.
+        allOf:
+          - $ref: '#/definitions/Address'
+  PostQuote:
+    type: object
+    required:
+      - tasks
+    properties:
+      tasks:
+        type: array
+        description: >-
+          Array containing all the tasks associated with the current quote. This
+          tasks could be either be pickUp or dropOff type.
+        items:
+          allOf:
+            - $ref: '#/definitions/PostQuoteTask'
+  PostQuotePlace:
+    type: object
+    required:
+      - address
+    properties:
+      description:
+        type: string
+        description: Short text describing the place.
+      address:
+        type: string
+        description: >-
+          Plain text name of the address. e.g. Calle San Vicente Martir, 91,
+          46007, Valencia.
+  PostQuoteTask:
+    type: object
+    required:
+      - type
+      - place
+    properties:
+      type:
+        type: string
+        enum:
+          - pickup
+          - dropoff
+        description: The type of task. This will be either pickup or dropoff
+      comments:
+        type: string
+        description: Any additional comment to facilitate the completion of the task.
+      place:
+        type: object
+        description: The place associated with the given task.
+        allOf:
+          - $ref: '#/definitions/PostQuotePlace'
+      contact:
+        type: object
+        description: The contact associated with the given task.
+        allOf:
+          - $ref: '#/definitions/Contact'
+  Price:
+    type: object
+    properties:
+      price:
+        type: string
+        description: The final calculated price
+      eta:
+        type: number
+        description: Calculated ETA for the pickup of the item.
+  Prices:
+    type: object
+    properties:
+      small:
+        type: object
+        description: Small package size.
+        allOf:
+          - $ref: '#/definitions/Price'
+      medium:
+        type: object
+        description: Medium package size.
+        allOf:
+          - $ref: '#/definitions/Price'
+      big:
+        type: object
+        description: Big package size.
+        allOf:
+          - $ref: '#/definitions/Price'
+  Product:
+    type: object
+    properties:
+      product_id:
+        type: string
+        description: >-
+          Unique identifier representing a specific product for a given latitude
+          & longitude. For example, uberX in San Francisco will have a different
+          product_id than uberX in Los Angeles.
+      description:
+        type: string
+        description: Description of product.
+      display_name:
+        type: string
+        description: Display name of product.
+      capacity:
+        type: string
+        description: 'Capacity of product. For example, 4 people.'
+      image:
+        type: string
+        description: Image URL representing the product.
   Profile:
     type: object
     properties:
+      profile_id:
+        type: integer
+        description: Unique identifier representing a user.
+      company_name:
+        type: string
+        description: Name of the company.
       first_name:
         type: string
         description: First name of the user.
@@ -650,60 +1566,31 @@ definitions:
         type: string
         description: Email address of the user
       phone:
-        type: object
-        description: The phone number of the user.
-        allOf:
-          - $ref: '#/definitions/Phone'
-      thumbnail:
         type: string
-        description: Small profile image URL of the user
+        description: The phone number of the user.
       verified:
         type: boolean
         description: >-
           Flag representing if the user has been verified or not. In case is not
           verified, the user will have restricted access to the API and only
           certain actions will be allowed.
-  Error:
-    type: object
-    properties:
-      code:
+      send_email_notifications:
+        type: boolean
+        description: Flag representing if the user want to receive email notifications.
+      send_sms_notifications:
+        type: boolean
+        description: Flag representing if the user want to receive sms notifications.
+      user_lang:
+        type: string
+        description: >-
+          [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1) 2 character
+          language code.
+      updated_at:
         type: integer
-        format: int32
-      message:
-        type: string
-      fields:
-        type: string
-  Delivery:
-    type: object
-    properties:
-      delivery_id:
-        type: string
-        description: Unique identifier representing a specific delivery.
+        description: Unix timestamp representing the moment in which the user was updated.
       created_at:
         type: integer
-        format: int32
-        description: Unix timestamp representing the moment the delivery was created.
-      last_update_at:
-        type: integer
-        format: int32
-        description: >-
-          Unix timestamp representing the last time when the delivery
-          information was updated.
-      pickup_location:
-        type: object
-        description: The pickup location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      dropoff_location:
-        type: object
-        description: The dropoff location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      tracking_url:
-        type: string
-        description: >-
-          Automatically generated tracking URL to be used in order to track and
-          monitor in real time the status of the current delivery.
+        description: Unix timestamp representing the moment in which the user was created.
   Quote:
     type: object
     properties:
@@ -716,54 +1603,55 @@ definitions:
           surprises down the road!).
       distance:
         type: number
-        format: float
-        description: Estimated distance in Km of the total route.
+        format: int32
+        description: Estimated distance in meters of the total route.
       duration:
         type: number
         format: int32
         description: Estimated duration in <b>minutes</b> of the delivery.
-      price:
+      expires_at:
         type: string
-        description: The calculated price for the delivery.
+        description: Unix timestamp representing the time when the quote will expire.
+      quote_user:
+        type: number
+        description: TODO
+      tasks:
+        type: array
+        description: >-
+          Array containing all the tasks associated with the current quote. This
+          tasks could be either be pickUp or dropOff type.
+        items:
+          allOf:
+            - $ref: '#/definitions/Task'
+      prices:
+        type: object
+        description: >-
+          An object containing all the prices and ETA for each of the packages
+          supported in the given location.
+        allOf:
+          - $ref: '#/definitions/Prices'
       currency:
         type: object
         description: The currency used for the price calculation
         allOf:
           - $ref: '#/definitions/Currency'
-      expires_at:
+      created_at:
         type: string
-        description: Unix timestamp representing the time when the quote will expire.
-      pickup_location:
-        type: object
-        description: The pick up location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      pickup_eta:
-        type: number
-        format: int32
-        description: The estimated time in <b>minutes</b> for pick up for this quote.
-      dropoff_location:
-        type: object
-        description: The drop off location information.
-        allOf:
-          - $ref: '#/definitions/Location'
-      dropoff_eta:
-        type: number
-        format: int32
-        description: The estimated time in <b>minutes</b> for drop off for this quote.
-  NewQuote:
+        description: Unix timestamp representing the time when the quote was created.
+      updated_at:
+        type: string
+        description: Unix timestamp representing the time when the quote was updated last.
+  Region:
     type: object
     properties:
-      pickup_location:
+      name:
+        type: string
+        description: Plain text name of the region. e.g. Uppland.
+      country:
         type: object
-        description: The pick up location information.
+        description: The country which the region belongs to.
         allOf:
-          - $ref: '#/definitions/Location'
-      dropoff_location:
-        type: object
-        description: The drop off location information.
-        allOf:
-          - $ref: '#/definitions/Location'
+          - $ref: '#/definitions/Country'
   Review:
     type: object
     properties:
@@ -789,6 +1677,59 @@ definitions:
         items:
           allOf:
             - $ref: '#/definitions/Review'
+  Task:
+    type: object
+    properties:
+      task_id:
+        type: string
+        description: Unique identifier representing a specific task.
+      description:
+        type: string
+        description: Description text for the created task.
+      place:
+        type: object
+        description: The place associated with the given task.
+        allOf:
+          - $ref: '#/definitions/Place'
+      contact:
+        type: object
+        description: The contact associated with the given task.
+        allOf:
+          - $ref: '#/definitions/Contact'
+      order:
+        type: number
+        format: int32
+        description: >-
+          Ordinal number which represent the order in which the task will be
+          executed by the couriers.
+      comments:
+        type: string
+        description: Any additional comment to facilitate the completion of the task.
+      task_type:
+        type: string
+        enum:
+          - pickup
+          - dropoff
+        description: The type of task. This will be either pickup or dropoff
+  Token:
+    type: object
+    properties:
+      access_token:
+        type: string
+        description: The access token issued by the authorization server.
+      token_type:
+        type: string
+        description: The type of the token issued.
+      expires_in:
+        type: number
+        format: int32
+        description: >-
+          The lifetime in seconds of the access token. For example, the value
+          "3600" denotes that the access token will expire in one hour from the
+          time the response was generated.
+      scope:
+        type: string
+        description: Scope usage of the token.
   Transport:
     type: object
     properties:
@@ -814,18 +1755,3 @@ definitions:
         description: Maximum dimensions of the package this transport type can hold.
         allOf:
           - $ref: '#/definitions/Dimension'
-  Dimension:
-    type: object
-    properties:
-      height:
-        type: number
-        format: int32
-        description: Height in <b>cm</b>
-      width:
-        type: number
-        format: int32
-        description: Width in <b>cm</b>
-      depth:
-        type: number
-        format: int32
-        description: Depth in <b>cm</b>

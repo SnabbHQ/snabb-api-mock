@@ -1,0 +1,18 @@
+type: object
+properties:
+  small:
+    type: object
+    description: "Small package size."
+    allOf:
+      - $ref: '#/definitions/Price'
+  medium:
+    type: object
+    description: "Medium package size."
+    allOf:
+      - $ref: '#/definitions/Price'
+  big:
+    type: object
+    description: "Big package size."
+    allOf:
+      - $ref: '#/definitions/Price'
+

@@ -1,0 +1,26 @@
+post:
+  tags:
+  - User
+  summary: Resend verify email
+  description: "This endpoint allow to resend activation account email to a user. Regenerate the user hash and send it to the user email."
+  security:
+    - OauthPasswordSecurity:
+      - user
+  operationId: sendVerifyMail
+  consumes:
+      - application/x-www-form-urlencoded
+  parameters:
+    - name: email
+      description: "The user's email address to send the activation email to."
+      in: formData
+      required: true
+      type: string
+      x-example: "darth.vader@snabb.io"
+  responses:
+    200:
+      description: "Empty response when the given email address exists in our system."
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: User

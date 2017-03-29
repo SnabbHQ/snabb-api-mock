@@ -1,0 +1,12 @@
+type: object
+required: [
+  tasks
+]
+properties:
+  tasks:
+    type: array
+    description: "Array containing all the tasks associated with the current quote. This tasks could be either be
+    pickUp or dropOff type."
+    items:
+      allOf:
+        - $ref: '#/definitions/PostQuoteTask'

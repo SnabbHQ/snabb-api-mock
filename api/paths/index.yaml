@@ -1,26 +1,26 @@
-#/deliveries/:
-#  $ref: ./deliveries/quote.yaml
-/auth/register:
-  $ref: ./auth/register.yaml
-/deliveries/address/validate:
-  $ref: ./deliveries/validate.yaml
-/deliveries/current:
-  $ref: ./deliveries/current.yaml
-/deliveries/history:
-  $ref: ./deliveries/history.yaml
-/deliveries/quote:
-  $ref: ./deliveries/quote.yaml
+/deliveries:
+  $ref: ./delivery/deliveries.yaml
 /deliveries/{delivery_id}:
-  $ref: ./deliveries/delivery.yaml
-/oauth/token:
+  $ref: ./delivery/delivery.yaml
+/deliveries/quote:
+  $ref: ./delivery/quote.yaml
+/o/token:
   $ref: ./auth/token.yaml
-/products:
-  $ref: ./products.yaml
-/user/password/reset:
+/user/forgotPassword:
+  $ref: ./user/forgotPassword.yaml
+/user/resetPassword:
   $ref: ./user/resetPassword.yaml
 /user/profile:
   $ref: ./user/profile.yaml
-
-
-
-
+/user/profile/{profile_id}:
+  $ref: ./user/updateProfile.yaml
+/user/register:
+  $ref: ./user/register.yaml
+/user/sendVerifyEmail:
+  $ref: ./user/sendVerifyEmail.yaml
+/user/updatePassword:
+  $ref: ./user/updatePassword.yaml
+/user/verifyUser:
+  $ref: ./user/verifyUser.yaml
+/address/validateAddress:
+  $ref: ./address/validateAddress.yaml
