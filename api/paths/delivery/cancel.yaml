@@ -1,0 +1,28 @@
+post:
+  tags:
+    - Delivery
+  summary: POST /deliveries/cancel
+  operationId: deliveryCancelPOST
+  description: "Cancel an ongoing delivery."
+  security:
+    - OauthApplicationSecurity:
+      - api
+  consumes:
+        - application/x-www-form-urlencoded
+  parameters:
+    - name: delivery_id
+      in: formData
+      description: "ID of the delivery to cancel. A delivery will be able to be cancelled at any time.
+      Take into account that after certain scenarios, a cancellation fee will be applied. Please read carefully
+       the cancellation info provided in the API docs."
+      required: true
+      type: string
+      x-example: "8b58bc58-7352-4278-b569-b5d24d8e3f76"
+  responses:
+      204:
+        description: "Empty response when the delivery has been cancelled correctly."
+      default:
+        description: Unexpected error
+        schema:
+          $ref: '#/definitions/Error'
+  x-swagger-router-controller: Delivery

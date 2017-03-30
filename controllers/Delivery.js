@@ -6,6 +6,10 @@ var url = require('url');
 var Delivery = require('./DeliveryService');
 
 
+module.exports.deliveryCancelPOST = function deliveryCancelPOST (req, res, next) {
+  Delivery.deliveryCancelPOST(req.swagger.params, res, next);
+};
+
 module.exports.deliveryGET = function deliveryGET (req, res, next) {
   Delivery.deliveryGET(req.swagger.params, res, next);
 };

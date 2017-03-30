@@ -1,5 +1,14 @@
 'use strict';
 
+exports.deliveryCancelPOST = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * delivery_id (String)
+  **/
+  // no response value expected for this operation
+  res.end();
+}
+
 exports.deliveryGET = function(args, res, next) {
   /**
    * parameters expected in the args:
