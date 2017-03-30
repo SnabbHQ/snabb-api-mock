@@ -17,7 +17,7 @@ post:
       type: string
       x-example: "r4w4fw45t542fd34234$"
   responses:
-    200:
+    204:
       description: "Empty response when the given email address exists in our system."
     default:
       description: Unexpected error

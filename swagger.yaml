@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: Move your app forward with the Snabb API.
+  description: Move your app forward with the Snabb API
   version: 1.0.0
   title: Snabb API
   contact:
@@ -98,7 +98,7 @@ paths:
                   created_at: 1487881467
                   updated_at: 1487881468
                   order_reference_id: SNABB2017001
-                  quote_id: 719
+                  quote_id: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
                   tasks:
                     - task_id: 1421
                       place:
@@ -196,7 +196,7 @@ paths:
                   created_at: 1487881467
                   updated_at: 1487881468
                   order_reference_id: SNABB2017001
-                  quote_id: 719
+                  quote_id: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
                   tasks:
                     - task_id: 1421
                       place:
@@ -299,9 +299,8 @@ paths:
           in: formData
           description: Identifier of the quote.
           required: true
-          type: number
-          format: int32
-          x-example: 895
+          type: string
+          x-example: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
         - name: selected_package_size
           in: formData
           description: The size price option selected. (small|medium|big).
@@ -343,7 +342,7 @@ paths:
               created_at: 1487881467
               updated_at: 1487881468
               order_reference_id: SNABB2017001
-              quote_id: 719
+              quote_id: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
               tasks:
                 - task_id: 1421
                   place:
@@ -481,7 +480,7 @@ paths:
               created_at: 1487881467
               updated_at: 1487881468
               order_reference_id: SNABB2017001
-              quote_id: 719
+              quote_id: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
               tasks:
                 - task_id: 1421
                   place:
@@ -558,6 +557,37 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Delivery
+  /deliveries/cancel:
+    post:
+      tags:
+        - Delivery
+      summary: POST /deliveries/cancel
+      operationId: deliveryCancelPOST
+      description: Cancel an ongoing delivery.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: delivery_id
+          in: formData
+          description: >-
+            ID of the delivery to cancel. A delivery will be able to be
+            cancelled at any time. Take into account that after certain
+            scenarios, a cancellation fee will be applied. Please read carefully
+            the cancellation info provided in the API docs.
+          required: true
+          type: string
+          x-example: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+      responses:
+        '204':
+          description: Empty response when the delivery has been cancelled correctly.
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Delivery
   /deliveries/quote:
     post:
       tags:
@@ -624,7 +654,7 @@ paths:
               $ref: '#/definitions/Quote'
           examples:
             application/json:
-              quote_id: 719
+              quote_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
               distance: 473
               expire_at: 1487882067
               quote_user: 18
@@ -822,7 +852,7 @@ paths:
           type: string
           x-example: p4sw0rd
       responses:
-        '200':
+        '204':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
@@ -1058,7 +1088,7 @@ paths:
           type: string
           x-example: darth.vader@snabb.io
       responses:
-        '200':
+        '204':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
@@ -1091,7 +1121,7 @@ paths:
           type: string
           x-example: N3w_4w3s0m3_p4sw0rd
       responses:
-        '200':
+        '204':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
@@ -1118,7 +1148,7 @@ paths:
           type: string
           x-example: r4w4fw45t542fd34234$
       responses:
-        '200':
+        '204':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
