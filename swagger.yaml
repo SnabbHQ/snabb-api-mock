@@ -7,7 +7,7 @@ info:
     name: Snabb Dev Systems
     url: developers.snabb.io
     email: dev.systems@snabb.io
-host: 'localhost:5000'
+host: snabb-api-mock.herokuapp.com
 schemes:
   - http
 basePath: /api/v1
@@ -853,7 +853,7 @@ paths:
           type: string
           x-example: p4sw0rd
       responses:
-        '200':
+        '204':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
@@ -1089,7 +1089,7 @@ paths:
           type: string
           x-example: darth.vader@snabb.io
       responses:
-        '200':
+        '204':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
@@ -1122,7 +1122,7 @@ paths:
           type: string
           x-example: N3w_4w3s0m3_p4sw0rd
       responses:
-        '200':
+        '204':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
@@ -1149,7 +1149,7 @@ paths:
           type: string
           x-example: r4w4fw45t542fd34234$
       responses:
-        '200':
+        '204':
           description: Empty response when the given email address exists in our system.
         default:
           description: Unexpected error
