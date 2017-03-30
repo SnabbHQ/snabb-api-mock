@@ -50,7 +50,7 @@ get:
                "created_at": 1487881467,
                "updated_at": 1487881468,
                "order_reference_id": "SNABB2017001",
-               "quote_id": 719,
+               "quote_id": "ffd0baa4-f45f-4a7e-a37d-daaad5d7acad",
                "tasks": [
                  {
                    "task_id": 1421,

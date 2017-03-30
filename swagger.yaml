@@ -98,7 +98,7 @@ paths:
                   created_at: 1487881467
                   updated_at: 1487881468
                   order_reference_id: SNABB2017001
-                  quote_id: 719
+                  quote_id: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
                   tasks:
                     - task_id: 1421
                       place:
@@ -196,7 +196,7 @@ paths:
                   created_at: 1487881467
                   updated_at: 1487881468
                   order_reference_id: SNABB2017001
-                  quote_id: 719
+                  quote_id: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
                   tasks:
                     - task_id: 1421
                       place:
@@ -299,9 +299,8 @@ paths:
           in: formData
           description: Identifier of the quote.
           required: true
-          type: number
-          format: int32
-          x-example: 895
+          type: string
+          x-example: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
         - name: selected_package_size
           in: formData
           description: The size price option selected. (small|medium|big).
@@ -343,7 +342,7 @@ paths:
               created_at: 1487881467
               updated_at: 1487881468
               order_reference_id: SNABB2017001
-              quote_id: 719
+              quote_id: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
               tasks:
                 - task_id: 1421
                   place:
@@ -481,7 +480,7 @@ paths:
               created_at: 1487881467
               updated_at: 1487881468
               order_reference_id: SNABB2017001
-              quote_id: 719
+              quote_id: ffd0baa4-f45f-4a7e-a37d-daaad5d7acad
               tasks:
                 - task_id: 1421
                   place:
@@ -655,7 +654,7 @@ paths:
               $ref: '#/definitions/Quote'
           examples:
             application/json:
-              quote_id: 719
+              quote_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
               distance: 473
               expire_at: 1487882067
               quote_user: 18

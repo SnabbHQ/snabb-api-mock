@@ -42,7 +42,7 @@ exports.deliveryGET = function(args, res, next) {
   "created_at" : 1487881467,
   "updated_at" : 1487881468,
   "order_reference_id" : "SNABB2017001",
-  "quote_id" : 719,
+  "quote_id" : "ffd0baa4-f45f-4a7e-a37d-daaad5d7acad",
   "tasks" : [ {
     "task_id" : 1421,
     "place" : {
@@ -178,7 +178,7 @@ exports.deliveryLIST = function(args, res, next) {
     "created_at" : 1487881467,
     "updated_at" : 1487881468,
     "order_reference_id" : "SNABB2017001",
-    "quote_id" : 719,
+    "quote_id" : "ffd0baa4-f45f-4a7e-a37d-daaad5d7acad",
     "tasks" : [ {
       "task_id" : 1421,
       "place" : {
@@ -292,7 +292,7 @@ exports.deliveryLIST = function(args, res, next) {
     "created_at" : 1487881467,
     "updated_at" : 1487881468,
     "order_reference_id" : "SNABB2017001",
-    "quote_id" : 719,
+    "quote_id" : "ffd0baa4-f45f-4a7e-a37d-daaad5d7acad",
     "tasks" : [ {
       "task_id" : 1421,
       "place" : {
@@ -394,7 +394,7 @@ exports.deliveryLIST = function(args, res, next) {
 exports.deliveryPOST = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * quote_id (BigDecimal)
+  * quote_id (String)
   * selected_package_size (String)
   **/
     var examples = {};
@@ -425,7 +425,7 @@ exports.deliveryPOST = function(args, res, next) {
   "created_at" : 1487881467,
   "updated_at" : 1487881468,
   "order_reference_id" : "SNABB2017001",
-  "quote_id" : 719,
+  "quote_id" : "ffd0baa4-f45f-4a7e-a37d-daaad5d7acad",
   "tasks" : [ {
     "task_id" : 1421,
     "place" : {
@@ -530,7 +530,7 @@ exports.quotePOST = function(args, res, next) {
   **/
     var examples = {};
   examples['application/json'] = {
-  "quote_id" : 719,
+  "quote_id" : "8b58bc58-7352-4278-b569-b5d24d8e3f76",
   "distance" : 473,
   "expire_at" : 1487882067,
   "quote_user" : 18,

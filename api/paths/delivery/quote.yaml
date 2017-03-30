@@ -57,7 +57,7 @@ post:
       examples:
         application/json:
           {
-            "quote_id": 719,
+            "quote_id": "8b58bc58-7352-4278-b569-b5d24d8e3f76",
             "distance": 473,
             "expire_at": 1487882067,
             "quote_user": 18,
