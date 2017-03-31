@@ -1764,13 +1764,13 @@ definitions:
       receipt_id:
         type: integer
         description: Unique identifier representing a specific receipt.
-      user:
+      user_id:
         type: integer
         description: Unique identifier representing a specific user.
-      receipt_delivery:
+      delivery_id:
         type: integer
         description: Unique identifier representing a specific delivery.
-      receipt_reference:
+      reference:
         type: string
         description: Unique identifier representing a reference to receipt.
   Receipt:
