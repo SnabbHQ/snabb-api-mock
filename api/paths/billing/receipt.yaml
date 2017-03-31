@@ -1,9 +1,9 @@
 get:
   tags:
   - Billing
-  summary: "GET /billing/receiptUser/{receipt_id}"
+  summary: "GET /billing/receipts/{receipt_id}"
   description: "Get Html rendered with receipt of User"
-  operationId: receiptUserDetailGET
+  operationId: receiptsGET
   security: []
   parameters:
         - name: receipt_id
@@ -15,10 +15,10 @@ get:
     200:
       description: "Receipt User HTML rendered"
       schema:
-        $ref: '#/definitions/ReceiptUserDetail'
+        $ref: '#/definitions/Receipt'
       examples:
         text/html:
-          <html><body>Receipt User HTML </body></html>
+          <html><body>Receipt HTML </body></html>
     default:
       description: Unexpected error
       schema:

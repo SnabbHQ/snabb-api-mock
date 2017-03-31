@@ -1,11 +1,11 @@
-/billing/receiptUser:
-  $ref: ./billing/receiptUser.yaml
-/billing/receiptUserDetail/{receipt_id}:
-  $ref: ./billing/receiptUserDetail.yaml
-/billing/ReceiptCourier:
+/billing/receipts:
+  $ref: ./billing/receipts.yaml
+/billing/receipts/{receipt_id}:
+  $ref: ./billing/receipt.yaml
+/billing/receiptsCourier:
+  $ref: ./billing/receiptsCourier.yaml
+/billing/receiptsCourier/{receipt_id}:
   $ref: ./billing/receiptCourier.yaml
-/billing/receiptCourierDetail/{receipt_id}:
-  $ref: ./billing/receiptCourierDetail.yaml
 /deliveries:
   $ref: ./delivery/deliveries.yaml
 /deliveries/{delivery_id}:

@@ -1,8 +1,8 @@
 get:
   tags:
     - Billing
-  summary: GET /billing/receiptUser
-  operationId: receiptUserLIST
+  summary: GET /billing/receiptsCourier
+  operationId: receiptsCourierLIST
   description: "Get a list of receipts for a given delivery."
   security:
     - OauthApplicationSecurity:
@@ -16,29 +16,29 @@ get:
       x-example: 1
   responses:
     200:
-      description: "A list of receipts of Users."
+      description: "A list of receipts of Couriers."
       schema:
         type: array
         items:
-          $ref: '#/definitions/ReceiptUser'
+          $ref: '#/definitions/ReceiptCourier'
       examples:
         application/json:
             {
                 "count": 2,
-                "next": "https://api_domain/api/v1/billing/receiptUser/?page=2",
+                "next": "https://api_domain/api/v1/billing/receiptsCourier/?page=2",
                 "previous": null,
                 "results": [
                     {
-                      "receipt_id": "8b58bc58-7352-4278-b569-b5d24d8e3f76",
-                      "user": 2,
-                      "receipt_delivery": 2,
-                      "receipt_reference": "SNABB-2017-U-1"
+                      "receipt_id": 1,
+                      "courier_id": 24,
+                      "delivery_id": 2,
+                      "reference": "SNABB-2017-C-1"
                     },
                     {
-                      "receipt_id": "8b58bc58-7352-4278-b569-b5d24d8e3f76",
-                      "user": 2,
-                      "receipt_delivery": 2,
-                      "receipt_reference": "SNABB-2017-U-2"
+                      "receipt_id": 2,
+                      "courier_id": 25,
+                      "delivery_id": 4,
+                      "reference": "SNABB-2017-C-2"
                     }
                 ]
             }

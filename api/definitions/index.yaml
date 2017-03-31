@@ -38,6 +38,14 @@ Profile:
   $ref: ./Profile.yaml
 Quote:
   $ref: ./delivery/Quote.yaml
+Receipts:
+  $ref: ./billing/Receipts.yaml
+Receipt:
+  $ref: ./billing/Receipt.yaml
+ReceiptsCourier:
+  $ref: ./billing/ReceiptsCourier.yaml
+ReceiptCourier:
+  $ref: ./billing/ReceiptCourier.yaml
 Region:
   $ref: ./location/Region.yaml
 Review:
@@ -50,11 +58,3 @@ Token:
   $ref: ./auth/Token.yaml
 Transport:
   $ref: ./Transport.yaml
-ReceiptCourier:
-  $ref: ./billing/ReceiptCourier.yaml
-ReceiptCourierDetail:
-  $ref: ./billing/ReceiptCourierDetail.yaml
-ReceiptUser:
-  $ref: ./billing/ReceiptUser.yaml
-ReceiptUserDetail:
-  $ref: ./billing/ReceiptUserDetail.yaml

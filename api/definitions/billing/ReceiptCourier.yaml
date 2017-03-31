@@ -3,12 +3,3 @@ properties:
   receipt_id:
     type: integer
     description: "Unique identifier representing a specific receipt."
-  courier:
-    type: integer
-    description: "Unique identifier representing a specific courier."
-  receipt_delivery:
-    type: integer
-    description: "Unique identifier representing a specific delivery."
-  receipt_reference:
-    type: string
-    description: "Unique identifier representing a reference to receipt."
