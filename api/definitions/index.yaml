@@ -4,6 +4,10 @@ Activity:
   $ref: ./Activity.yaml
 Address:
   $ref: ./location/Address.yaml
+Card:
+  $ref: ./payment/Card.yaml
+Cards:
+  $ref: ./payment/Cards.yaml
 City:
   $ref: ./location/City.yaml
 Contact:

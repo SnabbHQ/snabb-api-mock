@@ -1,3 +1,5 @@
+/address/validateAddress:
+  $ref: ./address/validateAddress.yaml
 /billing/receipts:
   $ref: ./billing/receipts.yaml
 /billing/receipts/{receipt_id}:
@@ -14,6 +16,10 @@
   $ref: ./delivery/quote.yaml
 /o/token:
   $ref: ./auth/token.yaml
+/payment/cards:
+  $ref: ./payment/cards.yaml
+/payment/cards/{card_id}:
+  $ref: ./payment/card.yaml
 /user/forgotPassword:
   $ref: ./user/forgotPassword.yaml
 /user/resetPassword:
@@ -30,5 +36,3 @@
   $ref: ./user/updatePassword.yaml
 /user/verifyUser:
   $ref: ./user/verifyUser.yaml
-/address/validateAddress:
-  $ref: ./address/validateAddress.yaml
