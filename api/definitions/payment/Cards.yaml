@@ -10,13 +10,8 @@ properties:
     type: integer
     description: "Unique identifier representing a specific delivery."
   default_card:
-    type: string
-    description: "Unique identifier representing a reference to receipt."
-  card_info:
-    type: object
-    description: "Card information to stripe."
-    allOf:
-      - $ref: '#/definitions/Card'
+    type: boolean
+    description: "Verify if is default card."
   created_at:
     type: string
     description: "Unix timestamp representing the moment in which the driver was created."

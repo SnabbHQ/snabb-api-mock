@@ -949,7 +949,80 @@ paths:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Auth
   /payment/cards:
-    $ref: ./payment/cards.yaml
+    get:
+      tags:
+        - Cards
+      summary: GET /cards
+      operationId: cardsList
+      description: Get a list of cards for a user.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      responses:
+        '200':
+          description: A list of cards.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Cards'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Cards
+    post:
+      tags:
+        - Cards
+      summary: POST /cards
+      operationId: cardsPost
+      description: >-
+        The Delivery endpoint returns a new delivery object with their price
+        <br/>The response includes [ISO
+        4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for
+        situations requiring currency conversion. Also, the response include the
+        courier info and tasks details like tracking URL for each task
+
+
+
+        <b>Warning:</b> If you try to create a delivery of an expired Quote, the
+        endpoint returns a bad request.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: token
+          in: formData
+          description: Identifier of the card stripe.
+          required: true
+          type: number
+          format: int32
+          x-example: 895
+      responses:
+        '200':
+          description: Response Created Card.
+          examples:
+            application/json:
+              code: '200901'
+              key: CREATED
+              message: Card created
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: '400405'
+              key: QUOTE_EXPIRED
+              message: Quote expired
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Cards
+  '/payment/cards/{card_id}':
+    $ref: ./payment/card.yaml
   /user/forgotPassword:
     post:
       tags:
@@ -1382,7 +1455,7 @@ definitions:
         type: string
         description: Unique identifier representing a specific customer.
       exp_month:
-        type: string
+        type: integer
         description: Expedition month of card.
       last4:
         type: string
@@ -1406,13 +1479,8 @@ definitions:
         type: integer
         description: Unique identifier representing a specific delivery.
       default_card:
-        type: string
-        description: Unique identifier representing a reference to receipt.
-      card_info:
-        type: object
-        description: Card information to stripe.
-        allOf:
-          - $ref: '#/definitions/Card'
+        type: boolean
+        description: Verify if is default card.
       created_at:
         type: string
         description: >-

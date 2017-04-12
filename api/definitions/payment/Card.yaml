@@ -10,7 +10,7 @@ properties:
     type: string
     description: "Unique identifier representing a specific customer."
   exp_month:
-    type: string
+    type: integer
     description: "Expedition month of card."
   last4:
     type: string

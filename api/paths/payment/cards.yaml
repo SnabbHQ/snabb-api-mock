@@ -14,45 +14,6 @@ get:
         type: array
         items:
           $ref: '#/definitions/Cards'
-      examples:
-        application/json:
-            {
-              "card_id": "9d74e5b5-b54f-4831-841b-c2341dee8270",
-              "user_id": 1,
-              "fingerprint": "MQbxSmwliG1vpW5G",
-              "default_card": false,
-              "card_info": {
-                  "funding": "debit",
-                  "fingerprint": "MQbxSmwliG1vpW5G",
-                  "last4": "5556",
-                  "exp_month": 12,
-                  "customer": "cus_APHmxRnwP084aA",
-                  "exp_year": 2018,
-                  "brand": "Visa",
-                  "id": "card_1A5GSkLCS1tnVc47gENTdagl"
-              },
-              "created_at": 0,
-              "updated_at": 1491841702
-          },
-          {
-              "card_id": "6d872680-293c-49c4-8e22-9a61dce899b6",
-              "user_id": 1,
-              "fingerprint": "5XF2DUrW8uMtaKCQ",
-              "default_card": true,
-              "card_info": {
-                  "funding": "credit",
-                  "fingerprint": "5XF2DUrW8uMtaKCQ",
-                  "last4": "4242",
-                  "exp_month": 12,
-                  "customer": "cus_APHmxRnwP084aA",
-                  "exp_year": 2018,
-                  "brand": "Visa",
-                  "id": "card_1A5Fe9LCS1tnVc47oZxRigqC"
-              },
-              "created_at": 0,
-              "updated_at": 1491841703
-          }
-    }
 
     default:
       description: Unexpected error
@@ -62,10 +23,14 @@ get:
 
 post:
   tags:
-    - Delivery
+    - Cards
   summary: POST /cards
-  operationId: cardsPOST
-  description: "The Cards endpoint returns allow create new cards from a token Stripe"
+  operationId: cardsPost
+  description: "The Delivery endpoint returns a new delivery object with their price <br/>The
+  response includes [ISO 4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for situations requiring currency
+   conversion. Also, the response include the courier info and tasks details like tracking URL for each task\n\n
+
+  <b>Warning:</b> If you try to create a delivery of an expired Quote, the endpoint returns a bad request."
   security:
     - OauthApplicationSecurity:
       - api
@@ -81,27 +46,21 @@ post:
       x-example: 895
   responses:
     200:
-      description: "Object is created."
-      schema:
-        type: array
+      description: "Response Created Card."
       examples:
-            {
-               "data": {
-                   "code": 200208,
-                   "message": 'Card created',
-                   "key": 'CARD_CREATED'
-               },
-               "status": status.HTTP_200_OK
-           }
+        application/json:
+          code: '200901'
+          key: CREATED
+          message: "Card created"
     400:
         description: Bad request
         schema:
           $ref: '#/definitions/Error'
         examples:
           application/json:
-            code: '400604'
-            key: CARD_STRIPE_ERROR
-            message: "Error creating Card Stripe"
+            code: '400405'
+            key: QUOTE_EXPIRED
+            message: "Quote expired"
     default:
       description: Unexpected error
       schema:
