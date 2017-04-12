@@ -1,6 +1,6 @@
 type: object
 properties:
-  id:
+  card_id:
     type: integer
     description: "Unique identifier representing a specific source card."
   fingerprint:

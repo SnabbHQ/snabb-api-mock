@@ -37,6 +37,49 @@ security:
   - OauthPasswordSecurity:
       - user
 paths:
+  /address/validateAddress:
+    post:
+      tags:
+        - Address
+      summary: POST /validateAddress
+      description: Validate if Snabb works in the address provided.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      operationId: validateAddress
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: address
+          description: Address formatted like gmaps.
+          in: formData
+          required: true
+          type: string
+          x-example: 'Passatge Dr. Serra, 46004, València, Spain'
+      responses:
+        '200':
+          description: >-
+            Return ADDRESS_OK if Snabb works in this address. If not, you get an
+            error code.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              key: ADDRESS_OK
+              code: 200206
+              message: Address valid
+        '400':
+          description: Return KEY_ADDRESS_REQUIRED if you don't send "address" field.
+          examples:
+            application/json:
+              code: 400401
+              message: Key address is required
+              key: KEY_ADDRESS_REQUIRED
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Address
   /billing/receipts:
     get:
       tags:
@@ -905,6 +948,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Auth
+  /payment/cards:
+    $ref: ./payment/cards.yaml
   /user/forgotPassword:
     post:
       tags:
@@ -1263,49 +1308,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  /address/validateAddress:
-    post:
-      tags:
-        - Address
-      summary: POST /validateAddress
-      description: Validate if Snabb works in the address provided.
-      security:
-        - OauthApplicationSecurity:
-            - api
-      operationId: validateAddress
-      consumes:
-        - application/x-www-form-urlencoded
-      parameters:
-        - name: address
-          description: Address formatted like gmaps.
-          in: formData
-          required: true
-          type: string
-          x-example: 'Passatge Dr. Serra, 46004, València, Spain'
-      responses:
-        '200':
-          description: >-
-            Return ADDRESS_OK if Snabb works in this address. If not, you get an
-            error code.
-          schema:
-            $ref: '#/definitions/Error'
-          examples:
-            application/json:
-              key: ADDRESS_OK
-              code: 200206
-              message: Address valid
-        '400':
-          description: Return KEY_ADDRESS_REQUIRED if you don't send "address" field.
-          examples:
-            application/json:
-              code: 400401
-              message: Key address is required
-              key: KEY_ADDRESS_REQUIRED
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Address
 definitions:
   Activities:
     type: object
@@ -1367,6 +1369,60 @@ definitions:
         description: The city in which this address is located.
         allOf:
           - $ref: '#/definitions/City'
+  Card:
+    type: object
+    properties:
+      card_id:
+        type: integer
+        description: Unique identifier representing a specific source card.
+      fingerprint:
+        type: string
+        description: Unique identifier representing a specific source card.
+      customer:
+        type: string
+        description: Unique identifier representing a specific customer.
+      exp_month:
+        type: string
+        description: Expedition month of card.
+      last4:
+        type: string
+        description: Last four chars of card.
+      brand:
+        type: string
+        description: Brand of card.
+      funding:
+        type: string
+        description: Funding of card.
+  Cards:
+    type: object
+    properties:
+      card_id:
+        type: integer
+        description: Unique identifier representing a specific receipt.
+      user_id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      fingerprint:
+        type: integer
+        description: Unique identifier representing a specific delivery.
+      default_card:
+        type: string
+        description: Unique identifier representing a reference to receipt.
+      card_info:
+        type: object
+        description: Card information to stripe.
+        allOf:
+          - $ref: '#/definitions/Card'
+      created_at:
+        type: string
+        description: >-
+          Unix timestamp representing the moment in which the driver was
+          created.
+      updated_at:
+        type: string
+        description: >-
+          Unix timestamp representing the last time when the driver information
+          was updated.
   City:
     type: object
     properties:

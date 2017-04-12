@@ -16,7 +16,7 @@ properties:
     type: object
     description: "Card information to stripe."
     allOf:
-      - $ref: '#/definitions/CardInfo'
+      - $ref: '#/definitions/Card'
   created_at:
     type: string
     description: "Unix timestamp representing the moment in which the driver was created."
