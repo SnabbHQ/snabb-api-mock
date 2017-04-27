@@ -739,6 +739,43 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Delivery
+  '/cancelDelivery/{delivery_id}':
+    get:
+      tags:
+        - Delivery
+      summary: 'GET /deliveries/{delivery_id}'
+      operationId: deliveryGET
+      description: Get a particular delivery information.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      parameters:
+        - name: delivery_id
+          in: path
+          description: ID of the delivery to fetch
+          required: true
+          type: string
+          x-example: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+      responses:
+        '200':
+          description: Status of delivery.
+          examples:
+            application/json:
+              key: DELIVERY_CANCELLED
+              message: Delivery Cancelled
+              code: 200210
+        '400':
+          description: Status of delivery.
+          examples:
+            application/json:
+              key: CANCEL_NOT_ALLOWED
+              message: In this status it is not allowed to cancel
+              code: 400610
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Delivery
   /deliveries/quote:
     post:
       tags:

@@ -12,6 +12,8 @@
   $ref: ./delivery/deliveries.yaml
 /deliveries/{delivery_id}:
   $ref: ./delivery/delivery.yaml
+/cancelDelivery/{delivery_id}:
+  $ref: ./delivery/cancelDelivery.yaml
 /deliveries/quote:
   $ref: ./delivery/quote.yaml
 /o/token:
