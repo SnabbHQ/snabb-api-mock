@@ -1,20 +1,23 @@
 type: object
 properties:
   card_id:
-    type: integer
+    type: string
     description: "Unique identifier representing a specific receipt."
   user_id:
     type: integer
     description: "Unique identifier representing a specific user."
   fingerprint:
-    type: integer
-    description: "Unique identifier representing a specific delivery."
+    type: string
+    description: "Unique identifier representing a specific card."
   default_card:
     type: boolean
     description: "Verify if is default card."
+  card_info:
+    type: object
+    description: "Info from stripe"
   created_at:
-    type: string
+    type: integer
     description: "Unix timestamp representing the moment in which the driver was created."
   updated_at:
-    type: string
+    type: integer
     description: "Unix timestamp representing the last time when the driver information was updated."

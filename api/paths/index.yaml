@@ -18,8 +18,6 @@
   $ref: ./auth/token.yaml
 /payment/cards:
   $ref: ./payment/cards.yaml
-/payment/cards/{card_id}:
-  $ref: ./payment/card.yaml
 /user/forgotPassword:
   $ref: ./user/forgotPassword.yaml
 /user/resetPassword:

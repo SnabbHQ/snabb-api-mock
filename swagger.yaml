@@ -1021,8 +1021,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Cards
-  '/payment/cards/{card_id}':
-    $ref: ./payment/card.yaml
   /user/forgotPassword:
     post:
       tags:
@@ -1442,52 +1440,31 @@ definitions:
         description: The city in which this address is located.
         allOf:
           - $ref: '#/definitions/City'
-  Card:
-    type: object
-    properties:
-      card_id:
-        type: integer
-        description: Unique identifier representing a specific source card.
-      fingerprint:
-        type: string
-        description: Unique identifier representing a specific source card.
-      customer:
-        type: string
-        description: Unique identifier representing a specific customer.
-      exp_month:
-        type: integer
-        description: Expedition month of card.
-      last4:
-        type: string
-        description: Last four chars of card.
-      brand:
-        type: string
-        description: Brand of card.
-      funding:
-        type: string
-        description: Funding of card.
   Cards:
     type: object
     properties:
       card_id:
-        type: integer
+        type: string
         description: Unique identifier representing a specific receipt.
       user_id:
         type: integer
         description: Unique identifier representing a specific user.
       fingerprint:
-        type: integer
-        description: Unique identifier representing a specific delivery.
+        type: string
+        description: Unique identifier representing a specific card.
       default_card:
         type: boolean
         description: Verify if is default card.
+      card_info:
+        type: object
+        description: Info from stripe
       created_at:
-        type: string
+        type: integer
         description: >-
           Unix timestamp representing the moment in which the driver was
           created.
       updated_at:
-        type: string
+        type: integer
         description: >-
           Unix timestamp representing the last time when the driver information
           was updated.
