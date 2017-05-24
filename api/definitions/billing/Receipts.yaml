@@ -1,0 +1,14 @@
+type: object
+properties:
+  receipt_id:
+    type: integer
+    description: "Unique identifier representing a specific receipt."
+  user_id:
+    type: integer
+    description: "Unique identifier representing a specific user."
+  delivery_id:
+    type: integer
+    description: "Unique identifier representing a specific delivery."
+  reference:
+    type: string
+    description: "Unique identifier representing a reference to receipt."

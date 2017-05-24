@@ -1,0 +1,50 @@
+get:
+  tags:
+    - Billing
+  summary: GET /billing/receiptsCourier
+  operationId: receiptsCourierLIST
+  description: "Get a list of receipts for a given delivery."
+  security:
+    - OauthApplicationSecurity:
+      - api
+  parameters:
+    - name: page
+      in: query
+      description: "Number of page"
+      type: number
+      format: int32
+      x-example: 1
+  responses:
+    200:
+      description: "A list of receipts of Couriers."
+      schema:
+        type: array
+        items:
+          $ref: '#/definitions/ReceiptCourier'
+      examples:
+        application/json:
+            {
+                "count": 2,
+                "next": "https://api_domain/api/v1/billing/receiptsCourier/?page=2",
+                "previous": null,
+                "results": [
+                    {
+                      "receipt_id": 1,
+                      "courier_id": 24,
+                      "delivery_id": 2,
+                      "reference": "SNABB-2017-C-1"
+                    },
+                    {
+                      "receipt_id": 2,
+                      "courier_id": 25,
+                      "delivery_id": 4,
+                      "reference": "SNABB-2017-C-2"
+                    }
+                ]
+            }
+
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: Billing

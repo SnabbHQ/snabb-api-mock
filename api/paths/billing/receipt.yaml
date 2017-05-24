@@ -1,0 +1,26 @@
+get:
+  tags:
+  - Billing
+  summary: "GET /billing/receipts/{receipt_id}"
+  description: "Get Html rendered with receipt of User"
+  operationId: receiptsGET
+  security: []
+  parameters:
+        - name: receipt_id
+          in: path
+          description: Unique Id for receipt User
+          required: true
+          type: integer
+  responses:
+    200:
+      description: "Receipt User HTML rendered"
+      schema:
+        $ref: '#/definitions/Receipt'
+      examples:
+        text/html:
+          <html><body>Receipt HTML </body></html>
+    default:
+      description: Unexpected error
+      schema:
+        $ref: '#/definitions/Error'
+  x-swagger-router-controller: Auth

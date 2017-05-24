@@ -37,6 +37,187 @@ security:
   - OauthPasswordSecurity:
       - user
 paths:
+  /address/validateAddress:
+    post:
+      tags:
+        - Address
+      summary: POST /validateAddress
+      description: Validate if Snabb works in the address provided.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      operationId: validateAddress
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: address
+          description: Address formatted like gmaps.
+          in: formData
+          required: true
+          type: string
+          x-example: 'Passatge Dr. Serra, 46004, València, Spain'
+      responses:
+        '200':
+          description: >-
+            Return ADDRESS_OK if Snabb works in this address. If not, you get an
+            error code.
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              key: ADDRESS_OK
+              code: 200206
+              message: Address valid
+        '400':
+          description: Return KEY_ADDRESS_REQUIRED if you don't send "address" field.
+          examples:
+            application/json:
+              code: 400401
+              message: Key address is required
+              key: KEY_ADDRESS_REQUIRED
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Address
+  /billing/receipts:
+    get:
+      tags:
+        - Billing
+      summary: GET /billing/receipts
+      operationId: receiptLIST
+      description: Get a list of receipts for a given delivery.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      parameters:
+        - name: page
+          in: query
+          description: Number of page
+          type: number
+          format: int32
+          x-example: 1
+      responses:
+        '200':
+          description: A list of receipts of Users.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Receipts'
+          examples:
+            application/json:
+              count: 2
+              next: 'https://api_domain/api/v1/billing/receipts/?page=2'
+              previous: null
+              results:
+                - receipt_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                  user_id: 2
+                  delivery_id: 2
+                  reference: SNABB-2017-U-1
+                - receipt_id: 8b58bc58-7352-4278-b569-b5d24d8e3f76
+                  user_id: 2
+                  delivery: 2
+                  reference: SNABB-2017-U-2
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Billing
+  '/billing/receipts/{receipt_id}':
+    get:
+      tags:
+        - Billing
+      summary: 'GET /billing/receipts/{receipt_id}'
+      description: Get Html rendered with receipt of User
+      operationId: receiptsGET
+      security: []
+      parameters:
+        - name: receipt_id
+          in: path
+          description: Unique Id for receipt User
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Receipt User HTML rendered
+          schema:
+            $ref: '#/definitions/Receipt'
+          examples:
+            text/html: <html><body>Receipt HTML </body></html>
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Auth
+  /billing/receiptsCourier:
+    get:
+      tags:
+        - Billing
+      summary: GET /billing/receiptsCourier
+      operationId: receiptsCourierLIST
+      description: Get a list of receipts for a given delivery.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      parameters:
+        - name: page
+          in: query
+          description: Number of page
+          type: number
+          format: int32
+          x-example: 1
+      responses:
+        '200':
+          description: A list of receipts of Couriers.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ReceiptCourier'
+          examples:
+            application/json:
+              count: 2
+              next: 'https://api_domain/api/v1/billing/receiptsCourier/?page=2'
+              previous: null
+              results:
+                - receipt_id: 1
+                  courier_id: 24
+                  delivery_id: 2
+                  reference: SNABB-2017-C-1
+                - receipt_id: 2
+                  courier_id: 25
+                  delivery_id: 4
+                  reference: SNABB-2017-C-2
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Billing
+  '/billing/receiptsCourier/{receipt_id}':
+    get:
+      tags:
+        - Billing
+      summary: 'GET /billing/receiptsCourier/{receipt_id}'
+      description: Get Html rendered with receipt of Courier
+      operationId: receiptsGET
+      security: []
+      parameters:
+        - name: receipt_id
+          in: path
+          description: Unique Id for receipt User
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Receipt Courier HTML rendered
+          schema:
+            $ref: '#/definitions/ReceiptCourier'
+          examples:
+            text/html: <html><body>Receipt HTML </body></html>
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Auth
   /deliveries:
     get:
       tags:
@@ -797,6 +978,79 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: Auth
+  /payment/cards:
+    get:
+      tags:
+        - Cards
+      summary: GET /cards
+      operationId: cardsList
+      description: Get a list of cards for a user.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      responses:
+        '200':
+          description: A list of cards.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Cards'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Cards
+    post:
+      tags:
+        - Cards
+      summary: POST /cards
+      operationId: cardsPost
+      description: >-
+        The Delivery endpoint returns a new delivery object with their price
+        <br/>The response includes [ISO
+        4217](http://en.wikipedia.org/wiki/ISO_4217) currency code for
+        situations requiring currency conversion. Also, the response include the
+        courier info and tasks details like tracking URL for each task
+
+
+
+        <b>Warning:</b> If you try to create a delivery of an expired Quote, the
+        endpoint returns a bad request.
+      security:
+        - OauthApplicationSecurity:
+            - api
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: token
+          in: formData
+          description: Identifier of the card stripe.
+          required: true
+          type: number
+          format: int32
+          x-example: 895
+      responses:
+        '200':
+          description: Response Created Card.
+          examples:
+            application/json:
+              code: '200901'
+              key: CREATED
+              message: Card created
+        '400':
+          description: Bad request
+          schema:
+            $ref: '#/definitions/Error'
+          examples:
+            application/json:
+              code: '400405'
+              key: QUOTE_EXPIRED
+              message: Quote expired
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      x-swagger-router-controller: Cards
   /user/forgotPassword:
     post:
       tags:
@@ -1155,49 +1409,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       x-swagger-router-controller: User
-  /address/validateAddress:
-    post:
-      tags:
-        - Address
-      summary: POST /validateAddress
-      description: Validate if Snabb works in the address provided.
-      security:
-        - OauthApplicationSecurity:
-            - api
-      operationId: validateAddress
-      consumes:
-        - application/x-www-form-urlencoded
-      parameters:
-        - name: address
-          description: Address formatted like gmaps.
-          in: formData
-          required: true
-          type: string
-          x-example: 'Passatge Dr. Serra, 46004, València, Spain'
-      responses:
-        '200':
-          description: >-
-            Return ADDRESS_OK if Snabb works in this address. If not, you get an
-            error code.
-          schema:
-            $ref: '#/definitions/Error'
-          examples:
-            application/json:
-              key: ADDRESS_OK
-              code: 200206
-              message: Address valid
-        '400':
-          description: Return KEY_ADDRESS_REQUIRED if you don't send "address" field.
-          examples:
-            application/json:
-              code: 400401
-              message: Key address is required
-              key: KEY_ADDRESS_REQUIRED
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
-      x-swagger-router-controller: Address
 definitions:
   Activities:
     type: object
@@ -1259,6 +1470,34 @@ definitions:
         description: The city in which this address is located.
         allOf:
           - $ref: '#/definitions/City'
+  Cards:
+    type: object
+    properties:
+      card_id:
+        type: string
+        description: Unique identifier representing a specific receipt.
+      user_id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      fingerprint:
+        type: string
+        description: Unique identifier representing a specific card.
+      default_card:
+        type: boolean
+        description: Verify if is default card.
+      card_info:
+        type: object
+        description: Info from stripe
+      created_at:
+        type: integer
+        description: >-
+          Unix timestamp representing the moment in which the driver was
+          created.
+      updated_at:
+        type: integer
+        description: >-
+          Unix timestamp representing the last time when the driver information
+          was updated.
   City:
     type: object
     properties:
@@ -1556,27 +1795,6 @@ definitions:
         description: Big package size.
         allOf:
           - $ref: '#/definitions/Price'
-  Product:
-    type: object
-    properties:
-      product_id:
-        type: string
-        description: >-
-          Unique identifier representing a specific product for a given latitude
-          & longitude. For example, uberX in San Francisco will have a different
-          product_id than uberX in Los Angeles.
-      description:
-        type: string
-        description: Description of product.
-      display_name:
-        type: string
-        description: Display name of product.
-      capacity:
-        type: string
-        description: 'Capacity of product. For example, 4 people.'
-      image:
-        type: string
-        description: Image URL representing the product.
   Profile:
     type: object
     properties:
@@ -1671,6 +1889,48 @@ definitions:
       updated_at:
         type: string
         description: Unix timestamp representing the time when the quote was updated last.
+  Receipts:
+    type: object
+    properties:
+      receipt_id:
+        type: integer
+        description: Unique identifier representing a specific receipt.
+      user_id:
+        type: integer
+        description: Unique identifier representing a specific user.
+      delivery_id:
+        type: integer
+        description: Unique identifier representing a specific delivery.
+      reference:
+        type: string
+        description: Unique identifier representing a reference to receipt.
+  Receipt:
+    type: object
+    properties:
+      receipt_id:
+        type: integer
+        description: Unique identifier representing a specific receipt.
+  ReceiptsCourier:
+    type: object
+    properties:
+      receipt_id:
+        type: integer
+        description: Unique identifier representing a specific receipt.
+      courier_id:
+        type: integer
+        description: Unique identifier representing a specific courier.
+      delivery_id:
+        type: integer
+        description: Unique identifier representing a specific delivery.
+      reference:
+        type: string
+        description: Unique identifier representing a reference to receipt.
+  ReceiptCourier:
+    type: object
+    properties:
+      receipt_id:
+        type: integer
+        description: Unique identifier representing a specific receipt.
   Region:
     type: object
     properties:

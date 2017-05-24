@@ -4,6 +4,8 @@ Activity:
   $ref: ./Activity.yaml
 Address:
   $ref: ./location/Address.yaml
+Cards:
+  $ref: ./payment/Cards.yaml
 City:
   $ref: ./location/City.yaml
 Contact:
@@ -34,12 +36,18 @@ Price:
   $ref: ./delivery/Price.yaml
 Prices:
   $ref: ./delivery/Prices.yaml
-Product:
-  $ref: ./Product.yaml
 Profile:
   $ref: ./Profile.yaml
 Quote:
   $ref: ./delivery/Quote.yaml
+Receipts:
+  $ref: ./billing/Receipts.yaml
+Receipt:
+  $ref: ./billing/Receipt.yaml
+ReceiptsCourier:
+  $ref: ./billing/ReceiptsCourier.yaml
+ReceiptCourier:
+  $ref: ./billing/ReceiptCourier.yaml
 Region:
   $ref: ./location/Region.yaml
 Review:
